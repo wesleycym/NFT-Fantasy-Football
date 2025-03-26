@@ -1,0 +1,20 @@
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+
+PRIVATE_KEY=<3fc3abf51b329537cb5e25a35b566a3bfe29f4cd95f62ed0d9e9c9d0b315528c>
+INFURA_API_KEY=<4f89d97cbaaa4d288348686cd4396a4a>
