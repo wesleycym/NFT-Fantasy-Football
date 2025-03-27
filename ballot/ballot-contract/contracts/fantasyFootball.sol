@@ -38,7 +38,7 @@ interface IERC721Receiver {
 
 contract ERC721 {
     IERC20 public yodaToken; // ERC20 contract
-    
+
     string public name;
     string public symbol;
     uint256 public mint_price;
@@ -63,11 +63,15 @@ contract ERC721 {
     mapping(address => mapping(address => bool)) public isApprovedForAll;
 
     constructor(
+        address _yodaTokenAddress, // Accepted ERC20 contract
+
         string memory _name, 
         string memory _symbol, 
         uint256 MINT_PRICE, 
         uint256 MAX_SUPPLY
     ) {
+        yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
         name = _name;
         symbol = _symbol;
         mint_price = MINT_PRICE;
