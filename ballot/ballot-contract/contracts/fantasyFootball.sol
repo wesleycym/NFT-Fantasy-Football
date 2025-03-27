@@ -37,6 +37,8 @@ interface IERC721Receiver {
 }
 
 contract ERC721 {
+    IERC20 public yodaToken; // ERC20 contract
+    
     string public name;
     string public symbol;
     uint256 public mint_price;
