@@ -127,6 +127,10 @@ contract ERC721 {
         players[tokenId].fantasyPoints = newPoints;
     }
 
+    function updateTeam(uint256 tokenId, string memory newTeam) external {
+        players[tokenId].team = newTeam;
+    }
+
     function _isApprovedOrOwner(
         address owner, 
         address spender, 
