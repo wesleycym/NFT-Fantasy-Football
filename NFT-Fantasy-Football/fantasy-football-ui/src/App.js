@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import NFTViewer from "./components/NFTViewer.jsx";
 
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  // Manually trigger wallet connect
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -32,7 +32,9 @@ function App() {
         <p>✅ Connected as: {walletAddress}</p>
       )}
 
-      {/* You can add the rest of your interface below */}
+      <div className="p-6">
+        <NFTViewer walletAddress={walletAddress} />
+      </div>
     </div>
   );
 }
