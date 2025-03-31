@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
     const [deployer, buyer] = await hre.ethers.getSigners();
 
-    const contractAddress = "YOUR_DEPLOYED_CONTRACT_ADDRESS_HERE"; // From deploy.js output
+    const contractAddress = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318"; // From deploy.js output
     const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball");
     const contract = FantasyFootball.attach(contractAddress);
 

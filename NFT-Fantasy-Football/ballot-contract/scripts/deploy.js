@@ -40,6 +40,10 @@ async function main() {
     await tx2.wait();
     console.log("Minted Mahomes NFT");
 
+    // Debug
+    console.log("Deployer address:", deployer.address);
+    console.log("Owner of token 0:", await contract.ownerOf(0));
+
 }
 
 main().catch((error) => {
