@@ -23,11 +23,22 @@ async function main() {
         "Josh Allen",
         "QB",
         "Buffalo Bills",
-        100
+        0
     );
 
     await tx.wait();
     console.log("Minted JA17 NFT");
+
+    const tx2 = await contract.mint(
+        deployer.address,
+        "Patrick Mahomes",
+        "QB",
+        "Kansas City Chiefs",
+        0
+    );
+
+    await tx2.wait();
+    console.log("Minted Mahomes NFT");
 
 
     // View the player NFT metadata (tokenId = 0 for the first mint)
