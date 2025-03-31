@@ -40,20 +40,6 @@ async function main() {
     await tx2.wait();
     console.log("Minted Mahomes NFT");
 
-
-    // View the player NFT metadata (tokenId = 0 for the first mint)
-    const player = await contract.players(0);
-    console.log("Player before update:", player);
-  
-    // Update the fantasy points
-    const updateTx = await contract.updateFantasyPoints(0, 152);
-    await updateTx.wait();
-    console.log("Updated fantasy points to 152");
-  
-    // View the updated data
-    const updatedPlayer = await contract.players(0);
-    console.log("Player after update:", updatedPlayer);
-
 }
 
 main().catch((error) => {
