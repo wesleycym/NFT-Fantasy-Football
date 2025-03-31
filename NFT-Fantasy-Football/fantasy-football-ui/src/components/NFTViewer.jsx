@@ -4,6 +4,10 @@ import FantasyFootballABI from "../contracts/FantasyFootball.json";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 
+/* 
+          Will only display NFTs after wallet is connected
+*/
+
 const NFTViewer = ({ walletAddress }) => {
   const [players, setPlayers] = useState([]);
   const [contract, setContract] = useState(null);
