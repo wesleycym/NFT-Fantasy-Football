@@ -106,7 +106,7 @@ contract FantasyFootball {
 
         require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
-        require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
+        //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
         uint256 tokenId = _nextTokenId++;
         _mint(to, tokenId);
