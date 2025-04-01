@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
+import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
+
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
 
@@ -48,26 +50,29 @@ const NFTViewer = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Fantasy Football NFTs</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {players.map((p) => {
-          // Create filename from player name, e.g., "Josh Allen" => "josh-allen.jpg"
-          const imageName = p.name.toLowerCase().replace(/\s+/g, "-") + ".jpg";
-          const imageUrl = `/images/${imageName}`;
-
-          return (
-            <div key={p.id} className="p-4 border rounded-lg shadow hover:shadow-xl transition">
-              <img
-                src={imageUrl}
-                alt={`${p.name} NFT`}
-                className="w-full h-auto rounded-lg mb-2"
-              />
-              <h3 className="text-lg font-semibold">{p.name}</h3>
-              <p>{p.position} – {p.team}</p>
-              <p>Fantasy Points: {p.fantasyPoints}</p>
-              <p className="text-sm text-gray-500">Owner: {p.owner}</p>
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {players.map((p) => (
+          <CardContainer key={p.id}>
+            <CardBody>
+              <CardItem translateZ={50}>
+                <img
+                  src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
+                  alt={p.name}
+                  className="rounded-lg w-full h-auto"
+                />
+              </CardItem>
+  
+              <CardItem translateZ={30}>
+                <div className="mt-4 text-center">
+                  <h3 className="text-lg font-bold">{p.name}</h3>
+                  <p>{p.position} – {p.team}</p>
+                  <p>Fantasy Points: {p.fantasyPoints}</p>
+                  <p className="text-sm text-gray-500 break-all">Owner: {p.owner}</p>
+                </div>
+              </CardItem>
+            </CardBody>
+          </CardContainer>
+        ))}
       </div>
     </div>
   );
