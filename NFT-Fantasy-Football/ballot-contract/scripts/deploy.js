@@ -40,6 +40,17 @@ async function main() {
     await tx2.wait();
     console.log("Minted Mahomes NFT");
 
+    const tx3 = await contract.mint(
+        deployer.address,
+        "Justin Jefferson",
+        "WR",
+        "Minnesota Vikings",
+        0
+    );
+
+    await tx3.wait();
+    console.log("Minted Jefferson NFT");
+
     // Debug
     console.log("Deployer address:", deployer.address);
     console.log("Owner of token 0:", await contract.ownerOf(0));
