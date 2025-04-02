@@ -53,22 +53,13 @@ const NFTViewer = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody>
+            <CardBody player={p}>
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
                   alt={p.name}
-                  className="rounded-lg w-full h-auto"
+                  className="rounded-xl w-full h-auto"
                 />
-              </CardItem>
-  
-              <CardItem translateZ={30}>
-                <div className="mt-4 text-center">
-                  <h3 className="text-lg font-bold">{p.name}</h3>
-                  <p>{p.position} – {p.team}</p>
-                  <p>Fantasy Points: {p.fantasyPoints}</p>
-                  <p className="text-sm text-gray-500 break-all">Owner: {p.owner}</p>
-                </div>
               </CardItem>
             </CardBody>
           </CardContainer>

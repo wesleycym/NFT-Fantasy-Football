@@ -63,17 +63,50 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({
-  children,
-  className
-}) => {
+export const CardBody = ({ children, className, player }) => {
+  const [showInfo, setShowInfo] = useState(false);
+
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "relative h-96 w-96 rounded-xl overflow-hidden [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
+        "before:absolute before:inset-0 before:rounded-xl before:border before:border-pink-500 before:animate-pulse",
         className
-      )}>
+      )}
+    >
       {children}
+
+      {/* Info + Buy Buttons */}
+      <div className="absolute bottom-4 left-4 flex gap-2 z-10">
+        <button
+          onClick={() => setShowInfo(true)}
+          className="px-3 py-1 bg-white text-black rounded shadow"
+        >
+          ℹ️ Info
+        </button>
+        <button
+          onClick={() => alert("Buy functionality here")}
+          className="px-3 py-1 bg-pink-500 text-white rounded shadow"
+        >
+          Buy
+        </button>
+      </div>
+
+      {/* Info Modal */}
+      {showInfo && (
+        <div className="absolute inset-0 bg-black/80 text-white flex flex-col justify-center items-center z-20 p-4 rounded-xl">
+          <h2 className="text-xl font-bold mb-2">{player.name}</h2>
+          <p>{player.position} – {player.team}</p>
+          <p>Fantasy Points: {player.fantasyPoints}</p>
+          <p className="text-sm break-words mt-2">Owner: {player.owner}</p>
+          <button
+            onClick={() => setShowInfo(false)}
+            className="mt-4 px-4 py-1 bg-white text-black rounded"
+          >
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 };
