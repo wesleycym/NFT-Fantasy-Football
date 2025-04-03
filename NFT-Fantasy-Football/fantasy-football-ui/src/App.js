@@ -42,11 +42,10 @@ function App() {
         </p>
       )}
 
-      <div className="w-full max-w-6xl px-4">
-        <div className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-6 shadow-2xl">
+        <div>
           <NFTViewer walletAddress={walletAddress} />
         </div>
-      </div>
+
     </div>
   );
 }
