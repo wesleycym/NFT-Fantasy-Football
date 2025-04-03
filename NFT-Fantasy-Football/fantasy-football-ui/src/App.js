@@ -27,7 +27,7 @@ function App() {
       <h1>Fantasy Football NFT Viewer</h1>
 
       {!isConnected ? (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button class = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={connectWallet}>Connect Wallet</button>
       ) : (
         <p>✅ Connected as: {walletAddress}</p>
       )}
