@@ -69,42 +69,43 @@ export const CardBody = ({ children, className, player }) => {
   return (
     <div
       className={cn(
-        "relative h-96 w-96 rounded-xl overflow-hidden [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
-        "before:absolute before:inset-0 before:rounded-xl before:border before:border-pink-500 before:animate-pulse",
+        "h-96 w-72 relative [transform-style:preserve-3d]",
         className
       )}
     >
       {children}
 
       {/* Info + Buy Buttons */}
-      <div className="absolute bottom-4 left-4 flex gap-2 z-10">
+      <div className="absolute bottom-4 left-4 flex gap-2 z-10 [transform:translateZ(60px)]">
         <button
           onClick={() => setShowInfo(true)}
-          className="px-3 py-1 bg-white text-black rounded shadow"
+          className="px-3 py-1 bg-white text-black rounded shadow border border-black border-size-2 border-r-100"
         >
           ℹ️ Info
         </button>
         <button
           onClick={() => alert("Buy functionality here")}
-          className="px-3 py-1 bg-pink-500 text-white rounded shadow"
+          className="px-3 py-1 bg-green-600 text-white rounded shadow border border-black border-size-2 border-r-100"
         >
           Buy
         </button>
       </div>
 
-      {/* Info Modal */}
+      {/* Info Panel - on top of card */}
       {showInfo && (
-        <div className="absolute inset-0 bg-black/80 text-white flex flex-col justify-center items-center z-20 p-4 rounded-xl">
-          <h2 className="text-xl font-bold mb-2">{player.name}</h2>
-          <p>{player.position} – {player.team}</p>
-          <p>Fantasy Points: {player.fantasyPoints}</p>
-          <p className="text-sm break-words mt-2">Owner: {player.owner}</p>
-          <button
-            onClick={() => setShowInfo(false)}
-            className="mt-4 px-4 py-1 bg-white text-black rounded"
-          >
-            Close
-          </button>
+        <div className="absolute inset-0 z-20 bg-black/80 text-white flex flex-col justify-center items-center p-4 rounded-xl [transform:translateZ(70px)]">
+          <div className="w-full max-w-full text-center break-words overflow-hidden">
+            <h2 className="text-xl font-bold mb-2">{player.name}</h2>
+            <p>{player.position} - {player.team}</p>
+            <p>Fantasy Points: {player.fantasyPoints}</p>
+            <p className="text-sm break-words mt-2">Owner: {player.owner}</p>
+            <button
+              onClick={() => setShowInfo(false)}
+              className="mt-4 px-4 py-1 bg-white text-black rounded"
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
     </div>
