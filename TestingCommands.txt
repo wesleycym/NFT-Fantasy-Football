@@ -1,0 +1,12 @@
+- Hardhat Node
+    1) cd NFT-Fantasy-Football
+    2) cd ballot-contract
+    3) npx hardhat node
+- Deploy.js
+    1) cd NFT-Fantasy-Football
+    2) cd ballot-contract
+    3) npx hardhat run scripts/deploy.js --network localhost
+- FrontEnd
+    1) cd NFT-Fantasy-Football
+    2) cd fantasy-football-ui
+    3) npm start
