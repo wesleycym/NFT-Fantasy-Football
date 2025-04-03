@@ -93,7 +93,7 @@ export const CardBody = ({ children, className, player }) => {
 
       {/* Info Panel - on top of card */}
       {showInfo && (
-        <div className="absolute inset-0 z-20 bg-black/80 text-white flex flex-col justify-center items-center p-4 rounded-xl [transform:translateZ(70px)]">
+        <div className="absolute top-6 left-4 right-4 bottom-6 z-20 bg-black/80 text-white flex flex-col justify-center items-center p-4 rounded-xl [transform:translateZ(70px)]">
           <div className="w-full max-w-full text-center break-words overflow-hidden">
             <h2 className="text-xl font-bold mb-2">{player.name}</h2>
             <p>{player.position} - {player.team}</p>
