@@ -24,7 +24,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-black to-zinc-950 text-white flex flex-col items-center justify-start px-6 py-10 space-y-10 font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-black to-zinc-950 text-white flex flex-col items-center justify-start px-6 py-4 space-y-6 font-sans ">
       <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-center drop-shadow-lg">
         NFT Fantasy Football
       </h1>
