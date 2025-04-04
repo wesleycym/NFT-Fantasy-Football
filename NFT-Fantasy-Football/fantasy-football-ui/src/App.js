@@ -43,7 +43,7 @@ function App() {
         )}
       </div>
 
-        <div className ="">
+        <div>
           <NFTViewer walletAddress={walletAddress} />
         </div>
 
