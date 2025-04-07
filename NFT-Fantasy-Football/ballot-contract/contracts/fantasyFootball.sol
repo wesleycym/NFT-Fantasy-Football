@@ -52,6 +52,8 @@ contract FantasyFootball {
         string position;
         string team;
         uint256 fantasyPoints; 
+
+        uint256 mintPrice; // Price for the NFT
     }
     mapping(uint256 => Player) public players;
 
@@ -102,7 +104,7 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints) public payable {
+    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice) public payable {
 
         require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
@@ -116,7 +118,9 @@ contract FantasyFootball {
             name: _name, 
             position: _position, 
             team: _team, 
-            fantasyPoints: _fantasyPoints
+            fantasyPoints: _fantasyPoints,
+
+            mintPrice: _mintPrice
         });
 
         tokenOwnerstoIds[to].push(tokenId);
