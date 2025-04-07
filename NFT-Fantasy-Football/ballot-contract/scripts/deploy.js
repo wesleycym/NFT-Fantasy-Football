@@ -51,6 +51,61 @@ async function main() {
     await tx3.wait();
     console.log("Minted Jefferson NFT");
 
+    const tx4 = await contract.mint(
+        deployer.address,
+        "Malik Nabers",
+        "WR",
+        "New York Giants",
+        0
+    );
+
+    await tx4.wait();
+    console.log("Minted Nabers NFT");
+
+    const tx5 = await contract.mint(
+        deployer.address,
+        "Saquan Barkley",
+        "RB",
+        "Philadelphia Eagles",
+        0
+    );
+
+    await tx5.wait();
+    console.log("Minted Barkley NFT");
+
+    const tx6 = await contract.mint(
+        deployer.address,
+        "Derrick Henry",
+        "RB",
+        "Baltimore Ravens",
+        0
+    );
+
+    await tx6.wait();
+    console.log("Minted Henry NFT");
+
+    const tx7 = await contract.mint(
+        deployer.address,
+        "Brock Bowers",
+        "TE",
+        "Las Vegas Raiders",
+        0
+    );
+
+    await tx7.wait();
+    console.log("Minted Bowers NFT");
+
+    const tx8 = await contract.mint(
+        deployer.address,
+        "Sam LaPorta",
+        "TE",
+        "Detroit Lions",
+        0
+    );
+
+    await tx8.wait();
+    console.log("Minted LaPorta NFT");
+
     // Debug
     console.log("Deployer address:", deployer.address);
     console.log("Owner of token 0:", await contract.ownerOf(0));
