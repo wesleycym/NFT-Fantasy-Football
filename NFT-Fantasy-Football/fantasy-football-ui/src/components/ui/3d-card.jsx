@@ -8,6 +8,9 @@ import React, {
   useEffect,
 } from "react";
 
+import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // Contract address from .env
+
 const MouseEnterContext = createContext(undefined);
 
 export const CardContainer = ({
@@ -84,7 +87,7 @@ export const CardBody = ({ children, className, player }) => {
           ℹ️ Info
         </button>
         <button
-          onClick={() => alert("Buy functionality here")}
+          onClick={() => buyNFT(player.id, CONTRACT_ADDRESS)}
           className="px-3 py-1 bg-green-600 text-white rounded shadow border border-black border-size-2 border-r-100"
         >
           Buy
