@@ -20,10 +20,11 @@ async function main() {
     // Minting an nft
     const tx = await contract.mint(
         deployer.address,
-        "Josh Allen",
-        "QB",
-        "Buffalo Bills",
-        0
+        "Josh Allen", // Name
+        "QB", // Position
+        "Buffalo Bills", // Team
+        0, // Fantasy points
+        100 // Mint price
     );
 
     await tx.wait();
@@ -34,7 +35,8 @@ async function main() {
         "Patrick Mahomes",
         "QB",
         "Kansas City Chiefs",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx2.wait();
@@ -45,7 +47,8 @@ async function main() {
         "Justin Jefferson",
         "WR",
         "Minnesota Vikings",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx3.wait();
@@ -56,7 +59,8 @@ async function main() {
         "Malik Nabers",
         "WR",
         "New York Giants",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx4.wait();
@@ -67,7 +71,8 @@ async function main() {
         "Saquan Barkley",
         "RB",
         "Philadelphia Eagles",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx5.wait();
@@ -78,7 +83,8 @@ async function main() {
         "Derrick Henry",
         "RB",
         "Baltimore Ravens",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx6.wait();
@@ -89,7 +95,8 @@ async function main() {
         "Brock Bowers",
         "TE",
         "Las Vegas Raiders",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx7.wait();
@@ -100,7 +107,8 @@ async function main() {
         "Sam LaPorta",
         "TE",
         "Detroit Lions",
-        0
+        0,
+        100 // Mint price
     );
 
     await tx8.wait();
