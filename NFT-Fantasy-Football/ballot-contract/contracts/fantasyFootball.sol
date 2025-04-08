@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/utils/Strings.sol"; // Library for converting uint to string
+import "base64-sol/base64.sol"; // For converting JSON metadata to base64 encoded string
+
 // ERC-20 interface -> sends / receives tokens
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
@@ -58,6 +61,8 @@ contract FantasyFootball {
     mapping(uint256 => Player) public players;
 
 
+    mapping(string => string) public playerImageMap; // Mapping from player name to player image
+
     mapping(uint256 => address) internal _ownerOf; // Mapping owner address to token count
     mapping(address => uint256[]) private tokenOwnerstoIds;
     mapping(address => uint256) internal _balanceOf; // Mapping from token ID to approved address
@@ -65,6 +70,7 @@ contract FantasyFootball {
     mapping(address => mapping(address => bool)) public isApprovedForAll;
 
     constructor(
+
         address _yodaTokenAddress, // Accepted ERC20 contract
 
         string memory _name, 
@@ -73,6 +79,16 @@ contract FantasyFootball {
         uint256 MAX_SUPPLY
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
+        /* Mapping all players -> hosted image */
+        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
+        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
+        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
+        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
+        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
+        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
+        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
+        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
 
         name = _name;
         symbol = _symbol;
@@ -215,4 +231,31 @@ contract FantasyFootball {
 
          _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
+
+
+    function tokenURI(uint256 tokenId) public view returns (string memory) {
+        require(_ownerOf[tokenId] != address(0), "Token does not exist");
+
+        Player memory p = players[tokenId];
+        string memory image = playerImageMap[p.name];
+
+        // Assemble JSON metadata string
+        string memory json = string(abi.encodePacked(
+            '{',
+                '"name": "', p.name, '",',
+                '"description": "Dynamic Fantasy Football NFT. Stats update based on real-world performance.",',
+                '"image": "', image, '",',
+                '"attributes": [',
+                    '{ "trait_type": "Team", "value": "', p.team, '" },',
+                    '{ "trait_type": "Position", "value": "', p.position, '" },',
+                    '{ "trait_type": "Fantasy Points", "value": ', Strings.toString(p.fantasyPoints), ' }',
+                ']',
+            '}'
+        ));
+
+        // Encode metadata in Base64
+        string memory encoded = Base64.encode(bytes(json));
+        return string(abi.encodePacked("data:application/json;base64,", encoded));
+    }   
+
 }
