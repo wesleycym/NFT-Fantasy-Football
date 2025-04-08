@@ -1,0 +1,9 @@
+    Basic Info:
+        - As of right now, I am minting 10 of each NFT, there are 8 total.
+        - The NFTs a static upon purchase, but if updated the NFT will update and be available to purchase again.
+            - Josh Allen starts with 0 FP, I purchase it. Josh Allen then gets 50 FP, I buy it again. I will then have
+                2 Josh Allen NFTs, one with 0 FP and another with 50 FP.
+
+    Questions:
+        - Is this structure correct?
+        - I am using Pinata to host the NFTs, will I need to find a way to have the updated NFT reflect the purchased one in the wallet?
