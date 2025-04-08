@@ -189,16 +189,30 @@ contract FantasyFootball {
         emit Approval(owner, spender, id);
     }
 
+    // Custom transfer function since we are buying
+    // transferFrom -> for trading 
+    function _transfer(address from, address to, uint256 id) internal {
+        require(from == _ownerOf[id], "from != owner");
+        require(to != address(0), "transfer to zero address");
+
+        _balanceOf[from]--;
+        _balanceOf[to]++;
+        _ownerOf[id] = to;
+
+        delete _approvals[id];
+        emit Transfer(from, to, id);
+    }
+
     function buy(uint256 tokenId) public {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
 
         // Skipping yoda payment while testing
-        if (address(yodaToken) != address(0)) {
-            uint256 price = players[tokenId].mintPrice;
-            require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], price), "YODA payment failed");
-        }
+        // if (address(yodaToken) != address(0)) {
+        //     uint256 price = players[tokenId].mintPrice;
+        //     require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], price), "YODA payment failed");
+        // }
 
-        transferFrom(_ownerOf[tokenId], msg.sender, tokenId);
+         _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
 }
