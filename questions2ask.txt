@@ -7,3 +7,4 @@
     Questions:
         - Is this structure correct?
         - I am using Pinata to host the NFTs, will I need to find a way to have the updated NFT reflect the purchased one in the wallet?
+        - I assume we shouldn't be using static metadata. Should we be using a dynamic tokenURI() instead?
