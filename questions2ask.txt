@@ -10,3 +10,4 @@
         - I assume we shouldn't be using static metadata. Should we be using a dynamic tokenURI() instead?
         - Is the metadata supposed to be onchain or offchain?
             - Images as of right now are offchain -> pinata.
+        - Are external libraries allowed? Like one that will convert uint to string and another that will convert JSON to base64 (for meta data)
