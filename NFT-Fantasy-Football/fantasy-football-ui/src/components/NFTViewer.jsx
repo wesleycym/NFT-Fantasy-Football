@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
+import { playerImageMap } from "../lib/playerImageMap";
 
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
@@ -55,7 +56,7 @@ const NFTViewer = () => {
             <CardBody player={p}>
               <CardItem translateZ={50}>
                 <img
-                  src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
+                  src={playerImageMap[p.name]}
                   alt={p.name}
                   className="rounded-xl w-full h-auto"
                 />

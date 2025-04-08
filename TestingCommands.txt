@@ -10,3 +10,9 @@
     1) cd NFT-Fantasy-Football
     2) cd fantasy-football-ui
     3) npm start
+
+- Compiling
+    1) cd NFT-Fantasy-Football
+    2) cd ballot-contract
+    3) npx hardhat compile
+    4) Move JSON file over to frontend
