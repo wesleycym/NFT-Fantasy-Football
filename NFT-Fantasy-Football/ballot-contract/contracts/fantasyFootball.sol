@@ -52,6 +52,8 @@ contract FantasyFootball {
         string position;
         string team;
         uint256 fantasyPoints; 
+
+        uint256 mintPrice; // Price for the NFT
     }
     mapping(uint256 => Player) public players;
 
@@ -102,7 +104,7 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints) public payable {
+    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice) public payable {
 
         require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
@@ -116,7 +118,9 @@ contract FantasyFootball {
             name: _name, 
             position: _position, 
             team: _team, 
-            fantasyPoints: _fantasyPoints
+            fantasyPoints: _fantasyPoints,
+
+            mintPrice: _mintPrice
         });
 
         tokenOwnerstoIds[to].push(tokenId);
@@ -183,5 +187,32 @@ contract FantasyFootball {
         );
         _approvals[id] = spender;
         emit Approval(owner, spender, id);
+    }
+
+    // Custom transfer function since we are buying
+    // transferFrom -> for trading 
+    function _transfer(address from, address to, uint256 id) internal {
+        require(from == _ownerOf[id], "from != owner");
+        require(to != address(0), "transfer to zero address");
+
+        _balanceOf[from]--;
+        _balanceOf[to]++;
+        _ownerOf[id] = to;
+
+        delete _approvals[id];
+        emit Transfer(from, to, id);
+    }
+
+    function buy(uint256 tokenId) public {
+        require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
+        require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
+
+        // Skipping yoda payment while testing
+        // if (address(yodaToken) != address(0)) {
+        //     uint256 price = players[tokenId].mintPrice;
+        //     require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], price), "YODA payment failed");
+        // }
+
+         _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
 }
