@@ -4,3 +4,4 @@
         3) Attributes not showing up.
         4) I don't have to connect my account when i purchase an NFT. It will just auto connect to my metamask and ask to confirm it.
         5) Hardhat accounts don't reset when I close and open it. The NFTs remain in the wallet.
+        6) When changing the values of a player, change it so we can use their name instead of their designated number (order in which they were minted).
