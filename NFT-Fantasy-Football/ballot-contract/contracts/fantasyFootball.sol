@@ -243,12 +243,12 @@ contract FantasyFootball {
         string memory json = string(abi.encodePacked(
             '{',
                 '"name": "', p.name, '",',
-                '"description": "Dynamic Fantasy Football NFT. Stats update based on real-world performance.",',
+                '"description": "', p.name, ' plays ', p.position, ' for the ', p.team, '.",',
                 '"image": "', image, '",',
                 '"attributes": [',
                     '{ "trait_type": "Team", "value": "', p.team, '" },',
                     '{ "trait_type": "Position", "value": "', p.position, '" },',
-                    '{ "trait_type": "Fantasy Points", "value": ', Strings.toString(p.fantasyPoints), ' }',
+                    '{ "trait_type": "Fantasy Points", "value": "', Strings.toString(p.fantasyPoints), '" }',
                 ']',
             '}'
         ));

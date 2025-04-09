@@ -1,0 +1,6 @@
+    Bugs:
+        1) NFT is double firing when purchasing. Says purchase successfull -> metamask fail -> metamask successfull. NFT still shows update
+        2) Images for nfts are wack. They are not scaled properly.
+        3) Attributes not showing up.
+        4) I don't have to connect my account when i purchase an NFT. It will just auto connect to my metamask and ask to confirm it.
+        5) Hardhat accounts don't reset when I close and open it. The NFTs remain in the wallet.
