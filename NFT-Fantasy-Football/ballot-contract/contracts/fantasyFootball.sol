@@ -90,14 +90,14 @@ contract FantasyFootball {
         // playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
         // playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
 
-        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/josh-allen.jpg";
-        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/patrick-mahomes.jpg";
-        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/justin-jefferson.jpg";
-        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/malik-nabers.jpg";
-        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/saquan-barkley.jpg";
-        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/derrick-henry.jpg";
-        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/brock-bowers.jpg";
-        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/sam-laporta.jpg";
+        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
+        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/patrick-mahomes.jpg";
+        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/justin-jefferson.jpg";
+        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/malik-nabers.jpg";
+        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/saquan-barkley.jpg";
+        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/derrick-henry.jpg";
+        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/brock-bowers.jpg";
+        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/sam-laporta.jpg";
 
         name = _name;
         symbol = _symbol;
