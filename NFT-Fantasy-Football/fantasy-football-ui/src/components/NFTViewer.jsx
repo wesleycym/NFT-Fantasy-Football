@@ -48,12 +48,19 @@ const NFTViewer = () => {
     fetchNFTs();
   }, []);
 
+  // Gathering set of all players owned by users wallet
+  const ownedTypes = new set ( 
+    players
+      .filter((p) => p.owner?.toLowerCase() === walletAddress?.toLowerCase())
+      .map((p) => p.name)
+  );
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody player={p}>
+            <CardBody player={p} isOwnedtype={ownedTypes.has(p.name)}>
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
