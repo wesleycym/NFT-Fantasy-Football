@@ -8,6 +8,10 @@ import React, {
   useEffect,
 } from "react";
 
+// Hero icons:
+import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+
+
 import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // Contract address from .env
 
@@ -66,7 +70,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player }) => {
+export const CardBody = ({ children, className, player, isOwnedType }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
@@ -111,6 +115,14 @@ export const CardBody = ({ children, className, player }) => {
           </div>
         </div>
       )}
+
+      {/* Owned badge -> Debugging & displaying if user owns the NFT */}
+      {isOwnedType && (
+        <div className="absolute top-2 left-2 z-20 bg-black/70 rounded-full p-1 animate-pulse">
+          <CheckBadgeIcon className="w-5 h-5 text-green-400" />
+        </div>
+      )}
+
     </div>
   );
 };
