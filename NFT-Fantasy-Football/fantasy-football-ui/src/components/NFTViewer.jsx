@@ -56,7 +56,7 @@ const NFTViewer = () => {
             <CardBody player={p}>
               <CardItem translateZ={50}>
                 <img
-                  src={playerImageMap[p.name]}
+                  src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
                   alt={p.name}
                   className="rounded-xl w-full h-auto"
                 />

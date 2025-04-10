@@ -80,15 +80,24 @@ contract FantasyFootball {
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
 
-        /* Mapping all players -> hosted image */
-        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
-        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
-        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
-        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
-        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
-        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
-        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
-        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
+        /* Mapping all players -> hosted image */ // OLD IMAGES
+        // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
+        // playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
+        // playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
+        // playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
+        // playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
+        // playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
+        // playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
+        // playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
+
+        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/josh-allen.jpg";
+        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/patrick-mahomes.jpg";
+        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/justin-jefferson.jpg";
+        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/malik-nabers.jpg";
+        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/saquan-barkley.jpg";
+        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/derrick-henry.jpg";
+        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/brock-bowers.jpg";
+        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih3wtws3bm66vyuvtqonhsksbj5vyl7ooebtxasfrztxnizgfbjva/sam-laporta.jpg";
 
         name = _name;
         symbol = _symbol;
