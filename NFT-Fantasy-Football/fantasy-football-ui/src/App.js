@@ -44,7 +44,7 @@ function App() {
       </div>
 
         <div>
-          <NFTViewer walletAddress={walletAddress} />
+          <NFTViewer walletAddress={walletAddress} isConnected={isConnected}/>
         </div>
 
     </div>

@@ -7,7 +7,7 @@ import { playerImageMap } from "../lib/playerImageMap";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
 
-const NFTViewer = ({ walletAddress }) => {
+const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);
   const [contract, setContract] = useState(null);
 
@@ -64,7 +64,7 @@ const NFTViewer = ({ walletAddress }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody player={p} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()}>
+            <CardBody player={p} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected}>
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}

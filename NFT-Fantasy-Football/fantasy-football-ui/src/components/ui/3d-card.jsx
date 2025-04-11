@@ -70,7 +70,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, isOwned }) => {
+export const CardBody = ({ children, className, player, isOwned, isConnected }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
@@ -90,12 +90,21 @@ export const CardBody = ({ children, className, player, isOwned }) => {
         >
           ℹ️ Info
         </button>
+        {isConnected ? (
         <button
           onClick={() => buyNFT(player.id, CONTRACT_ADDRESS)}
           className="px-3 py-1 bg-green-600 text-white rounded shadow border border-black border-size-2 border-r-100"
         >
           Buy
         </button>
+      ) : (
+        <button
+          disabled
+          className="px-3 py-1 bg-gray-500 text-white rounded shadow border border-black border-size-2 border-r-100 opacity-50 cursor-not-allowed"
+        >
+          Connect Wallet
+        </button>
+      )}
       </div>
 
       {/* Info Panel - on top of card */}
