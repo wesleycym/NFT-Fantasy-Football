@@ -70,7 +70,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, isOwnedType }) => {
+export const CardBody = ({ children, className, player, isOwned }) => {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
@@ -117,9 +117,9 @@ export const CardBody = ({ children, className, player, isOwnedType }) => {
       )}
 
       {/* Owned badge -> Debugging & displaying if user owns the NFT */}
-      {isOwnedType && (
-        <div className="absolute top-2 left-2 z-20 bg-black/70 rounded-full p-1 animate-pulse">
-          <CheckBadgeIcon className="w-5 h-5 text-green-400" />
+      {isOwned && (
+        <div className="absolute top-5 left-5 [transform:translateZ(60px)]">
+          <CheckBadgeIcon className="w-6 h-6 text-green-400" />
         </div>
       )}
 
