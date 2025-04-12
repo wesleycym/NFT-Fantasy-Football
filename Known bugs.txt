@@ -1,5 +1,6 @@
     Bugs:
-        1) NFT is double firing when purchasing. Says purchase successfull -> metamask fail -> metamask successfull. NFT still shows update [Rarely happens]
+    
+[FIXED - Implemented use state for button] NFT is double firing when purchasing. Says purchase successfull -> metamask fail -> metamask successfull. NFT still shows update [Rarely happens]
 [FIXED - Images will have a gray box underneath (metamask issue)] Images for nfts are wack. They are not scaled properly.
 [FIXED - Moved to description] Attributes not showing up.
         4) I don't have to connect my account when i purchase an NFT. It will just auto connect to my metamask and ask to confirm it. [Need to linearize the process]
