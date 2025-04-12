@@ -71,7 +71,8 @@ export const CardContainer = ({
 };
 
 export const CardBody = ({ children, className, player, isOwned, isConnected }) => {
-  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState(false); // State for information being shown
+  const [isBuying, setIsBuying] = useState(false); // Buy button state -> stop double clicks
 
   return (
     <div
@@ -90,12 +91,21 @@ export const CardBody = ({ children, className, player, isOwned, isConnected }) 
         >
           ℹ️ Info
         </button>
-        {isConnected ? (
+      {isConnected ? (
         <button
-          onClick={() => buyNFT(player.id, CONTRACT_ADDRESS)}
-          className="px-3 py-1 bg-green-600 text-white rounded shadow border border-black border-size-2 border-r-100"
+          onClick={async () => {
+            setIsBuying(true); // Change state
+            await buyNFT(player.id, CONTRACT_ADDRESS); // Call function -> wait for transaction
+            setIsBuying(false); // Revert state back
+          }}
+          disabled={isBuying} // Disable double firing 
+          className={`px-3 py-1 rounded shadow border border-black border-size-2 border-r-100 ${
+            isBuying
+              ? "bg-gray-500 cursor-not-allowed text-white opacity-50"
+              : "bg-green-600 hover:bg-green-700 text-white"
+          }`}
         >
-          Buy
+          {isBuying ? "Processing..." : "Buy"}
         </button>
       ) : (
         <button
