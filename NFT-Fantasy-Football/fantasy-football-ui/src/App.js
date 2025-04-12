@@ -15,13 +15,16 @@ function App() {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        setWalletAddress(accounts[0]);
-        setIsConnected(true);
-        toast.success("💰 Wallet connected", {
-          position: "top-right",
-          autoClose: 3000, 
-          theme: "dark",
-        })
+  
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+          setIsConnected(true);
+          toast.success("💰 Wallet connected", {
+            position: "top-right",
+            autoClose: 3000,
+            theme: "dark",
+          });
+        }
       } catch (err) {
         console.error("User rejected wallet connection:", err);
       }
@@ -30,16 +33,37 @@ function App() {
     }
   };
 
-  // Wallet disconnection
+  // Wallet disconnect
   const disconnectWallet = () => {
     setWalletAddress(null);
     setIsConnected(false);
     toast.success("🔌 Wallet disconnected", {
       position: "top-right",
-      autoClose: 3000, 
+      autoClose: 3000,
       theme: "dark",
     });
   };
+
+  // Handle account changes inside MetaMask
+  useEffect(() => {
+    if (window.ethereum) {
+      const handleAccountsChanged = (accounts) => {
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+          setIsConnected(true);
+        } else {
+          setWalletAddress(null);
+          setIsConnected(false);
+        }
+      };
+  
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
+  
+      return () => {
+        window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
+      };
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-black to-zinc-950 text-white flex flex-col items-center justify-start py-6 font-sans">
