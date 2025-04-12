@@ -8,6 +8,10 @@ import React, {
   useEffect,
 } from "react";
 
+// Hero icons:
+import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+
+
 import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // Contract address from .env
 
@@ -66,8 +70,9 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player }) => {
-  const [showInfo, setShowInfo] = useState(false);
+export const CardBody = ({ children, className, player, isOwned, isConnected }) => {
+  const [showInfo, setShowInfo] = useState(false); // State for information being shown
+  const [isBuying, setIsBuying] = useState(false); // Buy button state -> stop double clicks
 
   return (
     <div
@@ -86,12 +91,30 @@ export const CardBody = ({ children, className, player }) => {
         >
           ℹ️ Info
         </button>
+      {isConnected ? (
         <button
-          onClick={() => buyNFT(player.id, CONTRACT_ADDRESS)}
-          className="px-3 py-1 bg-green-600 text-white rounded shadow border border-black border-size-2 border-r-100"
+          onClick={async () => {
+            setIsBuying(true); // Change state
+            await buyNFT(player.id, CONTRACT_ADDRESS); // Call function -> wait for transaction
+            setIsBuying(false); // Revert state back
+          }}
+          disabled={isBuying} // Disable double firing 
+          className={`px-3 py-1 rounded shadow border border-black border-size-2 border-r-100 ${
+            isBuying
+              ? "bg-gray-500 cursor-not-allowed text-white opacity-50"
+              : "bg-green-600 hover:bg-green-700 text-white"
+          }`}
         >
-          Buy
+          {isBuying ? "Processing..." : "Buy"}
         </button>
+      ) : (
+        <button
+          disabled
+          className="px-3 py-1 bg-gray-500 text-white rounded shadow border border-black border-size-2 border-r-100 opacity-50 cursor-not-allowed"
+        >
+          Connect Wallet
+        </button>
+      )}
       </div>
 
       {/* Info Panel - on top of card */}
@@ -111,6 +134,14 @@ export const CardBody = ({ children, className, player }) => {
           </div>
         </div>
       )}
+
+      {/* Owned badge -> Debugging & displaying if user owns the NFT */}
+      {isOwned && (
+        <div className="absolute top-5 left-5 [transform:translateZ(60px)]">
+          <CheckBadgeIcon className="w-6 h-6 text-green-400" />
+        </div>
+      )}
+
     </div>
   );
 };
