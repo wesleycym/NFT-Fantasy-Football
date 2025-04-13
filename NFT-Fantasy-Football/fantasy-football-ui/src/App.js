@@ -44,7 +44,7 @@ function App() {
     });
   };
 
-  // Handle account changes inside MetaMask
+  // Handle account changes inside MetaMask -> will auto switch the connected account
   useEffect(() => {
     if (window.ethereum) {
       const handleAccountsChanged = (accounts) => {
