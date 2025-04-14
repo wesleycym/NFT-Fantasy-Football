@@ -3,7 +3,7 @@ import FantasyFootballABI from "../contracts/FantasyFootball.json"; // Import co
 
 import { toast } from "react-toastify"; // For alerts
 
-export const buyNFT = async (tokenId, contractAddress) => {
+export const buyNFT = async (tokenId, contractAddress, onBuySuccess) => {
 
     if(!window.ethereum) { // Check if MetaMask is connected
       toast.error("Please connect your MetaMask wallet.", {
@@ -30,6 +30,8 @@ export const buyNFT = async (tokenId, contractAddress) => {
         const tx = await contract.buy(tokenId); // purchase with buy() function -> fantasyFootball.sol
         await tx.wait(); // wait for the transaction
 
+        const newOwner = await signer.getAddress(); // Get new owner
+
         toast.update(pendingToast, {
           render: `NFT purchased!`,
           type: "success",
@@ -37,6 +39,10 @@ export const buyNFT = async (tokenId, contractAddress) => {
           autoClose: 3000,
           icon: "🎉",
         });
+
+        if (onBuySuccess) {
+          onBuySuccess(tokenId, newOwner);
+        }
 
       } catch (err) { // If anything f'd up
         console.error("Buy failed:", err); // Log error

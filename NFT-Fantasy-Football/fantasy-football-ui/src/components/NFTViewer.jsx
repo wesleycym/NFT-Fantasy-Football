@@ -48,6 +48,14 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
     fetchNFTs();
   }, []);
 
+  const handleBuySuccess = (tokenId, newOwner) => {
+    setPlayers((prevPlayers) =>
+      prevPlayers.map((p) =>
+        p.id === tokenId ? { ...p, owner: newOwner } : p
+      )
+    );
+  };
+
   // Gathering set of all players owned by users wallet
   const ownedTypes = new Set();
 
@@ -64,7 +72,7 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody player={p} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected}>
+            <CardBody player={p} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected} onBuySuccess={handleBuySuccess}>
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}

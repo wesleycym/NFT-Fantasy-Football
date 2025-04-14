@@ -70,7 +70,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, isOwned, isConnected }) => {
+export const CardBody = ({ children, className, player, isOwned, isConnected, onBuySuccess }) => {
   const [showInfo, setShowInfo] = useState(false); // State for information being shown
   const [isBuying, setIsBuying] = useState(false); // Buy button state -> stop double clicks
 
@@ -95,7 +95,7 @@ export const CardBody = ({ children, className, player, isOwned, isConnected }) 
         <button
           onClick={async () => {
             setIsBuying(true); // Change state
-            await buyNFT(player.id, CONTRACT_ADDRESS); // Call function -> wait for transaction
+            await buyNFT(player.id, CONTRACT_ADDRESS, onBuySuccess); // Call function -> wait for transaction
             setIsBuying(false); // Revert state back
           }}
           disabled={isBuying} // Disable double firing 
