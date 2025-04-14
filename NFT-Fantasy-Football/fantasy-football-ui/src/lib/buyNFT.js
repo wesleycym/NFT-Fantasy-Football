@@ -23,7 +23,7 @@ export const buyNFT = async (tokenId, contractAddress, onBuySuccess) => {
         const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer); // Create contract
 
         pendingToast = toast.loading("Processing transaction...", {
-          position: "top-right",
+          position: "top-left",
           theme: "dark",
         });
     
