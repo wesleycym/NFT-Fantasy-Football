@@ -74,7 +74,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, walletAddress, isOwned, isConnected, onBuySuccess, contractAddress }) => {
+export const CardBody = ({ children, className, player, walletAddress, isOwned, isConnected, onBuySuccess, contractAddress, fetchNFTs }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [isBuying, setIsBuying] = useState(false);
 
@@ -114,8 +114,8 @@ export const CardBody = ({ children, className, player, walletAddress, isOwned, 
           <button
             onClick={async () => {
               setIsBuying(true);
-              await buyNFT(player.id, contractAddress);
-              onBuySuccess(player.id, walletAddress);
+              await buyNFT(player.id, contractAddress, fetchNFTs);
+              onBuySuccess();
               setIsBuying(false);
             }}
             disabled={isBuying}
@@ -183,7 +183,7 @@ export const CardBody = ({ children, className, player, walletAddress, isOwned, 
                   const tx = await contract.setForSale(player.id, newStatus, player.salePrice);
                   await tx.wait();
 
-                  onBuySuccess(player.id, walletAddress); // Refresh UI
+                  onBuySuccess(); // Refresh UI
 
                   toast.success(
                     newStatus ? "✅ NFT listed for sale!" : "❎ NFT removed from sale",
@@ -220,7 +220,7 @@ export const CardBody = ({ children, className, player, walletAddress, isOwned, 
                   const tx = await contract.setForSale(player.id, player.forSale, newPrice);
                   await tx.wait();
 
-                  onBuySuccess(player.id, walletAddress); // Refresh
+                  onBuySuccess(); // Refresh
                   toast.success(`✅ Price updated to ${newPrice}`, { position: "top-right", autoClose: 2500 });
                 } catch (err) {
                   console.error("Failed to update price:", err);

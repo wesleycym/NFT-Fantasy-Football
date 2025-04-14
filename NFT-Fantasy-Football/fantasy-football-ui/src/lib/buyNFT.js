@@ -19,6 +19,8 @@ export const buyNFT = async (tokenId, contractAddress, onBuySuccess) => {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer);
+    const buyer = await signer.getAddress();
+    console.log("BUYER:", buyer);
 
     // Fetch price for transparency (in case needed later for payment)
     const player = await contract.players(tokenId);
@@ -54,7 +56,11 @@ export const buyNFT = async (tokenId, contractAddress, onBuySuccess) => {
     });
 
     if (onBuySuccess) {
-      onBuySuccess(tokenId, updatedOwner);
+      try {
+        await onBuySuccess(); // just in case it's async or throws
+      } catch (e) {
+        console.warn("onBuySuccess failed silently:", e);
+      }
     }
 
   } catch (err) {
