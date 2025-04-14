@@ -62,8 +62,10 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       }
     };
 
-    fetchNFTs();
-  }, []);
+    if (CONTRACT_ADDRESS){
+      fetchNFTs();
+    }
+  }, [walletAddress]);
 
   const handleBuySuccess = (tokenId, newOwner) => {
     setPlayers((prevPlayers) =>
