@@ -24,7 +24,9 @@ async function main() {
         "QB", // Position
         "Buffalo Bills", // Team
         0, // Fantasy points
-        100 // Mint price
+        100, // Mint price
+        true, // For sale
+        100 // Resale price
     );
 
     await tx.wait();
@@ -36,7 +38,9 @@ async function main() {
         "QB",
         "Kansas City Chiefs",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx2.wait();
@@ -48,7 +52,9 @@ async function main() {
         "WR",
         "Minnesota Vikings",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx3.wait();
@@ -60,7 +66,9 @@ async function main() {
         "WR",
         "New York Giants",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx4.wait();
@@ -72,7 +80,9 @@ async function main() {
         "RB",
         "Philadelphia Eagles",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx5.wait();
@@ -84,7 +94,9 @@ async function main() {
         "RB",
         "Baltimore Ravens",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx6.wait();
@@ -96,7 +108,9 @@ async function main() {
         "TE",
         "Las Vegas Raiders",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx7.wait();
@@ -108,7 +122,9 @@ async function main() {
         "TE",
         "Detroit Lions",
         0,
-        100 // Mint price
+        100, // Mint price
+        true,
+        100
     );
 
     await tx8.wait();

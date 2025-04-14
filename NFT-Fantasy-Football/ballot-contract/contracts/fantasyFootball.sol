@@ -48,23 +48,20 @@ contract FantasyFootball {
     uint256 public max_supply;
     uint256 private _nextTokenId;
 
-    address public deployer; // Address of the deployer -> trying to fix duplicating NFTs
-
-
     // Player metadata 
     struct Player {
         string name; 
         string position;
         string team;
         uint256 fantasyPoints; 
-
         uint256 mintPrice; // Price for the NFT
+
+        bool forSale; 
+        uint256 salePrice;
     }
+
     mapping(uint256 => Player) public players;
-
-
     mapping(string => string) public playerImageMap; // Mapping from player name to player image
-
     mapping(uint256 => address) internal _ownerOf; // Mapping owner address to token count
     mapping(address => uint256[]) private tokenOwnerstoIds;
     mapping(address => uint256) internal _balanceOf; // Mapping from token ID to approved address
@@ -74,15 +71,12 @@ contract FantasyFootball {
     constructor(
 
         address _yodaTokenAddress, // Accepted ERC20 contract
-
         string memory _name, 
         string memory _symbol, 
         uint256 MINT_PRICE, 
         uint256 MAX_SUPPLY
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
-
-        deployer = msg.sender; // Set the deployer address
 
         /* Mapping all players -> hosted image */ // OLD IMAGES
         // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
@@ -134,7 +128,7 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice) public payable {
+    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice, bool _forSale, uint256 _salePrice) public payable {
 
         require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
@@ -149,8 +143,9 @@ contract FantasyFootball {
             position: _position, 
             team: _team, 
             fantasyPoints: _fantasyPoints,
-
-            mintPrice: _mintPrice
+            mintPrice: _mintPrice,
+            forSale: _forSale,
+            salePrice: _salePrice
         });
 
         tokenOwnerstoIds[to].push(tokenId);
@@ -219,6 +214,12 @@ contract FantasyFootball {
         emit Approval(owner, spender, id);
     }
 
+    function setForSale(uint256 tokenId, bool status, uint256 price) public {
+        require(_ownerOf[tokenId] == msg.sender, "Not the token owner");
+        players[tokenId].forSale = status;
+        players[tokenId].salePrice = price;
+    }
+
     // Custom transfer function since we are buying
     // transferFrom -> for trading 
     function _transfer(address from, address to, uint256 id) internal {
@@ -237,7 +238,12 @@ contract FantasyFootball {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
 
-        require(_ownerOf[tokenId] == deployer, "NFT already purchased"); // Only the deployer can sell the NFT [people were able to forcefully buy NFTs from others + duplicating NFTs]
+        Player storage player = players[tokenId];
+        require(player.forSale, "NFT not for sale");
+
+        //address seller = _ownerOf[tokenId]; // Won't need until yoda is implemented
+        player.forSale = false;
+        player.salePrice = 0;
 
         // Skipping yoda payment while testing
         // if (address(yodaToken) != address(0)) {

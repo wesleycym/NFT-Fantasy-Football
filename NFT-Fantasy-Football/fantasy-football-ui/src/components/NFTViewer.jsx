@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
-import { playerImageMap } from "../lib/playerImageMap";
-
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
 
@@ -11,7 +9,7 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);
   const [contract, setContract] = useState(null);
 
-  const [deployer, setDeployer] = useState(null); // Deployer address
+  // const [deployer, setDeployer] = useState(null); // Deployer address
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -25,9 +23,9 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
         console.log("Wallet Address:", walletAddress);
         
 
-        const deployerAddress = await ffContract.deployer(); // Grabbing the deployer address from the contract
-        console.log("Deployer from contract:", deployerAddress); // Debug
-        setDeployer(deployerAddress); // Setting the address
+        // const deployerAddress = await ffContract.deployer(); // Grabbing the deployer address from the contract
+        // console.log("Deployer from contract:", deployerAddress); // Debug
+        // setDeployer(deployerAddress); // Setting the address
 
         const maxSupply = await ffContract.max_supply();
         console.log("Max supply:", maxSupply);
@@ -44,8 +42,13 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
               position: player.position,
               team: player.team,
               fantasyPoints: player.fantasyPoints.toString(),
+              mintPrice: player.mintPrice.toString(),
+              forSale: player.forSale,
+              salePrice: player.salePrice.toString(),
               owner,
             });
+
+            console.log("NFT fetch complete. Players:", fetchedPlayers);
 
             console.log(`Token ID: ${i}`);
             console.log("Player Data:", player);
@@ -67,10 +70,27 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
     }
   }, [walletAddress]);
 
-  const handleBuySuccess = (tokenId, newOwner) => {
+  const handleBuySuccess = async (tokenId, newOwner) => {
+    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, FantasyFootballABI.abi, provider);
+    const updatedPlayer = await contract.players(tokenId);
+    const updatedOwner = await contract.ownerOf(tokenId);
+  
     setPlayers((prevPlayers) =>
       prevPlayers.map((p) =>
-        p.id === tokenId ? { ...p, owner: newOwner } : p
+        p.id === tokenId
+          ? {
+              ...p,
+              name: updatedPlayer.name,
+              position: updatedPlayer.position,
+              team: updatedPlayer.team,
+              fantasyPoints: updatedPlayer.fantasyPoints.toString(),
+              mintPrice: updatedPlayer.mintPrice.toString(),
+              forSale: updatedPlayer.forSale,
+              salePrice: updatedPlayer.salePrice.toString(),
+              owner: updatedOwner,
+            }
+          : p
       )
     );
   };
@@ -91,7 +111,14 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody player={p} walletAddress={walletAddress} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected} onBuySuccess={handleBuySuccess} deployer={deployer} contractAddress={CONTRACT_ADDRESS}>
+            <CardBody 
+              player={p} 
+              walletAddress={walletAddress} 
+              isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} 
+              isConnected={isConnected} 
+              onBuySuccess={handleBuySuccess} 
+              contractAddress={CONTRACT_ADDRESS}
+            >
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
