@@ -11,12 +11,17 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);
   const [contract, setContract] = useState(null);
 
+  const [deployer, setDeployer] = useState(null); // Deployer address
+
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
         const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545"); // Use local node
         const ffContract = new ethers.Contract(CONTRACT_ADDRESS, FantasyFootballABI.abi, provider);
         setContract(ffContract);
+
+        const deployerAddress = await ffContract.deployer(); // Grabbing the deployer address from the contract
+        setDeployer(deployerAddress); // Setting the address
 
         const maxSupply = await ffContract.max_supply();
         const fetchedPlayers = [];
@@ -72,7 +77,7 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {players.map((p) => (
           <CardContainer key={p.id}>
-            <CardBody player={p} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected} onBuySuccess={handleBuySuccess}>
+            <CardBody player={p} walletAddress={walletAddress} isOwned={walletAddress && p.owner.toLowerCase() === walletAddress.toLowerCase()} isConnected={isConnected} onBuySuccess={handleBuySuccess} deployer={deployer} contractAddress={CONTRACT_ADDRESS}>
               <CardItem translateZ={50}>
                 <img
                   src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}

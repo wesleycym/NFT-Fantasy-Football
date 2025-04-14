@@ -48,6 +48,8 @@ contract FantasyFootball {
     uint256 public max_supply;
     uint256 private _nextTokenId;
 
+    address public deployer; // Address of the deployer -> trying to fix duplicating NFTs
+
 
     // Player metadata 
     struct Player {
@@ -79,6 +81,8 @@ contract FantasyFootball {
         uint256 MAX_SUPPLY
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
+        deployer = msg.sender; // Set the deployer address
 
         /* Mapping all players -> hosted image */ // OLD IMAGES
         // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
@@ -232,6 +236,8 @@ contract FantasyFootball {
     function buy(uint256 tokenId) public {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
+
+        require(_ownerOf[tokenId] == deployer, "NFT already purchased"); // Only the deployer can sell the NFT [people were able to forcefully buy NFTs from others + duplicating NFTs]
 
         // Skipping yoda payment while testing
         // if (address(yodaToken) != address(0)) {

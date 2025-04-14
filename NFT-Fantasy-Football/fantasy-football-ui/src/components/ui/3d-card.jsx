@@ -70,17 +70,12 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, isOwned, isConnected, onBuySuccess }) => {
+export const CardBody = ({ children, className, player, walletAddress, isOwned, isConnected, onBuySuccess, deployer, contractAddress }) => {
   const [showInfo, setShowInfo] = useState(false); // State for information being shown
   const [isBuying, setIsBuying] = useState(false); // Buy button state -> stop double clicks
 
   return (
-    <div
-      className={cn(
-        "h-96 w-72 relative [transform-style:preserve-3d]",
-        className
-      )}
-    >
+    <div className={cn("h-96 w-72 relative [transform-style:preserve-3d]", className)}>
       {children}
 
       {/* Info + Buy Buttons */}
@@ -91,33 +86,44 @@ export const CardBody = ({ children, className, player, isOwned, isConnected, on
         >
           ℹ️ Info
         </button>
-      {isConnected ? (
-        <button
-          onClick={async () => {
-            setIsBuying(true); // Change state
-            await buyNFT(player.id, CONTRACT_ADDRESS, onBuySuccess); // Call function -> wait for transaction
-            setIsBuying(false); // Revert state back
-          }}
-          disabled={isBuying} // Disable double firing 
-          className={`px-3 py-1 rounded shadow border border-black border-size-2 border-r-100 ${
-            isBuying
-              ? "bg-gray-500 cursor-not-allowed text-white opacity-50"
-              : "bg-green-600 hover:bg-green-700 text-white"
-          }`}
-        >
-          {isBuying ? "Processing..." : "Buy"}
-        </button>
-      ) : (
-        <button
-          disabled
-          className="px-3 py-1 bg-gray-500 text-white rounded shadow border border-black border-size-2 border-r-100 opacity-50 cursor-not-allowed"
-        >
-          Connect Wallet
-        </button>
-      )}
+
+        {!isConnected ? (
+          <button
+            disabled
+            className="px-3 py-1 bg-gray-500 text-white rounded shadow border border-black border-size-2 border-r-100 opacity-50 cursor-not-allowed"
+          >
+            Connect Wallet
+          </button>
+        ) : player.owner.toLowerCase() === deployer.toLowerCase() ? (
+          <button
+            onClick={async () => {
+              setIsBuying(true);
+              await buyNFT(player.id, contractAddress);
+              onBuySuccess(player.id, walletAddress); // ✅ Update ownership state
+              setIsBuying(false);
+            }}
+            disabled={isBuying}
+            className={`px-3 py-1 rounded shadow border border-black border-size-2 border-r-100 ${
+              isBuying
+                ? "bg-gray-500 cursor-not-allowed text-white opacity-50"
+                : "bg-green-600 hover:bg-green-700 text-white"
+            }`}
+          >
+            {isBuying ? "Processing..." : "Buy"}
+          </button>
+        ) : (
+          <button
+            disabled
+            className="px-3 py-1 bg-gray-400 text-white rounded shadow border border-black border-size-2 border-r-100 opacity-50 cursor-not-allowed"
+          >
+            {player.owner.toLowerCase() === walletAddress?.toLowerCase()
+              ? "Owned"
+              : "Sold"}
+          </button>
+        )}
       </div>
 
-      {/* Info Panel - on top of card */}
+      {/* Info Panel */}
       {showInfo && (
         <div className="absolute top-6 left-4 right-4 bottom-6 z-20 bg-black/80 text-white flex flex-col justify-center items-center p-4 rounded-xl [transform:translateZ(70px)]">
           <div className="w-full max-w-full text-center break-words overflow-hidden">
@@ -135,13 +141,12 @@ export const CardBody = ({ children, className, player, isOwned, isConnected, on
         </div>
       )}
 
-      {/* Owned badge -> Debugging & displaying if user owns the NFT */}
+      {/* Owned Badge */}
       {isOwned && (
         <div className="absolute top-5 left-5 [transform:translateZ(60px)]">
-          <CheckBadgeIcon className="w-6 h-6 text-green-400" />
+          <CheckBadgeIcon className="w-6 h-6 text-green-400 border border-black rounded-full bg-black/80 p-[2px]" />
         </div>
       )}
-
     </div>
   );
 };
