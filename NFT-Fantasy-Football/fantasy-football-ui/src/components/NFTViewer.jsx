@@ -20,10 +20,17 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
         const ffContract = new ethers.Contract(CONTRACT_ADDRESS, FantasyFootballABI.abi, provider);
         setContract(ffContract);
 
+        // Debug 
+        console.log("Frontend CONTRACT_ADDRESS:", CONTRACT_ADDRESS);
+        console.log("Wallet Address:", walletAddress);
+        
+
         const deployerAddress = await ffContract.deployer(); // Grabbing the deployer address from the contract
+        console.log("Deployer from contract:", deployerAddress); // Debug
         setDeployer(deployerAddress); // Setting the address
 
         const maxSupply = await ffContract.max_supply();
+        console.log("Max supply:", maxSupply);
         const fetchedPlayers = [];
 
         for (let i = 0; i < maxSupply; i++) {
@@ -39,6 +46,11 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
               fantasyPoints: player.fantasyPoints.toString(),
               owner,
             });
+
+            console.log(`Token ID: ${i}`);
+            console.log("Player Data:", player);
+            console.log("Owner Address:", owner);
+
           } catch (err) {
             // Token might not exist
           }
