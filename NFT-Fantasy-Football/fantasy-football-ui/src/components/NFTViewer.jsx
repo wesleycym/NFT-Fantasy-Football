@@ -4,6 +4,7 @@ import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
+const infuraKey = process.env.REACT_APP_INFURA_API_KEY; // from .env
 
 const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);
@@ -12,7 +13,8 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
   // const [deployer, setDeployer] = useState(null); // Deployer address
   const fetchNFTs = async () => {
     try {
-      const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545"); // Use local node
+      //const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545"); // Use local node -> hardhat 
+      const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/${infuraKey}`); // For sepolia
       const ffContract = new ethers.Contract(CONTRACT_ADDRESS, FantasyFootballABI.abi, provider);
       setContract(ffContract);
 
