@@ -31,12 +31,18 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       //console.log("Max supply:", maxSupply);
       const totalSupply = await ffContract.totalSupply();
       console.log("Total supply:", totalSupply);
+
       const fetchedPlayers = [];
 
       for (let i = 0; i < totalSupply; i++) {
         try {
           const player = await ffContract.players(i);
           const owner = await ffContract.ownerOf(i);
+
+          if (!player.name || owner === ethers.ZeroAddress) {
+            console.warn(`Token ID ${i} might not be minted or valid.`);
+            continue;
+          }
 
           fetchedPlayers.push({
             id: i,
@@ -50,20 +56,18 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
             owner,
           });
 
-          console.log("NFT fetch complete. Players:", fetchedPlayers);
-
-          console.log(`Token ID: ${i}`);
-          console.log("Player Data:", player);
-          console.log("Owner Address:", owner);
+          console.log(`Token ID ${i} fetched.`);
 
         } catch (err) {
           // Token might not exist
+          console.warn(`Skipped token ID ${i}:`, err.message);
         }
       }
 
       setPlayers(fetchedPlayers);
+      console.log("🎉 All players fetched:", fetchedPlayers);
     } catch (err) {
-      console.error("Error fetching NFTs:", err);
+      console.error("💥 Error fetching NFTs:", err);
     }
   };
 
