@@ -3,132 +3,48 @@ const hre = require("hardhat");
 
 async function main() {
 
-    const [deployer] = await hre.ethers.getSigners();
+    const [deployer] = await hre.ethers.getSigners(); // Pulls avaiblable accounts
 
-    const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball"); 
+    const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball"); // Preparing the contract
 
     const contract = await FantasyFootball.deploy(
         "0x0000000000000000000000000000000000000000", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
-        "FantasyFootball",
-        "FFNFT",
-        1000,
-        10
+        "FantasyFootball", // Name of collection
+        "FFNFT", // Symbol of collection
+        0, // Global mint price -> 0 for now (testing)
+        10 // Max supply 
     );
 
-    console.log("FantasyFootball NFT contract deployed to:", contract.target);
+    await contract.waitForDeployment(); // Wait for the contract to be deployed
 
-    // Minting an nft
+    console.log("FantasyFootball NFT contract deployed to:", contract.target); // Debug
+
+    // Minting NFTs
+    const players = [
+        ["Josh Allen", "QB", "Buffalo Bills"],
+        ["Patrick Mahomes", "QB", "Kansas City Chiefs"],
+        ["Justin Jefferson", "WR", "Minnesota Vikings"],
+        ["Malik Nabers", "WR", "New York Giants"],
+        ["Saquan Barkley", "RB", "Philadelphia Eagles"],
+        ["Derrick Henry", "RB", "Baltimore Ravens"],
+        ["Brock Bowers", "TE", "Las Vegas Raiders"],
+        ["Sam LaPorta", "TE", "Detroit Lions"]
+    ];
+
+    for (const [name, position, team] of players) {
     const tx = await contract.mint(
         deployer.address,
-        "Josh Allen", // Name
-        "QB", // Position
-        "Buffalo Bills", // Team
-        0, // Fantasy points
-        100, // Mint price
-        true, // For sale
-        100 // Resale price
+        name,
+        position,
+        team,
+        0,     // Fantasy points
+        0,   // Mint price -> Free for the time being
+        true,  // For sale
+        0    // Sale price -> Free for the time being
     );
-
-    await tx.wait();
-    console.log("Minted JA17 NFT");
-
-    const tx2 = await contract.mint(
-        deployer.address,
-        "Patrick Mahomes",
-        "QB",
-        "Kansas City Chiefs",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx2.wait();
-    console.log("Minted Mahomes NFT");
-
-    const tx3 = await contract.mint(
-        deployer.address,
-        "Justin Jefferson",
-        "WR",
-        "Minnesota Vikings",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx3.wait();
-    console.log("Minted Jefferson NFT");
-
-    const tx4 = await contract.mint(
-        deployer.address,
-        "Malik Nabers",
-        "WR",
-        "New York Giants",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx4.wait();
-    console.log("Minted Nabers NFT");
-
-    const tx5 = await contract.mint(
-        deployer.address,
-        "Saquan Barkley",
-        "RB",
-        "Philadelphia Eagles",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx5.wait();
-    console.log("Minted Barkley NFT");
-
-    const tx6 = await contract.mint(
-        deployer.address,
-        "Derrick Henry",
-        "RB",
-        "Baltimore Ravens",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx6.wait();
-    console.log("Minted Henry NFT");
-
-    const tx7 = await contract.mint(
-        deployer.address,
-        "Brock Bowers",
-        "TE",
-        "Las Vegas Raiders",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx7.wait();
-    console.log("Minted Bowers NFT");
-
-    const tx8 = await contract.mint(
-        deployer.address,
-        "Sam LaPorta",
-        "TE",
-        "Detroit Lions",
-        0,
-        100, // Mint price
-        true,
-        100
-    );
-
-    await tx8.wait();
-    console.log("Minted LaPorta NFT");
+    await tx.wait(); // Wait for the transaction to be mined
+    console.log(`Minted ${name} NFT`); // Debug
+    }
 
     // Debug
     console.log("Deployer address:", deployer.address);
