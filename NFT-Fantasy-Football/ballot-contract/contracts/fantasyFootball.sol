@@ -269,8 +269,10 @@ contract FantasyFootball {
         string memory json = string(abi.encodePacked(
             '{',
                 '"name": "', p.name, '",',
-                '"description": "', p.name, ' is a ', p.position, ' for the ', p.team, 
-                    '. Fantasy Points: ', Strings.toString(p.fantasyPoints), '",',
+                '"description": "', 
+                    p.position, '\\n',
+                    p.team, '\\n',
+                    Strings.toString(p.fantasyPoints), ' Fantasy Points",',
                 '"image": "', image, '"',
             '}'
         ));
