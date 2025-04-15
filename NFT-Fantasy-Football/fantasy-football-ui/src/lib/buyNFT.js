@@ -1,65 +1,86 @@
-import { ethers } from "ethers"; // Import ethers
-import FantasyFootballABI from "../contracts/FantasyFootball.json"; // Import contract ABI
+import { ethers } from "ethers";
+import FantasyFootballABI from "../contracts/FantasyFootball.json";
+import { toast } from "react-toastify";
 
-import { toast } from "react-toastify"; // For alerts
+export const buyNFT = async (tokenId, contractAddress, onBuySuccess) => {
+  if (!window.ethereum) {
+    toast.error("Please connect your MetaMask wallet.", {
+      position: "top-right",
+      autoClose: 3000,
+      theme: "dark",
+      icon: "⚠️",
+    });
+    return;
+  }
 
-export const buyNFT = async (tokenId, contractAddress) => {
+  let pendingToast;
 
-    if(!window.ethereum) { // Check if MetaMask is connected
-      toast.error("Please connect your MetaMask wallet.", {
+  try {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer);
+    const buyer = await signer.getAddress();
+    console.log("BUYER:", buyer);
+
+    // Fetch price for transparency (in case needed later for payment)
+    const player = await contract.players(tokenId);
+    const salePrice = player.salePrice;
+
+    // Show price in ETH if needed (ethers.formatEther(salePrice))
+    console.log(`Buying token ${tokenId} for ${salePrice} (raw)`);
+
+    pendingToast = toast.loading("Processing transaction...", {
+      position: "top-left",
+      theme: "dark",
+    });
+
+    // Yoda Token Payment Placeholder (for future use)
+    // const yodaToken = new ethers.Contract(YODA_TOKEN_ADDRESS, YodaABI.abi, signer);
+    // await yodaToken.approve(contractAddress, salePrice);
+    // const tx = await contract.buy(tokenId); // Buy after approval
+
+    const tx = await contract.buy(tokenId); // current logic
+    console.log("Transaction hash:", tx.hash);
+
+    const receipt = await tx.wait();
+    console.log("Transaction confirmed in block:", receipt.blockNumber);
+
+    const updatedOwner = await contract.ownerOf(tokenId);
+    console.log("New owner:", updatedOwner);
+
+    toast.update(pendingToast, {
+      render: "🎉 NFT purchased successfully!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+    });
+
+    if (onBuySuccess) {
+      try {
+        await onBuySuccess(); // just in case it's async or throws
+      } catch (e) {
+        console.warn("onBuySuccess failed silently:", e);
+      }
+    }
+
+  } catch (err) {
+    console.error("Buy failed:", err);
+
+    const message = err?.reason || err?.message || "Purchase failed. Please try again.";
+
+    if (pendingToast) {
+      toast.update(pendingToast, {
+        render: `💥 ${message}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } else {
+      toast.error(`💥 ${message}`, {
         position: "top-right",
         autoClose: 3000,
         theme: "dark",
-        icon: "⚠️",
       });
-      return;
     }
-
-    let pendingToast; // Create pending toast -> fix scope issue in catch block
-
-    try {
-        const provider = new ethers.BrowserProvider(window.ethereum); // Create provider
-        const signer = await provider.getSigner(); // Get signer
-        const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer); // Create contract
-
-        pendingToast = toast.loading("Processing transaction...", {
-          position: "top-right",
-          theme: "dark",
-        });
-    
-        const tx = await contract.buy(tokenId); // purchase with buy() function -> fantasyFootball.sol
-        await tx.wait(); // wait for the transaction
-
-        toast.update(pendingToast, {
-          render: `NFT purchased!`,
-          type: "success",
-          isLoading: false,
-          autoClose: 3000,
-          icon: "🎉",
-        });
-
-      } catch (err) { // If anything f'd up
-        console.error("Buy failed:", err); // Log error
-        
-        // Check if there is a pending toast
-        if (pendingToast) {
-          // If loading is still happening
-          toast.update(pendingToast, {
-            render: "Purchase failed. Please try again.",
-            type: "error",
-            isLoading: false,
-            autoClose: 3000,
-            icon: "💥",
-          });
-
-        } else {
-          // If error happens before loading
-          toast.error("Purchase failed. Please try again.", {
-            position: "top-right",
-            autoClose: 3000,
-            theme: "dark",
-            icon: "💥",
-          });
-        }
-      }
+  }
 };
