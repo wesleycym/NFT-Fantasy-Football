@@ -48,6 +48,8 @@ contract FantasyFootball {
     uint256 public max_supply;
     uint256 private _nextTokenId;
 
+    uint256 public totalSupply;
+
     // Player metadata 
     struct Player {
         string name; 
@@ -136,6 +138,8 @@ contract FantasyFootball {
 
         uint256 tokenId = _nextTokenId++;
         _mint(to, tokenId);
+
+        totalSupply += 1;
 
         // Store player data
         players[tokenId] = Player({
@@ -265,18 +269,18 @@ contract FantasyFootball {
         string memory json = string(abi.encodePacked(
             '{',
                 '"name": "', p.name, '",',
-                '"description": "', 
-                    p.name, ' plays ', p.position, ' for the ', p.team, '. ',
-                    'Fantasy Points: ', Strings.toString(p.fantasyPoints), '. ',
-                    'Position: ', p.position, '. ',
-                    'Team: ', p.team, '."',
-                ',',
+                '"description": "', p.name, ' is a ', p.position, ' for the ', p.team, 
+                    '. Fantasy Points: ', Strings.toString(p.fantasyPoints), '",',
                 '"image": "', image, '"',
             '}'
         ));
 
         string memory encoded = Base64.encode(bytes(json));
         return string(abi.encodePacked("data:application/json;base64,", encoded));
+    }
+
+    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+        return interfaceId == 0x80ac58cd; // ERC-721 interface ID
     }
 
 }

@@ -25,11 +25,13 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       // console.log("Deployer from contract:", deployerAddress); // Debug
       // setDeployer(deployerAddress); // Setting the address
 
-      const maxSupply = await ffContract.max_supply();
-      console.log("Max supply:", maxSupply);
+      //const maxSupply = await ffContract.max_supply();
+      //console.log("Max supply:", maxSupply);
+      const totalSupply = await ffContract.totalSupply();
+      console.log("Total supply:", totalSupply);
       const fetchedPlayers = [];
 
-      for (let i = 0; i < maxSupply; i++) {
+      for (let i = 0; i < totalSupply; i++) {
         try {
           const player = await ffContract.players(i);
           const owner = await ffContract.ownerOf(i);
