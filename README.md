@@ -3,7 +3,7 @@ NFT Fantasy Football is a decentralized web application that combines NFT owerns
 ___
 Upon deployment, the deployer becomes the **inital owner of all NFTs**, and has them automatically listed for resale. **Only 1 NFT is minted per player**, ensuring uniqueness, and enforcing the semantics of a fantasy football league. Once purchased at the base price, NFTs are transferred to the buyer and removed from circulation. The new owner is then given the option to list the NFT for sale again, with their own asking price.    
 ___
-Fantasy point updates are reflected live on the frontend of the application. Each NFT dynamically encodes its metadata using the **tokenURI()** function. If a player's points are updated, and the NFT is resold, the new owner will see the **updated stats** reflected automatically in their wallet.
+Fantasy point updates are reflected live on the frontend of the application. Each NFT dynamically encodes its metadata using the **tokenURI()** function. If a player's points are updated, and the NFT is resold, the new owner will see the **updated stats** reflected automatically in their wallet. Although players do not mint the cards themselves, purchasing an NFT with high fantasy points can capture a legacy defining game; like owning a piece of history. The on-chain **fantasyPoints field** locks in a snapshot of the players greatness. If sold, the next user gets whatever the current **tokenURI()** reflects. 
 ___
 ## Demo Checklist 
 **1) Good tile and abstract of 100 words:** ✅   
@@ -11,7 +11,7 @@ ___
 **3) Working front-end for the NFT for users to interact:** ✅   
 **4) Display of NFT’s price in Yodas and Transfer of Yoda for the price of an NFT:** ⚠️ Prices to display, but all NFTs are free as of testing.   
 **5) User able to mint NFT with base characteristics specified; multiple users do the same:** ⚠️ Reflected on nature of fantasy football. Availability of single player is limited, however the availability of mulitple players is abundant.   
-**6) Dynamic nature of the NFT:** ⚠️ Ensuring the integrity of fantasy football, users cannot change the values of players, the power to do so is left to the commissioner (deployer).   
+**6) Dynamic nature of the NFT:** ⚠️ Ensuring the integrity of fantasy football, users cannot change the values of players, the power to do so is left to the commissioner (deployer). However, I could change the logic to allow multiple NFTs of the same player to be minted, all with different fantasy point values.   
 **7) Users able to display NFT on their wallet:** ✅   
 **8) What are the offchain data for the NFT?** Where is the offchain data stored? How is it accessed? How is it
 represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata. As for data itself (name, FP, etc.), it is encoded on the fly using **tokenURI**.   
