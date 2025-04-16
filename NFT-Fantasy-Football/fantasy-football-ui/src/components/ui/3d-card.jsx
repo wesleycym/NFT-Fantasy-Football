@@ -125,7 +125,7 @@ export const CardBody = ({ children, className, player, walletAddress, isOwned, 
                 : "bg-green-600 hover:bg-green-700 text-white"
             }`}
           >
-            {isBuying ? "Processing..." : `Buy (${player.salePrice})`}
+            {isBuying ? "Processing..." : `Buy for (${player.salePrice}) YODA`}
           </button>
         ) : (
           <button
