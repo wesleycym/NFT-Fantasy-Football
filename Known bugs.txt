@@ -1,3 +1,4 @@
     Bugs:
 
-        N/A
+        1) Fetching NFTs too fast on Mac, Windows laptop works fine.
+            - Add more delay?
