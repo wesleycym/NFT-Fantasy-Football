@@ -1,12 +1,32 @@
-- Hardhat Node
+- Hardhat Node:
     1) cd NFT-Fantasy-Football
     2) cd ballot-contract
     3) npx hardhat node
-- Deploy.js
+
+- Deploy.js:
     1) cd NFT-Fantasy-Football
     2) cd ballot-contract
     3) npx hardhat run scripts/deploy.js --network localhost
-- FrontEnd
+
+- FrontEnd:
     1) cd NFT-Fantasy-Football
     2) cd fantasy-football-ui
     3) npm start
+
+- Compiling:
+    1) cd NFT-Fantasy-Football
+    2) cd ballot-contract
+    3) npx hardhat compile
+    4) Move JSON file over to frontend
+
+- If hardhat breaks:
+    1) Remove-Item -Recurse -Force .\node_modules
+    2) Remove-Item -Force .\package-lock.json
+    3) npm install --save-dev hardhat
+    4) npm install --save-dev @nomicfoundation/hardhat-toolbox
+
+- Chaning values:
+    1) npx hardhat console --network localhost
+    2) const [owner, user] = await ethers.getSigners();
+    3) const contract = await ethers.getContractAt("FantasyFootball", "YOUR_CONTRACT_ADDRESS");
+    4) await contract.connect(owner).updateFantasyPoints(0, 42); // update token 0 to 42 points

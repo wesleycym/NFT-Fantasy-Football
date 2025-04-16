@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/utils/Strings.sol"; // Library for converting uint to string
+import "base64-sol/base64.sol"; // For converting JSON metadata to base64 encoded string
+
 // ERC-20 interface -> sends / receives tokens
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
@@ -45,6 +48,7 @@ contract FantasyFootball {
     uint256 public max_supply;
     uint256 private _nextTokenId;
 
+    uint256 public totalSupply;
 
     // Player metadata 
     struct Player {
@@ -52,12 +56,14 @@ contract FantasyFootball {
         string position;
         string team;
         uint256 fantasyPoints; 
-
         uint256 mintPrice; // Price for the NFT
+
+        bool forSale; 
+        uint256 salePrice;
     }
+
     mapping(uint256 => Player) public players;
-
-
+    mapping(string => string) public playerImageMap; // Mapping from player name to player image
     mapping(uint256 => address) internal _ownerOf; // Mapping owner address to token count
     mapping(address => uint256[]) private tokenOwnerstoIds;
     mapping(address => uint256) internal _balanceOf; // Mapping from token ID to approved address
@@ -65,14 +71,34 @@ contract FantasyFootball {
     mapping(address => mapping(address => bool)) public isApprovedForAll;
 
     constructor(
-        address _yodaTokenAddress, // Accepted ERC20 contract
 
+        address _yodaTokenAddress, // Accepted ERC20 contract
         string memory _name, 
         string memory _symbol, 
         uint256 MINT_PRICE, 
         uint256 MAX_SUPPLY
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
+        /* Mapping all players -> hosted image */ // OLD IMAGES
+        // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
+        // playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
+        // playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
+        // playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
+        // playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
+        // playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
+        // playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
+        // playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
+
+        // NEW IMAGES  -> 1200x1200px
+        playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
+        playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/patrick-mahomes.jpg";
+        playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/justin-jefferson.jpg";
+        playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/malik-nabers.jpg";
+        playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/saquan-barkley.jpg";
+        playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/derrick-henry.jpg";
+        playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/brock-bowers.jpg";
+        playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/sam-laporta.jpg";
 
         name = _name;
         symbol = _symbol;
@@ -104,7 +130,7 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice) public payable {
+    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice, bool _forSale, uint256 _salePrice) public payable {
 
         require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
@@ -113,14 +139,17 @@ contract FantasyFootball {
         uint256 tokenId = _nextTokenId++;
         _mint(to, tokenId);
 
+        totalSupply += 1;
+
         // Store player data
         players[tokenId] = Player({
             name: _name, 
             position: _position, 
             team: _team, 
             fantasyPoints: _fantasyPoints,
-
-            mintPrice: _mintPrice
+            mintPrice: _mintPrice,
+            forSale: _forSale,
+            salePrice: _salePrice
         });
 
         tokenOwnerstoIds[to].push(tokenId);
@@ -189,6 +218,12 @@ contract FantasyFootball {
         emit Approval(owner, spender, id);
     }
 
+    function setForSale(uint256 tokenId, bool status, uint256 price) public {
+        require(_ownerOf[tokenId] == msg.sender, "Not the token owner");
+        players[tokenId].forSale = status;
+        players[tokenId].salePrice = price;
+    }
+
     // Custom transfer function since we are buying
     // transferFrom -> for trading 
     function _transfer(address from, address to, uint256 id) internal {
@@ -207,6 +242,13 @@ contract FantasyFootball {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
 
+        Player storage player = players[tokenId];
+        require(player.forSale, "NFT not for sale");
+
+        //address seller = _ownerOf[tokenId]; // Won't need until yoda is implemented
+        player.forSale = false;
+        player.salePrice = 0;
+
         // Skipping yoda payment while testing
         // if (address(yodaToken) != address(0)) {
         //     uint256 price = players[tokenId].mintPrice;
@@ -215,4 +257,30 @@ contract FantasyFootball {
 
          _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
+
+
+    function tokenURI(uint256 tokenId) public view returns (string memory) {
+        require(_ownerOf[tokenId] != address(0), "Token does not exist");
+
+        Player memory p = players[tokenId];
+        string memory image = playerImageMap[p.name];
+
+        // JSON metadata with full details in description
+        string memory json = string(abi.encodePacked(
+            '{',
+                '"name": "', p.name, '",',
+                '"description": "', p.name, ' is a ', p.position, ' for the ', p.team, 
+                    '. Fantasy Points: ', Strings.toString(p.fantasyPoints), '",',
+                '"image": "', image, '"',
+            '}'
+        ));
+
+        string memory encoded = Base64.encode(bytes(json));
+        return string(abi.encodePacked("data:application/json;base64,", encoded));
+    }
+
+    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+        return interfaceId == 0x80ac58cd; // ERC-721 interface ID
+    }
+
 }
