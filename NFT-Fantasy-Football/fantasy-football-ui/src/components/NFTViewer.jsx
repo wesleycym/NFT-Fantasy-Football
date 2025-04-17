@@ -37,9 +37,9 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
       for (let i = 0; i < totalSupply; i++) {
         try {
 
-          await new Promise(resolve => setTimeout(resolve, 500)); // Delay to stay withing rate limits
+          await new Promise(resolve => setTimeout(resolve, 350)); // Delay to stay withing rate limits
           const player = await ffContract.players(i);
-          await new Promise(resolve => setTimeout(resolve, 500)); // Delay again
+          await new Promise(resolve => setTimeout(resolve, 350)); // Delay again
           const owner = await ffContract.ownerOf(i);
 
           if (!player.name || owner === ethers.ZeroAddress) {
