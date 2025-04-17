@@ -1,2 +1,4 @@
     Needed changes:
         - Possibly make the cards for vibrant; make them look like they are valuable.
+            * Possibly use this as a an outline? outline-solid bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1
+                ** Make it more vibrant/animate it
