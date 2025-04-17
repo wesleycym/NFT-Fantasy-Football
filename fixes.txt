@@ -6,3 +6,6 @@
         - Make it more interactive. Maybe turn it into a game.
             * Possibly grab all possible stats from last season, and randomize a fantasy game from the player with those stats.
                 ** More gambly approach
+
+        Make a randomly generated fantasy stats on players, if above a certain threshold, give it a rank
+            If possible have players go against each other, or top rank
