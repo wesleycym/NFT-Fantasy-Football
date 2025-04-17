@@ -1,9 +1,11 @@
 # 🏈 NFT Fantasy Football
-NFT Fantasy Football is a decentralized web application that combines NFT owernship with the dynamic nature of fantasy football through the use of fantasy points. Each NFT represents a real-world player, and includes attributes such as name, team, position, and most importantly, fantasy points. Users can connect their MetaMask wallet, and purchase player NFTs using ERC-20 Yoda tokens.   
+NFT Fantasy Football is a decentralized web application that combines NFT owernship with the dynamic nature of fantasy football through the use of fantasy points. Each NFT represents a real-world player, and includes attributes such as name, team, position, and most importantly, fantasy points. Users can connect their MetaMask wallet, and purchase player NFTs using custom ERC-20 Yoda tokens.   
 ___
-Upon deployment, the deployer becomes the **inital owner of all NFTs**, and has them automatically listed for resale. **Only 1 NFT is minted per player**, ensuring uniqueness, and enforcing the semantics of a fantasy football league. Once purchased at the base price, NFTs are transferred to the buyer and removed from circulation. The new owner is then given the option to list the NFT for sale again, with their own asking price.    
+Upon deployment, the deployer becomes the **inital owner of all NFTs**, and has them automatically listed for sale. **Only 1 NFT is minted per NFL athlete**, ensuring uniqueness, and enforcing the structure of a fantasy football league. Once purchased at the base price, NFTs are transferred to the buyer and removed from circulation. The new owner is then given the option to list the NFT for sale again, with their own asking price.    
 ___
-Fantasy point updates are reflected live on the frontend of the application. Each NFT dynamically encodes its metadata using the **tokenURI()** function. If a player's points are updated, and the NFT is resold, the new owner will see the **updated stats** reflected automatically in their wallet. Although players do not mint the cards themselves, purchasing an NFT with high fantasy points can capture a legacy defining game; like owning a piece of history. The on-chain **fantasyPoints field** locks in a snapshot of the players greatness. If sold, the next user gets whatever the current **tokenURI()** reflects. 
+Fantasy point updates are reflected live on the frontend of the application. Each NFT dynamically encodes its metadata using the **tokenURI()** function. If a player's points are updated, and the NFT is resold, the new owner will see the **updated stats** reflected automatically in their wallet.   
+___
+Although players do not mint the cards themselves, purchasing an NFT with high fantasy points can capture a legacy defining game; like owning a piece of history. The on-chain **fantasyPoints field** locks in a snapshot of the players greatness.   
 ___
 ## Demo Checklist 
 **1) Good tile and abstract of 100 words:** ✅   
