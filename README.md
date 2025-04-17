@@ -18,7 +18,7 @@ ___
 **8) What are the offchain data for the NFT?** Where is the offchain data stored? How is it accessed? How is it
 represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata. As for data itself (name, FP, etc.), it is encoded on the fly using **tokenURI**.   
 
-```
+"```solidity"
     function tokenURI(uint256 tokenId) public view returns (string memory) {
         require(_ownerOf[tokenId] != address(0), "Token does not exist");
 
@@ -40,5 +40,5 @@ represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata.
         string memory encoded = Base64.encode(bytes(json));
         return string(abi.encodePacked("data:application/json;base64,", encoded));
     }
-```   
+"```"   
 **9) Compute based on NFT properties:** ❌ While it is possible to include all on the field variables to determine a players performance, there was a concern with high gas usage if implemented. Statically uploading a JSON file of all stats (passing yards, tds, etc) will turn the application into a static NFT platform, unless its manually updated. However, it is entirely possible to sort all players on the front end by points earned.
