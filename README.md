@@ -18,7 +18,7 @@ ___
 **8) What are the offchain data for the NFT?** Where is the offchain data stored? How is it accessed? How is it
 represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata. As for data itself (name, FP, etc.), it is encoded on the fly using **tokenURI**.   
 
-"```solidity"
+"```solidity"   
     function tokenURI(uint256 tokenId) public view returns (string memory) {
         require(_ownerOf[tokenId] != address(0), "Token does not exist");
 
