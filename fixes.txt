@@ -1,0 +1,2 @@
+    Needed changes:
+        - Possibly make the cards for vibrant; make them look like they are valuable.
