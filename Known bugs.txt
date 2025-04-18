@@ -1,10 +1,6 @@
     Bugs:
-    
-[FIXED - Implemented use state for button] NFT is double firing when purchasing. Says purchase successfull -> metamask fail -> metamask successfull. NFT still shows update [Rarely happens]
-[FIXED - Images will have a gray box underneath (metamask issue)] Images for nfts are wack. They are not scaled properly.
-[FIXED - Moved to description] Attributes not showing up.
-        4) I don't have to connect my account when i purchase an NFT. It will just auto connect to my metamask and ask to confirm it. [Need to linearize the process]
-[FIXED(Maybe?) - Manually delete NFTS] Hardhat accounts don't reset when I close and open it. The NFTs remain in the wallet.
-[FIXED - Project too small to warrant that change] When changing the values of a player, change it so we can use their name instead of their designated number (order in which they were minted).
-        7) I don't know if its minting 10 of each, but when I am not connected to the wallet, it still purchases yet it doesn't show up in my wallet, but i am the new owner.
-        8) Owner changes, don't know if its a hardhat development issue - when nft is bought, do the funds move to the owner address?
+
+        1) Fetching NFTs too fast on Mac, Windows laptop works fine.
+            - Add more delay?
+        2) When reselling, you have to go through 1 transaction to set the price, and another to list it for sale. Leads to confusion. 
+            - Make it more noticable / interactive
