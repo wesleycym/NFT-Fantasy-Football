@@ -222,7 +222,7 @@ export const FumblesLost =
     18: 0
 };
 
-/* 6 points per */
+/* 6 points per {DONE} */
 export const FumbleRecoveredForATouchdown = 
 {
     1: 0,
