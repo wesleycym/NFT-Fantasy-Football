@@ -19,37 +19,8 @@ async function main() {
 
     console.log("FantasyFootball NFT contract deployed to:", contract.target); // Debug
 
-    // Minting NFTs
-    const players = [
-        ["Josh Allen", "QB", "Buffalo Bills"],
-        ["Patrick Mahomes", "QB", "Kansas City Chiefs"],
-        ["Justin Jefferson", "WR", "Minnesota Vikings"],
-        ["Malik Nabers", "WR", "New York Giants"],
-        ["Saquan Barkley", "RB", "Philadelphia Eagles"],
-        ["Derrick Henry", "RB", "Baltimore Ravens"],
-        ["Brock Bowers", "TE", "Las Vegas Raiders"],
-        ["Sam LaPorta", "TE", "Detroit Lions"]
-    ];
-
-    for (const [name, position, team] of players) {
-    const tx = await contract.mint(
-        deployer.address,
-        name,
-        position,
-        team,
-        0,     // Fantasy points
-        0,   // Mint price -> Free for the time being
-        true,  // For sale
-        0    // Sale price -> Free for the time being
-    );
-    await tx.wait(); // Wait for the transaction to be mined
-    console.log(`Minted ${name} NFT`); // Debug
-    }
-
     // Debug
     console.log("Deployer address:", deployer.address);
-    console.log("Owner of token 0:", await contract.ownerOf(0));
-
 }
 
 main().catch((error) => {
