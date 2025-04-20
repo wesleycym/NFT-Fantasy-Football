@@ -7,6 +7,9 @@ import * as DerrickHenryStats from "./playerStats/DerrickHenry"; // Derrick Henr
 import * as BrockBowersStats from "./playerStats/BrockBowers"; // Brock Bowers 2024-2025 season stats
 import * as SamLaPortaStats from "./playerStats/SamLaPorta"; // Sam LaPorta 2024-2025 season stats
 
+/*
+        Change rank function based on position 
+*/
 
 // Mapping players name to their designated stats
 playerStatMap = 
