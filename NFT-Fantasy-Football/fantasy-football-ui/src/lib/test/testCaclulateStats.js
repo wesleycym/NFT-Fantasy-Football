@@ -1,38 +1,43 @@
-import * as JoshAllenStats from "./playerStats/JoshAllen"; // Josh Allens 2024-2025 season stats
-import * as PatrickMahomesStats from "./playerStats/PatrickMahomes"; // Patrick Mahomes 2024-2025 season stats
-import * as JustinJeffersonStats from "./playerStats/JustinJefferson"; // Justin Jefferson 2024-2025 season stats
-import * as MalikNabersStats from "./playerStats/MalikNabers"; // Malik Nabers 2024-2025 season stats
-import * as SaquanBarkleyStats from "./playerStats/SaquanBarkley"; // Saquan Barkley 2024-2025 season stats
-import * as DerrickHenryStats from "./playerStats/DerrickHenry"; // Derrick Henry 2024-2025 season stats
-import * as BrockBowersStats from "./playerStats/BrockBowers"; // Brock Bowers 2024-2025 season stats
-import * as SamLaPortaStats from "./playerStats/SamLaPorta"; // Sam LaPorta 2024-2025 season stats
 
+const JoshAllenStats = require("./testJA17");
+// const PatrickMahomesStats = require("./playerStats/PatrickMahomes");
+// const JustinJeffersonStats = require("./playerStats/JustinJefferson");
+// const MalikNabersStats = require("./playerStats/MalikNabers");
+// const SaquanBarkleyStats = require("./playerStats/SaquanBarkley");
+// const DerrickHenryStats = require("./playerStats/DerrickHenry");
+// const BrockBowersStats = require("./playerStats/BrockBowers");
+// const SamLaPortaStats = require("./playerStats/SamLaPorta");
 
 // Mapping players name to their designated stats
-playerStatMap = 
+const playerStatMap = 
 {
     "Josh Allen": JoshAllenStats,
-    "Patrick Mahomes": PatrickMahomesStats,
-    "Justin Jefferson": JustinJeffersonStats,
-    "Malik Nabers": MalikNabersStats,
-    "Saquan Barkley": SaquanBarkleyStats,
-    "Derrick Henry": DerrickHenryStats,
-    "Brock Bowers": BrockBowersStats,
-    "Sam LaPorta": SamLaPortaStats,
+    // "Patrick Mahomes": PatrickMahomesStats,
+    // "Justin Jefferson": JustinJeffersonStats,
+    // "Malik Nabers": MalikNabersStats,
+    // "Saquan Barkley": SaquanBarkleyStats,
+    // "Derrick Henry": DerrickHenryStats,
+    // "Brock Bowers": BrockBowersStats,
+    // "Sam LaPorta": SamLaPortaStats,
 }
 
-export function getRank(points) {
-  if (points >= 40) return "🏆 Hall of Fame";
-  if (points >= 30) return "💪 All-Pro";
-  if (points >= 15) return "🔒 Starter";
-  if (points >= 8) return "🛠️ Bench";
-  if (points >= 5)  return "📦 Practice Squad";
-  return "🧢 Draft Bust";
-}
+let DEBUG = false;
 
-export function generateRandomFantasyStats(playerName) 
+function getRank(points) {
+    if (points >= 40) return "🏆 Hall of Fame";
+    if (points >= 30) return "💪 All-Pro";
+    if (points >= 15) return "🔒 Starter";
+    if (points >= 8) return "🛠️ Bench";
+    if (points >= 5)  return "📦 Practice Squad";
+    return "🧢 Draft Bust";
+  }
+
+function generateRandomFantasyStats(playerName) 
 {
     const stats = playerStatMap[playerName]; // Map player name to their stats
+
+    if (DEBUG) console.log(stats);
+
     if (!stats) throw new Error("Unknown player name: " + playerName); // Throw error if player name is not found
 
     let fantasyPoints = 0; // Initialize fantasy points
@@ -72,7 +77,7 @@ export function generateRandomFantasyStats(playerName)
         breakdown.push(`${label}: ${value} (Week ${week})`);
       }
 
-      let rank = getRank(fantasyPoints); // Get rank
+      let rank = getRank(fantasyPoints);
       
       // Return points and breakdown -> (Passing yards: 232 (Week 1))
       return {
@@ -81,5 +86,6 @@ export function generateRandomFantasyStats(playerName)
 }
 
 module.exports = {
-    generateRandomFantasyStats
+    generateRandomFantasyStats,
+    getRank
   };
