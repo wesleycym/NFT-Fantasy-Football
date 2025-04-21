@@ -82,7 +82,3 @@ export function generateRandomFantasyStats(playerName)
         fantasyPoints, breakdown, rank
       };
 }
-
-module.exports = {
-    generateRandomFantasyStats
-  };
