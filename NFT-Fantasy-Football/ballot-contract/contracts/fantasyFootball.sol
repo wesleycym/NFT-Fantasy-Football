@@ -150,15 +150,6 @@ contract FantasyFootball {
         tokenOwnerstoIds[to].push(tokenId);
     }
 
-    // Update fantasy points
-    function updateFantasyPoints(uint256 tokenId, uint256 newPoints) external {
-        players[tokenId].fantasyPoints = newPoints;
-    }
-
-    function updateTeam(uint256 tokenId, string memory newTeam) external {
-        players[tokenId].team = newTeam;
-    }
-
     function _isApprovedOrOwner(
         address owner, 
         address spender, 
