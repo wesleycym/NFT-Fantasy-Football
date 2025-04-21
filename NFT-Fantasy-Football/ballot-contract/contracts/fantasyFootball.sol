@@ -56,9 +56,22 @@ contract FantasyFootball {
         string team;
         uint256 fantasyPoints; 
         uint256 mintPrice; // Price for the NFT
-
         bool forSale; 
         uint256 salePrice;
+
+        // New Information -> extra metadata (specific stats + rank (could be removed for gas reasons))
+        string passingYards;
+        string passingTouchdowns;
+        string passingInterceptions;
+        string rushingYards;
+        string rushingTouchdowns;
+        string receptions;
+        string receivingYards;
+        string receivingTouchdowns;
+        string twoPointConversions;
+        string fumblesLost;
+        string fumbleRecoveredForATouchdown;
+        string rank;
     }
 
     mapping(uint256 => Player) public players;
@@ -77,16 +90,6 @@ contract FantasyFootball {
         uint256 MINT_PRICE
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
-
-        /* Mapping all players -> hosted image */ // OLD IMAGES
-        // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
-        // playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
-        // playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
-        // playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
-        // playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
-        // playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
-        // playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
-        // playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
 
         // NEW IMAGES  -> 1200x1200px
         playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
@@ -127,7 +130,30 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice, bool _forSale, uint256 _salePrice) public payable {
+    function mint
+    (
+        address to, 
+        string memory _name, 
+        string memory _position, 
+        string memory _team, 
+        uint256 _fantasyPoints, 
+        uint256 _mintPrice, 
+        bool _forSale, 
+        uint256 _salePrice,
+        string _passingYards,
+        string _passingTouchdowns,
+        string _passingInterceptions,
+        string _rushingYards,
+        string _rushingTouchdowns,
+        string _receptions,
+        string _receivingYards,
+        string _receivingTouchdowns,
+        string _twoPointConversions,
+        string _fumblesLost,
+        string _fumbleRecoveredForATouchdown,
+        string _rank
+        ) 
+        public payable {
 
         //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
@@ -144,7 +170,16 @@ contract FantasyFootball {
             fantasyPoints: _fantasyPoints,
             mintPrice: _mintPrice,
             forSale: _forSale,
-            salePrice: _salePrice
+            salePrice: _salePrice,
+            passingYards: _passingYards,
+            passingTouchdowns: _passingTouchdowns,
+            passingInterceptions: _passingInterceptions,
+            rushingYards: _rushingYards,
+            rushingTouchdowns: _rushingTouchdowns,
+            twoPointConversions: _twoPointConversions,
+            fumblesLost: _fumblesLost,
+            fumbleRecoveredForATouchdown: _fumbleRecoveredForATouchdown,
+            rank: _rank
         });
 
         tokenOwnerstoIds[to].push(tokenId);
