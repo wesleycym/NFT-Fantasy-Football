@@ -45,7 +45,6 @@ contract FantasyFootball {
     string public name;
     string public symbol;
     uint256 public mint_price;
-    uint256 public max_supply;
     uint256 private _nextTokenId;
 
     uint256 public totalSupply;
@@ -75,8 +74,7 @@ contract FantasyFootball {
         address _yodaTokenAddress, // Accepted ERC20 contract
         string memory _name, 
         string memory _symbol, 
-        uint256 MINT_PRICE, 
-        uint256 MAX_SUPPLY
+        uint256 MINT_PRICE
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
 
@@ -103,7 +101,6 @@ contract FantasyFootball {
         name = _name;
         symbol = _symbol;
         mint_price = MINT_PRICE;
-        max_supply = MAX_SUPPLY;
     }
 
     event Transfer(
@@ -131,8 +128,6 @@ contract FantasyFootball {
     }
 
     function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice, bool _forSale, uint256 _salePrice) public payable {
-
-        require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
 
         //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 

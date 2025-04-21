@@ -11,8 +11,7 @@ async function main() {
         "0x0000000000000000000000000000000000000000", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
         "FantasyFootball", // Name of collection
         "FFNFT", // Symbol of collection
-        0, // Global mint price -> 0 for now (testing)
-        10 // Max supply 
+        0 // Global mint price -> 0 for now (testing)
     );
 
     await contract.waitForDeployment(); // Wait for the contract to be deployed
