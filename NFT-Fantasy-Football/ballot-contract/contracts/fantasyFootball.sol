@@ -60,17 +60,7 @@ contract FantasyFootball {
         uint256 salePrice;
 
         // New Information -> extra metadata (specific stats + rank (could be removed for gas reasons))
-        string passingYards;
-        string passingTouchdowns;
-        string passingInterceptions;
-        string rushingYards;
-        string rushingTouchdowns;
-        string receptions;
-        string receivingYards;
-        string receivingTouchdowns;
-        string twoPointConversions;
-        string fumblesLost;
-        string fumbleRecoveredForATouchdown;
+        string breakdown;
         string rank;
     }
 
@@ -140,17 +130,7 @@ contract FantasyFootball {
         uint256 _mintPrice, 
         bool _forSale, 
         uint256 _salePrice,
-        string memory _passingYards,
-        string memory _passingTouchdowns,
-        string memory _passingInterceptions,
-        string memory _rushingYards,
-        string memory _rushingTouchdowns,
-        string memory _receptions,
-        string memory _receivingYards,
-        string memory _receivingTouchdowns,
-        string memory _twoPointConversions,
-        string memory _fumblesLost,
-        string memory _fumbleRecoveredForATouchdown,
+        string memory _breakdown,
         string memory _rank
         ) 
         public payable {
@@ -171,17 +151,7 @@ contract FantasyFootball {
             mintPrice: _mintPrice,
             forSale: _forSale,
             salePrice: _salePrice,
-            passingYards: _passingYards,
-            passingTouchdowns: _passingTouchdowns,
-            passingInterceptions: _passingInterceptions,
-            rushingYards: _rushingYards,
-            rushingTouchdowns: _rushingTouchdowns,
-            receptions: _receptions,
-            receivingYards: _receivingYards,
-            receivingTouchdowns: _receivingTouchdowns,
-            twoPointConversions: _twoPointConversions,
-            fumblesLost: _fumblesLost,
-            fumbleRecoveredForATouchdown: _fumbleRecoveredForATouchdown,
+            breakdown: _breakdown,
             rank: _rank
         });
 
