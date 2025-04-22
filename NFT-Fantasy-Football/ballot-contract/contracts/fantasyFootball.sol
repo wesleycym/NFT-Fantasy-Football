@@ -263,12 +263,11 @@ contract FantasyFootball {
             p.name, " [", p.rank, " ", Strings.toString(p.fantasyPoints), " FP]"
         ));
 
-
         string memory description = string(abi.encodePacked(
             p.name, " - ", p.position, " for ", p.team, "\\n",
             "\\uD83C\\uDFC8 Fantasy Points: ", Strings.toString(p.fantasyPoints), "\\n",
             "\\u2B50 Rank: ", p.rank, "\\n",
-            "\\uD83D\\uDCCA Breakdown: ", p.breakdown
+            "\\uD83D\\uDCCA Breakdown:\\n ", p.breakdown
         ));
 
         // JSON metadata with full details in description
