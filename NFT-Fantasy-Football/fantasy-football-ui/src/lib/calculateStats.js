@@ -12,7 +12,7 @@ import * as SamLaPortaStats from "./playerStats/SamLaPorta"; // Sam LaPorta 2024
 */
 
 // Mapping players name to their designated stats
-playerStatMap = 
+const playerStatMap = 
 {
     "Josh Allen": JoshAllenStats,
     "Patrick Mahomes": PatrickMahomesStats,
