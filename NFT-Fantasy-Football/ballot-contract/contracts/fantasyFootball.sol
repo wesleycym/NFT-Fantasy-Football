@@ -259,14 +259,19 @@ contract FantasyFootball {
         Player memory p = players[tokenId];
         string memory image = playerImageMap[p.name];
 
+
+        string memory description = string(abi.encodePacked(
+            p.name, " - ", p.position, " for ", p.team, "\\n",
+            "Fantasy Points: ", Strings.toString(p.fantasyPoints), "\\n",
+            "Rank: ", p.rank, "\\n",
+            "Breakdown: ", p.breakdown
+        ));
+
         // JSON metadata with full details in description
         string memory json = string(abi.encodePacked(
             '{',
                 '"name": "', p.name, '",',
-                '"description": "', 
-                    p.position, '\\n',
-                    p.team, '\\n',
-                    Strings.toString(p.fantasyPoints), ' Fantasy Points",',
+                '"description": "', description, '",',
                 '"image": "', image, '"',
             '}'
         ));
