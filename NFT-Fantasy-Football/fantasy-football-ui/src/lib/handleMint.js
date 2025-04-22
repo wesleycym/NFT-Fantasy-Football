@@ -14,7 +14,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     const mintPrice = ethers.parseUnits(player.mintPrice.toString(), 18);
     // const breakdownString = breakdown.join(" | ");
 
-    const breakdownString = breakdown.map(item => `- ${item}`).join("\\n"); // Each breakdown item on a new line
+    const breakdownString = breakdown.map(item => `- ${item}`).join("\n"); // Each breakdown item on a new line
 
     // Pre formatting description
     const description = [
@@ -22,7 +22,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
         `🏈 Fantasy Points: ${fantasyPoints}`,
         `⭐ Rank: ${rank}`,
         `📊 Breakdown:\n${breakdownString}`
-      ].join("\\n");
+      ].join("\n");
 
     const tx = await contract.mint(
       await signer.getAddress(),
