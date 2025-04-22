@@ -14,6 +14,7 @@ import { toast } from "react-toastify"; // For alerts
 import { ethers } from "ethers";
 import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 import FantasyFootballABI from "../../contracts/FantasyFootball.json";
+import { handleMint } from "../../lib/handleMint";
 
 const MouseEnterContext = createContext(undefined);
 
@@ -74,18 +75,6 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
   const [showInfo, setShowInfo] = useState(false);
   const [isBuying, setIsBuying] = useState(false);
 
-  const handleBuy = async () => {
-    try {
-      setIsBuying(true);
-      // Minting logic here
-      console.log("Minting NFT for:", player.name);
-    } catch (err) {
-      console.error("Mint failed:", err);
-    } finally {
-      setIsBuying(false);
-    }
-  };
-
   return (
     <div className={cn("h-96 w-72 relative [transform-style:preserve-3d]", className)}>
       {children}
@@ -108,7 +97,7 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
           </button>
         ) : (
           <button
-            onClick={handleBuy}
+            onClick={() => handleMint(player, contractAddress, setIsBuying)}
             disabled={isBuying}
             className={`px-3 py-1 rounded shadow border border-black ${
               isBuying
@@ -127,7 +116,7 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
           <div className="w-full max-w-full text-center break-words overflow-hidden">
             <h2 className="text-xl font-bold mb-2">{player.name}</h2>
             <p>{player.position} - {player.team}</p>
-            <p>"Mint Price: "{player.mintPrice}</p>
+            <p>Mint Price: {player.mintPrice} YODA</p>
             <p className="mt-4 text-sm font-semibold underline">Rank Tiers</p>
             <ul className="text-xs leading-5">
               <li>🏆 Hall of Fame: 40+</li>
