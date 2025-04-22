@@ -127,6 +127,7 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
           <div className="w-full max-w-full text-center break-words overflow-hidden">
             <h2 className="text-xl font-bold mb-2">{player.name}</h2>
             <p>{player.position} - {player.team}</p>
+            <p>"Mint Price: "{player.mintPrice}</p>
             <p className="mt-4 text-sm font-semibold underline">Rank Tiers</p>
             <ul className="text-xs leading-5">
               <li>🏆 Hall of Fame: 40+</li>
