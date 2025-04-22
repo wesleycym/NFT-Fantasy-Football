@@ -60,7 +60,7 @@ contract FantasyFootball {
         uint256 salePrice;
 
         // New Information -> extra metadata (specific stats + rank (could be removed for gas reasons))
-        string breakdown;
+        string description;
         string rank;
     }
 
@@ -130,7 +130,7 @@ contract FantasyFootball {
         uint256 _mintPrice, 
         bool _forSale, 
         uint256 _salePrice,
-        string memory _breakdown,
+        string memory _description,
         string memory _rank
         ) 
         public payable {
@@ -151,7 +151,7 @@ contract FantasyFootball {
             mintPrice: _mintPrice,
             forSale: _forSale,
             salePrice: _salePrice,
-            breakdown: _breakdown,
+            description: _description,
             rank: _rank
         });
 
@@ -263,12 +263,7 @@ contract FantasyFootball {
             p.rank, " ", p.name 
         ));
 
-        string memory description = string(abi.encodePacked(
-            p.name, " - ", p.position, " for ", p.team, "\\n",
-            "\\uD83C\\uDFC8 Fantasy Points: ", Strings.toString(p.fantasyPoints), "\\n",
-            "\\u2B50 Rank: ", p.rank, "\\n",
-            "\\uD83D\\uDCCA Breakdown:\\n ", p.breakdown
-        ));
+        string memory description = p.description; // From pre formatted description in the frontend
 
         // JSON metadata with full details in description
         string memory json = string(abi.encodePacked(
