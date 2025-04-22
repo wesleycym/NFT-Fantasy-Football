@@ -259,8 +259,8 @@ contract FantasyFootball {
         Player memory p = players[tokenId];
         string memory image = playerImageMap[p.name];
 
-        string memory displayName = string(abi.encodePacked(
-            p.name, " [", p.rank, " ", Strings.toString(p.fantasyPoints), " FP]"
+        string memory displayName = string(abi.encodePacked( // Should only display name along with rank emoji
+            p.rank, " ", p.name 
         ));
 
         string memory description = string(abi.encodePacked(
