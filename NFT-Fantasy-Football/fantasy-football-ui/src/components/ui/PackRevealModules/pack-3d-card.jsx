@@ -1,5 +1,6 @@
+"use client";
 
-import { cn } from "../../lib/utils";
+import { cn } from "../../../lib/utils";
 
 import React, {
   createContext,
@@ -8,16 +9,6 @@ import React, {
   useRef,
   useEffect,
 } from "react";
-
-// Hero icons:
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-toastify"; // For alerts
-import { ethers } from "ethers";
-import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
-import FantasyFootballABI from "../../contracts/FantasyFootball.json";
-import { handleMint } from "../../lib/handleMint";
-import BuyButton from "./3dCardModules/BuyButton";
-import InfoButton from "./3dCardModules/InfoButton";
 
 const MouseEnterContext = createContext(undefined);
 
@@ -51,7 +42,7 @@ export const CardContainer = ({
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
-        className={cn("py-20 flex items-center justify-center", containerClassName)}
+        className={cn("flex items-center justify-center w-full h-full", containerClassName)}
         style={{
           perspective: "1000px",
         }}>
@@ -74,41 +65,17 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, walletAddress, isConnected, contractAddress, onReveal }) => {
-  const [showInfo, setShowInfo] = useState(false);
-  const [isBuying, setIsBuying] = useState(false);
-
-  const handleBuy = async () => {
-    const revealData = await handleMint(player, contractAddress, setIsBuying);
-    if (revealData && onReveal) {
-      onReveal(revealData);
-    }
-  };
-
+export const CardBody = ({
+  children,
+  className
+}) => {
   return (
-    <div className={cn("h-96 w-72 relative [transform-style:preserve-3d]", className)}>
+    <div
+      className={cn(
+        "h-[500px] w-[500px] flex flex-col items-center justify-center",
+        className
+      )}>
       {children}
-
-      <div className="absolute bottom-4 left-4 flex gap-2 z-10 [transform:translateZ(60px)]">
-        <button
-          onClick={() => setShowInfo(true)}
-          className="px-3 py-1 bg-white text-black rounded shadow border border-black"
-        >
-          ℹ️ Info
-        </button>
-
-        <BuyButton
-          isConnected={isConnected}
-          isBuying={isBuying}
-          player={player}
-          onBuy={handleBuy}
-        />
-      </div>
-
-      {/* Info Modal */}
-      {showInfo && (
-        <InfoButton player={player} onClose={() => setShowInfo(false)} />
-      )}
     </div>
   );
 };

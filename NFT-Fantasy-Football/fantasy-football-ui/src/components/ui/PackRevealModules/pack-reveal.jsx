@@ -1,6 +1,7 @@
 import AnimatedTestimonials from "./animated-reveal"; 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { CardContainer, CardBody, CardItem } from "./pack-3d-card";
 
 const playerImageMap = 
 {
@@ -57,8 +58,14 @@ const PackReveal = ({ player, fantasyPoints, rank, breakdown }) => {
     ];
   
     return (
-      <div className="w-full flex flex-col items-center justify-center">
-        <AnimatedTestimonials testimonials={revealSlides} />
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <CardContainer className="w-[500px] h-[500px]">
+          <CardBody>
+            <CardItem translateZ={50}>
+              <AnimatedTestimonials testimonials={revealSlides} />
+            </CardItem>
+          </CardBody>
+        </CardContainer>
       </div>
     );
   };

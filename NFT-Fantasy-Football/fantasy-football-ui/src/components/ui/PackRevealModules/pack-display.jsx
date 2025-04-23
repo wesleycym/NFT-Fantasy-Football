@@ -12,7 +12,7 @@ const PackDisplay = ({ revealData, onClose }) => {
           rank={revealData.rank}
           breakdown={revealData.breakdown}
         />
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-10">
           <button
             onClick={onClose}
             className="px-6 py-2 bg-white text-black rounded hover:bg-gray-200 transition"
