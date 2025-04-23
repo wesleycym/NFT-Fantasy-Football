@@ -29,8 +29,8 @@ export const AnimatedTestimonials = ({
   const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
 
   return (
-    <div className="mx-auto max-w-md px-4 py-20 font-sans antialiased md:max-w-xl lg:max-w-2xl">
-      <div className="relative h-[400px] w-full">
+    <div className="mx-auto max-w-2xl font-sans antialiased">
+      <div className="relative w-[500px] h-[500px] mx-auto">
         <AnimatePresence mode="wait">
           {testimonials.map((testimonial, index) =>
             isActive(index) ? (
@@ -59,7 +59,7 @@ export const AnimatedTestimonials = ({
                   duration: 0.4,
                   ease: "easeInOut",
                 }}
-                className="absolute inset-0 origin-bottom rounded-3xl overflow-hidden shadow-lg bg-gray-900 text-white p-6 flex items-center justify-center"
+                className="absolute inset-0 origin-bottom rounded-3xl overflow-hidden shadow-lg bg-gray-900 text-white p-2 flex items-center justify-center"
               >
                 {testimonial.content}
               </motion.div>

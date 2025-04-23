@@ -1,5 +1,6 @@
 import AnimatedTestimonials from "./animated-reveal"; 
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const playerImageMap = 
 {
@@ -26,19 +27,26 @@ const PackReveal = ({ player, fantasyPoints, rank, breakdown }) => {
       },
       {
         content: (
-          <div className="text-center space-y-2">
-            <h2 className="text-xl font-bold">{player.name}</h2>
-            <p>{player.position} - {player.team}</p>
-            <p>🏈 {fantasyPoints} Fantasy Points</p>
-            <p>{rank}</p>
-          </div>
+          <div className="h-full w-full flex flex-col justify-center items-center px-6 py-4 text-center space-y-3">
+            <h2 className="text-4xl font-bold">{player.name}</h2>
+            <p className="text-2xl">{player.position} - {player.team}</p>
+            <p className="text-2xl font-semibold text-yellow-300 drop-shadow-sm">🏈 {fantasyPoints} Fantasy Points</p>
+            <motion.p
+              className="text-6xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1.1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            >
+              <span className="drop-shadow-lg">{rank}</span>
+            </motion.p>
+        </div>
         ),
       },
       {
         content: (
-          <div className="text-left px-4 text-sm max-h-60 overflow-y-auto">
-            <h3 className="font-semibold mb-2">📊 Breakdown</h3>
-            <ul className="list-disc space-y-1">
+          <div className="flex flex-col h-full w-full px-6 py-4 overflow-y-auto text-sm text-left text-white">
+            <h3 className="text-lg font-semibold mb-3 text-center">📊 Breakdown</h3>
+            <ul className="list-disc pl-5 space-y-2 flex-1 overflow-y-auto">
               {breakdown.map((line, i) => (
                 <li key={i}>{line}</li>
               ))}
