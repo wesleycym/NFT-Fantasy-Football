@@ -39,6 +39,15 @@ export async function handleMint(player, contractAddress, setIsBuying) {
 
     await tx.wait();
     console.log("✅ NFT minted successfully!");
+
+    return
+    {
+      player,
+      fantasyPoints,
+      rank,
+      breakdown
+    };
+
   } catch (err) {
     console.error("❌ Mint failed:", err);
   } finally {
