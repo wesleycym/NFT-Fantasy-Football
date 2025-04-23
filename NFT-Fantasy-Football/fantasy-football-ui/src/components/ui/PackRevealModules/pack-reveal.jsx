@@ -19,11 +19,21 @@ const PackReveal = ({ player, fantasyPoints, rank, breakdown }) => {
     const revealSlides = [
       {
         content: (
-          <img
-            src={playerImageMap[player.name]}
-            alt={player.name}
-            className="h-full w-full rounded-3xl object-cover object-center"
-          />
+          <div className="relative w-full h-full rounded-3xl overflow-hidden">
+            <motion.img
+              src={playerImageMap[player.name]}
+              alt={player.name}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 10,
+                duration: 0.6,
+              }}
+              className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+            />
+          </div>
         ),
       },
       {
