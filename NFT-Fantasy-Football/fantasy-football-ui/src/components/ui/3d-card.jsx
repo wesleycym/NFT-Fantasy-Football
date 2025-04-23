@@ -15,6 +15,8 @@ import { ethers } from "ethers";
 import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 import FantasyFootballABI from "../../contracts/FantasyFootball.json";
 import { handleMint } from "../../lib/handleMint";
+import BuyButton from "../3dCardModules/BuyButton";
+import InfoButton from "../3dCardModules/InfoButton";
 
 const MouseEnterContext = createContext(undefined);
 
@@ -75,11 +77,17 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
   const [showInfo, setShowInfo] = useState(false);
   const [isBuying, setIsBuying] = useState(false);
 
+  const handleBuy = async () => {
+    const revealData = await handleMint(player, contractAddress, setIsBuying);
+    if (revealData && onReveal) {
+      onReveal(revealData);
+    }
+  };
+
   return (
     <div className={cn("h-96 w-72 relative [transform-style:preserve-3d]", className)}>
       {children}
 
-      {/* Info + Buy Buttons */}
       <div className="absolute bottom-4 left-4 flex gap-2 z-10 [transform:translateZ(60px)]">
         <button
           onClick={() => setShowInfo(true)}
@@ -88,52 +96,17 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
           ℹ️ Info
         </button>
 
-        {!isConnected ? (
-          <button
-            disabled
-            className="px-3 py-1 bg-gray-500 text-white rounded shadow border border-black opacity-50 cursor-not-allowed"
-          >
-            Connect Wallet
-          </button>
-        ) : (
-          <button
-            onClick={() => handleMint(player, contractAddress, setIsBuying)}
-            disabled={isBuying}
-            className={`px-3 py-1 rounded shadow border border-black ${
-              isBuying
-                ? "bg-gray-500 cursor-not-allowed text-white opacity-50"
-                : "bg-green-600 hover:bg-green-700 text-white"
-            }`}
-          >
-            {isBuying ? "Processing..." : `Buy for (${player.mintPrice}) YODA`}
-          </button>
-        )}
+        <BuyButton
+          isConnected={isConnected}
+          isBuying={isBuying}
+          player={player}
+          onBuy={handleBuy}
+        />
       </div>
 
-      {/* Info Panel */}
+      {/* Info Modal */}
       {showInfo && (
-        <div className="absolute top-6 left-4 right-4 bottom-6 z-20 bg-black/80 text-white flex flex-col justify-center items-center p-4 rounded-xl [transform:translateZ(70px)]">
-          <div className="w-full max-w-full text-center break-words overflow-hidden">
-            <h2 className="text-xl font-bold mb-2">{player.name}</h2>
-            <p>{player.position} - {player.team}</p>
-            <p>Mint Price: {player.mintPrice} YODA</p>
-            <p className="mt-4 text-sm font-semibold underline">Rank Tiers</p>
-            <ul className="text-xs leading-5">
-              <li>🏆 Hall of Fame: 40+</li>
-              <li>💪 All-Pro: 30–39</li>
-              <li>🔒 Starter: 15–29</li>
-              <li>🛠️ Bench: 8–14</li>
-              <li>📦 Practice Squad: 5–7</li>
-              <li>🧢 Draft Bust: &lt; 5</li>
-            </ul>
-            <button
-              onClick={() => setShowInfo(false)}
-              className="mt-4 px-4 py-1 bg-white text-black rounded"
-            >
-              Close
-            </button>
-          </div>
-        </div>
+        <InfoModal player={player} onClose={() => setShowInfo(false)} />
       )}
     </div>
   );
