@@ -1,4 +1,4 @@
-import AnimatedTestimonials from "./AnimatedTestimonials"; 
+import AnimatedTestimonials from "./animated-reveal"; 
 import { useState } from "react";
 
 const playerImageMap = 

@@ -45,7 +45,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
       player,
       fantasyPoints,
       rank,
-      breakdown
+      breakdownString
     };
 
   } catch (err) {

@@ -1,6 +1,6 @@
-import PackReveal from "./PackReveal";
+import PackReveal from "./pack-reveal";
 
-const PackRevealModal = ({ revealData, onClose }) => {
+const PackDisplay = ({ revealData, onClose }) => {
   if (!revealData) return null;
 
   return (
@@ -25,4 +25,4 @@ const PackRevealModal = ({ revealData, onClose }) => {
   );
 };
 
-export default PackRevealModal;
+export default PackDisplay;

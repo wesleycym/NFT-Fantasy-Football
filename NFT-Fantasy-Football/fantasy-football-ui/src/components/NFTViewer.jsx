@@ -3,12 +3,14 @@ import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 import { mintablePlayers } from "../lib/AvailablePlayers";
+import PackDisplay from "./ui/PackRevealModules/pack-display";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
 const infuraKey = process.env.REACT_APP_INFURA_API_KEY; // from .env
 
 const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);
+  const [revealData, setRevealData] = useState(null);
 
   useEffect(() => {
     const loadAvailablePlayers = () => {
@@ -32,7 +34,7 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
               walletAddress={walletAddress} 
               isConnected={isConnected} 
               contractAddress={CONTRACT_ADDRESS}
-              infuraKey={infuraKey} // Sending key incase it will be needed
+              onReveal={setRevealData}
             >
               <CardItem translateZ={50}>
                 <img
@@ -44,6 +46,10 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
             </CardBody>
           </CardContainer>
         ))}
+
+        {/* Reveal Pack */}
+        {revealData && <PackDisplay revealData={revealData} onClose={() => setRevealData(null)} />}
+        
       </div>
     </div>
   );

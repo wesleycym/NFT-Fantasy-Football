@@ -15,8 +15,8 @@ import { ethers } from "ethers";
 import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 import FantasyFootballABI from "../../contracts/FantasyFootball.json";
 import { handleMint } from "../../lib/handleMint";
-import BuyButton from "../3dCardModules/BuyButton";
-import InfoButton from "../3dCardModules/InfoButton";
+import BuyButton from "./3dCardModules/BuyButton";
+import InfoButton from "./3dCardModules/InfoButton";
 
 const MouseEnterContext = createContext(undefined);
 
@@ -73,7 +73,7 @@ export const CardContainer = ({
   );
 };
 
-export const CardBody = ({ children, className, player, walletAddress, isConnected, contractAddress }) => {
+export const CardBody = ({ children, className, player, walletAddress, isConnected, contractAddress, onReveal }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [isBuying, setIsBuying] = useState(false);
 
@@ -106,7 +106,7 @@ export const CardBody = ({ children, className, player, walletAddress, isConnect
 
       {/* Info Modal */}
       {showInfo && (
-        <InfoModal player={player} onClose={() => setShowInfo(false)} />
+        <InfoButton player={player} onClose={() => setShowInfo(false)} />
       )}
     </div>
   );
