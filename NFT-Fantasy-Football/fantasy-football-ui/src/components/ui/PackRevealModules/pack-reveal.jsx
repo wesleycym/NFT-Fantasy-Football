@@ -23,15 +23,14 @@ const PackReveal = ({ player, fantasyPoints, rank, breakdown }) => {
             <motion.img
               src={playerImageMap[player.name]}
               alt={player.name}
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{
                 type: "tween",
-                stiffness: 120,
+                stiffness: 15,
                 damping: 10,
-                duration: 0.6,
+                duration: 0.3,
               }}
-              className="absolute inset-0 w-full h-full object-cover rounded-3xl"
             />
           </div>
         ),
