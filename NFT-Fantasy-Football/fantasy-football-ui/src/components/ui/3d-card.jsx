@@ -10,10 +10,7 @@ import React, {
 } from "react";
 
 // Hero icons:
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-toastify"; // For alerts
 import { ethers } from "ethers";
-import { buyNFT } from "../../lib/buyNFT"; // Import buyNFT
 import FantasyFootballABI from "../../contracts/FantasyFootball.json";
 import { handleMint } from "../../lib/handleMint";
 import BuyButton from "./3dCardModules/BuyButton";

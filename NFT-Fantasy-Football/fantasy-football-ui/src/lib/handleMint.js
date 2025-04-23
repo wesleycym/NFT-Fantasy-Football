@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { generateRandomFantasyStats } from "./calculateStats";
+import { toast } from "react-toastify"; // For alerts
 
 export async function handleMint(player, contractAddress, setIsBuying) {
   try {
