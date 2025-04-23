@@ -26,7 +26,7 @@ const PackReveal = ({ player, fantasyPoints, rank, breakdown }) => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{
-                type: "spring",
+                type: "tween",
                 stiffness: 120,
                 damping: 10,
                 duration: 0.6,
