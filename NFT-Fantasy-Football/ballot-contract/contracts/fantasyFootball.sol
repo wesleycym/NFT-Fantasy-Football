@@ -135,7 +135,7 @@ contract FantasyFootball {
         ) 
         public payable {
 
-        //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
+        require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
         uint256 tokenId = _nextTokenId++;
         _mint(to, tokenId);
@@ -239,15 +239,11 @@ contract FantasyFootball {
         Player storage player = players[tokenId];
         require(player.forSale, "NFT not for sale");
 
+        require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], player.salePrice), "YODA payment failed"); // Transfer YODA
+
         //address seller = _ownerOf[tokenId]; // Won't need until yoda is implemented
         player.forSale = false;
         player.salePrice = 0;
-
-        // Skipping yoda payment while testing
-        // if (address(yodaToken) != address(0)) {
-        //     uint256 price = players[tokenId].mintPrice;
-        //     require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], price), "YODA payment failed");
-        // }
 
          _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
