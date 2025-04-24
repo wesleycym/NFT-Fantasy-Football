@@ -8,7 +8,7 @@ async function main() {
     const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball"); // Preparing the contract
 
     const contract = await FantasyFootball.deploy(
-        "0x0000000000000000000000000000000000000000", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
+        "0xe1d6e2F8F036179656bEb0E2BDb8E326b0E6b094", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
         "FantasyFootball", // Name of collection
         "FFNFT", // Symbol of collection
         0 // Global mint price -> 0 for now (testing)
