@@ -45,7 +45,6 @@ contract FantasyFootball {
     string public name;
     string public symbol;
     uint256 public mint_price;
-    uint256 public max_supply;
     uint256 private _nextTokenId;
 
     uint256 public totalSupply;
@@ -57,9 +56,12 @@ contract FantasyFootball {
         string team;
         uint256 fantasyPoints; 
         uint256 mintPrice; // Price for the NFT
-
         bool forSale; 
         uint256 salePrice;
+
+        // New Information -> extra metadata (specific stats + rank (could be removed for gas reasons))
+        string description;
+        string rank;
     }
 
     mapping(uint256 => Player) public players;
@@ -75,20 +77,9 @@ contract FantasyFootball {
         address _yodaTokenAddress, // Accepted ERC20 contract
         string memory _name, 
         string memory _symbol, 
-        uint256 MINT_PRICE, 
-        uint256 MAX_SUPPLY
+        uint256 MINT_PRICE
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
-
-        /* Mapping all players -> hosted image */ // OLD IMAGES
-        // playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeihnxgenqrxsn4cc6tzy72faur2ct75ilqpppvqlh6p4f6tvjpnrqu";
-        // playerImageMap["Patrick Mahomes"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeifxug3nzodtqwuclbw6ujm6qgwnlthbolptm3ccicz6y2rhfm2g6m";
-        // playerImageMap["Justin Jefferson"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiczha7ytlx2lsj3ao4k7vvv2rahnmimmsi56cugfhq4cjdg3hhbgm";
-        // playerImageMap["Malik Nabers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeielqpuswqy5wsrki3qslju7pg24zpxejtkkghsfxuvpotoi4hbb34";
-        // playerImageMap["Saquan Barkley"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeibvlud3q3y2wcakfxodkj7gmh4gychqatqgcgqteexxr6nz6yyocq";
-        // playerImageMap["Derrick Henry"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeieciyughqzisyrishld73dz636ovfc7pvtncobhsuom7g7mjqrjly";
-        // playerImageMap["Brock Bowers"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeiglsbnwgqgz7nfsb5n5trpmr4s35iyievc4q5fixvik6r6ultlc7e";
-        // playerImageMap["Sam LaPorta"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeih5hkwvo6asdfzpxx5mznk3ltncqakcyovxwmuwgsbw5boekk2k54";
 
         // NEW IMAGES  -> 1200x1200px
         playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
@@ -103,7 +94,6 @@ contract FantasyFootball {
         name = _name;
         symbol = _symbol;
         mint_price = MINT_PRICE;
-        max_supply = MAX_SUPPLY;
     }
 
     event Transfer(
@@ -130,9 +120,20 @@ contract FantasyFootball {
         emit Transfer(address(0), to, id);
     }
 
-    function mint(address to, string memory _name, string memory _position, string memory _team, uint256 _fantasyPoints, uint256 _mintPrice, bool _forSale, uint256 _salePrice) public payable {
-
-        require(_nextTokenId < max_supply, "Max supply reached"); // Check max supply
+    function mint
+    (
+        address to, 
+        string memory _name, 
+        string memory _position, 
+        string memory _team, 
+        uint256 _fantasyPoints, 
+        uint256 _mintPrice, 
+        bool _forSale, 
+        uint256 _salePrice,
+        string memory _description,
+        string memory _rank
+        ) 
+        public payable {
 
         //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
@@ -149,19 +150,12 @@ contract FantasyFootball {
             fantasyPoints: _fantasyPoints,
             mintPrice: _mintPrice,
             forSale: _forSale,
-            salePrice: _salePrice
+            salePrice: _salePrice,
+            description: _description,
+            rank: _rank
         });
 
         tokenOwnerstoIds[to].push(tokenId);
-    }
-
-    // Update fantasy points
-    function updateFantasyPoints(uint256 tokenId, uint256 newPoints) external {
-        players[tokenId].fantasyPoints = newPoints;
-    }
-
-    function updateTeam(uint256 tokenId, string memory newTeam) external {
-        players[tokenId].team = newTeam;
     }
 
     function _isApprovedOrOwner(
@@ -265,14 +259,21 @@ contract FantasyFootball {
         Player memory p = players[tokenId];
         string memory image = playerImageMap[p.name];
 
+        // Extracting only first character
+        bytes memory rankBytes = bytes(p.rank);
+        string memory emojiOnly = string(abi.encodePacked(rankBytes[0], rankBytes[1], rankBytes[2], rankBytes[3]));
+
+        string memory displayName = string(abi.encodePacked( // Should only display name along with rank emoji
+            emojiOnly, " ", p.name 
+        ));
+
+        string memory description = p.description; // From pre formatted description in the frontend
+
         // JSON metadata with full details in description
         string memory json = string(abi.encodePacked(
             '{',
-                '"name": "', p.name, '",',
-                '"description": "', 
-                    p.position, '\\n',
-                    p.team, '\\n',
-                    Strings.toString(p.fantasyPoints), ' Fantasy Points",',
+                '"name": "', displayName, '",',
+                '"description": "', description, '",',
                 '"image": "', image, '"',
             '}'
         ));
