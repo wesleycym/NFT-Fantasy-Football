@@ -25,7 +25,7 @@
     3) npm install --save-dev hardhat
     4) npm install --save-dev @nomicfoundation/hardhat-toolbox
 
-- Chaning values:
+- Changing values (hardhat):
     1) npx hardhat console --network localhost
     2) const [owner, user] = await ethers.getSigners();
     3) const contract = await ethers.getContractAt("FantasyFootball", "YOUR_CONTRACT_ADDRESS");
