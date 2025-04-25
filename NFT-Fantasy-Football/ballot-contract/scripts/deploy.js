@@ -14,7 +14,8 @@ async function main() {
         1 // Global mint price in YODA (set to 1 to test transfers)
     );
 
-    await contract.waitForDeployment(); // Wait for the contract to be deployed
+    //await contract.waitForDeployment(); // Wait for the contract to be deployed
+    await contract.deploymentTransaction().wait(); // Forcefully waits for the transaction to confirm
 
     console.log("FantasyFootball NFT contract deployed to:", contract.target); // Debug
 
