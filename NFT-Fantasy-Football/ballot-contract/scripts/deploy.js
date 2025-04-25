@@ -3,15 +3,15 @@ const hre = require("hardhat");
 
 async function main() {
 
-    const [deployer] = await hre.ethers.getSigners(); // Pulls avaiblable accounts
+    const [deployer] = await hre.ethers.getSigners(); // Get the deployer account
 
     const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball"); // Preparing the contract
 
     const contract = await FantasyFootball.deploy(
-        "0xe1d6e2F8F036179656bEb0E2BDb8E326b0E6b094", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
+        "0xe1d6e2F8F036179656bEb0E2BDb8E326b0E6b094", // YODA token address
         "FantasyFootball", // Name of collection
         "FFNFT", // Symbol of collection
-        0 // Global mint price -> 0 for now (testing)
+        1 // Global mint price in YODA (set to 1 to test transfers)
     );
 
     await contract.waitForDeployment(); // Wait for the contract to be deployed
