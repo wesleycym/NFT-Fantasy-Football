@@ -3,6 +3,11 @@
     2) cd ballot-contract
     3) npx hardhat node
 
+- DeployYoda.js: [Yoda testing on hardhat]
+    1) cd NFT-Fantasy-Football
+    2) cd ballot-contract
+    3) npx hardhat run scripts/deployYoda.js --network localhost
+
 - Deploy.js:
     1) cd NFT-Fantasy-Football
     2) cd ballot-contract
