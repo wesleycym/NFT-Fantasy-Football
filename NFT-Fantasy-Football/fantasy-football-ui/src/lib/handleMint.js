@@ -13,7 +13,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer);
 
-    const mintPrice = ethers.parseUnits(player.mintPrice.toString(), 18);
+    const mintPrice = ethers.parseUnits(player.mintPrice.toString(), 2);
     // const breakdownString = breakdown.join(" | ");
 
     const breakdownString = breakdown.map(item => `- ${item}`).join("\\n"); // Each breakdown item on a new line
