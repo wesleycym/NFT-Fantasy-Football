@@ -28,12 +28,12 @@ async function main() {
     console.log("Deploying FantasyFootball contract");
 
     const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball");
-    
+
     const fantasyFootball = await FantasyFootball.deploy(
         yodaAddress, // YODA address
         "FantasyFootball", // NFT name
         "FFNFT", // NFT symbol
-        1 // Global mint price (1 YODA)
+        10 // Global mint price (Low number for testing)
     );
 
     await fantasyFootball.deploymentTransaction().wait();
