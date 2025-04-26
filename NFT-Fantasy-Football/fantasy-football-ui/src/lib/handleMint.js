@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { generateRandomFantasyStats } from "./calculateStats";
 import { toast } from "react-toastify"; // For alerts
+import { approveYodaSpend } from "./yoda"; // Import yoda helper
 
 export async function handleMint(player, contractAddress, setIsBuying) {
   try {
