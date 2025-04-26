@@ -14,7 +14,9 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer);
 
     const mintPrice = ethers.parseUnits(player.mintPrice.toString(), 2);
-    // const breakdownString = breakdown.join(" | ");
+    console.log(`Mint Price (parsed): ${mintPrice}`);
+
+    await approveYodaSpend(contractAddress, mintPrice); // Approve YODA spend
 
     const breakdownString = breakdown.map(item => `- ${item}`).join("\\n"); // Each breakdown item on a new line
 
@@ -26,6 +28,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
         `Breakdown:\\n${breakdownString}`
       ].join("\\n");
 
+    // Create payload for mint
     const tx = await contract.mint(
       await signer.getAddress(),
       player.name,
