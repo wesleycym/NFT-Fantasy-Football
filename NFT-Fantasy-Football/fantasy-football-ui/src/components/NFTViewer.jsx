@@ -6,7 +6,7 @@ import { mintablePlayers } from "../lib/AvailablePlayers";
 import PackDisplay from "./ui/PackRevealModules/pack-display";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS; // from .env
-const infuraKey = process.env.REACT_APP_INFURA_API_KEY; // from .env
+const infuraKey = process.env.REACT_APP_INFURA_API_KEY; // from .env, don't know if this is needed
 
 const NFTViewer = ({ walletAddress, isConnected }) => {
   const [players, setPlayers] = useState([]);

@@ -1,24 +1,45 @@
 // NFT will be here to mint
 const hre = require("hardhat");
 
+const LOCAL_TESTING = false; // true for local testing | false for sepolia
+
 async function main() {
+    const [deployer] = await hre.ethers.getSigners(); // Get the deployer account
 
-    const [deployer] = await hre.ethers.getSigners(); // Pulls avaiblable accounts
+    let yodaAddress; // Declare yoda address
 
-    const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball"); // Preparing the contract
+    if (LOCAL_TESTING) {
+        console.log("Local Testing");
 
-    const contract = await FantasyFootball.deploy(
-        "0x0000000000000000000000000000000000000000", // Dummy yoda address -> Also commented out the require yoda in the mint function of the contract
-        "FantasyFootball", // Name of collection
-        "FFNFT", // Symbol of collection
-        0 // Global mint price -> 0 for now (testing)
+        const YODA = await hre.ethers.getContractFactory("YODA");
+        const yoda = await YODA.deploy("Yoda Token", "YODA", 1000000); // 1 million supply
+        await yoda.deploymentTransaction().wait();
+        
+        yodaAddress = yoda.target;
+
+        console.log("YODA deployed to:", yodaAddress);
+
+    } else {
+        console.log("Sepolia deployment");
+
+        yodaAddress = "0xe1d6e2F8F036179656bEb0E2BDb8E326b0E6b094"; // Given yoda address
+    }
+
+    console.log("Deploying FantasyFootball contract");
+
+    const FantasyFootball = await hre.ethers.getContractFactory("FantasyFootball");
+
+    const fantasyFootball = await FantasyFootball.deploy(
+        yodaAddress, // YODA address
+        "FantasyFootball", // NFT name
+        "FFNFT", // NFT symbol
+        5000 // Global mint price (2 decimal, 5000 -> 50.00 YODA)
     );
 
-    await contract.waitForDeployment(); // Wait for the contract to be deployed
+    await fantasyFootball.deploymentTransaction().wait();
 
-    console.log("FantasyFootball NFT contract deployed to:", contract.target); // Debug
+    console.log("FantasyFootball contract deployed to:", fantasyFootball.target);
 
-    // Debug
     console.log("Deployer address:", deployer.address);
 }
 

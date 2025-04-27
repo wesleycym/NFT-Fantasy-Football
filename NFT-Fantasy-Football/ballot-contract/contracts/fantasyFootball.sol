@@ -7,6 +7,8 @@ import "base64-sol/base64.sol"; // For converting JSON metadata to base64 encode
 // ERC-20 interface -> sends / receives tokens
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256); // Returns the amount of tokens held by an address -> will be used to check contract balance
+    function transfer(address recipient, uint256 amount) external returns (bool);
 }
 
 interface IERC165 {
@@ -41,13 +43,14 @@ interface IERC721Receiver {
 
 contract FantasyFootball {
     IERC20 public yodaToken; // ERC20 contract
+    string public name; // FantasyFootball
+    string public symbol; // FFNFT
+    uint256 public mint_price; // Global mint price
 
-    string public name;
-    string public symbol;
-    uint256 public mint_price;
-    uint256 private _nextTokenId;
+    address public contractOwner; // Mark the owner
 
-    uint256 public totalSupply;
+    uint256 private _nextTokenId; // Maybe remove?
+    uint256 public totalSupply; // Maybe remove?
 
     // Player metadata 
     struct Player {
@@ -55,7 +58,6 @@ contract FantasyFootball {
         string position;
         string team;
         uint256 fantasyPoints; 
-        uint256 mintPrice; // Price for the NFT
         bool forSale; 
         uint256 salePrice;
 
@@ -80,6 +82,8 @@ contract FantasyFootball {
         uint256 MINT_PRICE
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
+        contractOwner = msg.sender;
 
         // NEW IMAGES  -> 1200x1200px
         playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
@@ -127,20 +131,17 @@ contract FantasyFootball {
         string memory _position, 
         string memory _team, 
         uint256 _fantasyPoints, 
-        uint256 _mintPrice, 
-        bool _forSale, 
-        uint256 _salePrice,
         string memory _description,
         string memory _rank
         ) 
         public payable {
 
-        //require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
+        require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
-        uint256 tokenId = _nextTokenId++;
-        _mint(to, tokenId);
+        uint256 tokenId = _nextTokenId++; // Increment token ID
+        _mint(to, tokenId); // Mint token
 
-        totalSupply += 1;
+        totalSupply += 1; // Increment total supply
 
         // Store player data
         players[tokenId] = Player({
@@ -148,14 +149,13 @@ contract FantasyFootball {
             position: _position, 
             team: _team, 
             fantasyPoints: _fantasyPoints,
-            mintPrice: _mintPrice,
-            forSale: _forSale,
-            salePrice: _salePrice,
+            forSale: false,
+            salePrice: 0,
             description: _description,
             rank: _rank
         });
 
-        tokenOwnerstoIds[to].push(tokenId);
+        tokenOwnerstoIds[to].push(tokenId); // Add token ID to token owner's array
     }
 
     function _isApprovedOrOwner(
@@ -212,13 +212,14 @@ contract FantasyFootball {
         emit Approval(owner, spender, id);
     }
 
+    // Set NFT for sale function
     function setForSale(uint256 tokenId, bool status, uint256 price) public {
-        require(_ownerOf[tokenId] == msg.sender, "Not the token owner");
-        players[tokenId].forSale = status;
-        players[tokenId].salePrice = price;
+        require(_ownerOf[tokenId] == msg.sender, "Not the token owner"); // Check if you own the token
+        players[tokenId].forSale = status; // Set for sale
+        players[tokenId].salePrice = price; // Set sale price
     }
 
-    // Custom transfer function since we are buying
+    // Custom transfer function since we are buying (old but works)
     // transferFrom -> for trading 
     function _transfer(address from, address to, uint256 id) internal {
         require(from == _ownerOf[id], "from != owner");
@@ -232,6 +233,7 @@ contract FantasyFootball {
         emit Transfer(from, to, id);
     }
 
+    // Custom buy function for marketplace (if added)
     function buy(uint256 tokenId) public {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
@@ -239,27 +241,23 @@ contract FantasyFootball {
         Player storage player = players[tokenId];
         require(player.forSale, "NFT not for sale");
 
+        require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], player.salePrice), "YODA payment failed"); // Transfer YODA
+
         //address seller = _ownerOf[tokenId]; // Won't need until yoda is implemented
         player.forSale = false;
         player.salePrice = 0;
-
-        // Skipping yoda payment while testing
-        // if (address(yodaToken) != address(0)) {
-        //     uint256 price = players[tokenId].mintPrice;
-        //     require(yodaToken.transferFrom(msg.sender, _ownerOf[tokenId], price), "YODA payment failed");
-        // }
 
          _transfer(_ownerOf[tokenId], msg.sender, tokenId);
     }
 
 
     function tokenURI(uint256 tokenId) public view returns (string memory) {
-        require(_ownerOf[tokenId] != address(0), "Token does not exist");
+        require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
 
-        Player memory p = players[tokenId];
-        string memory image = playerImageMap[p.name];
+        Player memory p = players[tokenId]; // Get player
+        string memory image = playerImageMap[p.name]; // Get player image from map
 
-        // Extracting only first character
+        // Extracting only first character (the emoji)
         bytes memory rankBytes = bytes(p.rank);
         string memory emojiOnly = string(abi.encodePacked(rankBytes[0], rankBytes[1], rankBytes[2], rankBytes[3]));
 
@@ -284,6 +282,19 @@ contract FantasyFootball {
 
     function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
         return interfaceId == 0x80ac58cd; // ERC-721 interface ID
+    }
+
+    // Custom modifier -> Verify if the sender is the owner
+    modifier onlyOwner() {
+        require(msg.sender == contractOwner, "Not the owner");
+        _;
+    }
+
+    // Function to allow owner to withdraw YODA from the contract
+    function withdrawYoda() external onlyOwner {
+        uint256 balance = yodaToken.balanceOf(address(this));
+        require(balance > 0, "No Yoda to withdraw");
+        yodaToken.transfer(contractOwner, balance);
     }
 
 }

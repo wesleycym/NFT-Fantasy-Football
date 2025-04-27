@@ -22,7 +22,7 @@ const BuyButton = ({ isConnected, isBuying, player, onBuy }) => {
           : "bg-green-600 hover:bg-green-700 text-white"
       }`}
     >
-      {isBuying ? "Processing..." : `Buy for (${player.mintPrice}) YODA`}
+      {isBuying ? "Processing..." : `Buy for 50 YODA`}
     </button>
   );
 };
