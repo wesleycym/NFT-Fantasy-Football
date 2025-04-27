@@ -138,10 +138,10 @@ contract FantasyFootball {
 
         require(yodaToken.transferFrom(msg.sender, address(this), mint_price), "YODA payment failed"); // Transfer YODA
 
-        uint256 tokenId = _nextTokenId++;
-        _mint(to, tokenId);
+        uint256 tokenId = _nextTokenId++; // Increment token ID
+        _mint(to, tokenId); // Mint token
 
-        totalSupply += 1;
+        totalSupply += 1; // Increment total supply
 
         // Store player data
         players[tokenId] = Player({
@@ -155,7 +155,7 @@ contract FantasyFootball {
             rank: _rank
         });
 
-        tokenOwnerstoIds[to].push(tokenId);
+        tokenOwnerstoIds[to].push(tokenId); // Add token ID to token owner's array
     }
 
     function _isApprovedOrOwner(
@@ -212,13 +212,14 @@ contract FantasyFootball {
         emit Approval(owner, spender, id);
     }
 
+    // Set NFT for sale function
     function setForSale(uint256 tokenId, bool status, uint256 price) public {
-        require(_ownerOf[tokenId] == msg.sender, "Not the token owner");
-        players[tokenId].forSale = status;
-        players[tokenId].salePrice = price;
+        require(_ownerOf[tokenId] == msg.sender, "Not the token owner"); // Check if you own the token
+        players[tokenId].forSale = status; // Set for sale
+        players[tokenId].salePrice = price; // Set sale price
     }
 
-    // Custom transfer function since we are buying
+    // Custom transfer function since we are buying (old but works)
     // transferFrom -> for trading 
     function _transfer(address from, address to, uint256 id) internal {
         require(from == _ownerOf[id], "from != owner");
@@ -232,6 +233,7 @@ contract FantasyFootball {
         emit Transfer(from, to, id);
     }
 
+    // Custom buy function for marketplace (if added)
     function buy(uint256 tokenId) public {
         require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
         require(_ownerOf[tokenId] != msg.sender, "You already own this NFT"); // Check if you own the token
@@ -250,12 +252,12 @@ contract FantasyFootball {
 
 
     function tokenURI(uint256 tokenId) public view returns (string memory) {
-        require(_ownerOf[tokenId] != address(0), "Token does not exist");
+        require(_ownerOf[tokenId] != address(0), "Token does not exist"); // Check if token exists
 
-        Player memory p = players[tokenId];
-        string memory image = playerImageMap[p.name];
+        Player memory p = players[tokenId]; // Get player
+        string memory image = playerImageMap[p.name]; // Get player image from map
 
-        // Extracting only first character
+        // Extracting only first character (the emoji)
         bytes memory rankBytes = bytes(p.rank);
         string memory emojiOnly = string(abi.encodePacked(rankBytes[0], rankBytes[1], rankBytes[2], rankBytes[3]));
 
