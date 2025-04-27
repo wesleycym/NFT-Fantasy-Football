@@ -7,6 +7,7 @@ import "base64-sol/base64.sol"; // For converting JSON metadata to base64 encode
 // ERC-20 interface -> sends / receives tokens
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256); // Returns the amount of tokens held by an address -> will be used to check contract balance
 }
 
 interface IERC165 {
@@ -45,7 +46,7 @@ contract FantasyFootball {
     string public symbol; // FFNFT
     uint256 public mint_price; // Global mint price
 
-    address public owner; // Mark the owner
+    address public contractOwner; // Mark the owner
 
     uint256 private _nextTokenId; // Maybe remove?
     uint256 public totalSupply; // Maybe remove?
@@ -81,7 +82,7 @@ contract FantasyFootball {
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
 
-        owner = msg.sender;
+        contractOwner = msg.sender;
 
         // NEW IMAGES  -> 1200x1200px
         playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
@@ -282,7 +283,7 @@ contract FantasyFootball {
 
     // Custom modifier -> Verify if the sender is the owner
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not the owner");
+        require(msg.sender == contractOwner, "Not the owner");
         _;
     }
 
@@ -290,7 +291,7 @@ contract FantasyFootball {
     function withdrawYoda() external onlyOwner {
         uint256 balance = yodaToken.balanceOf(address(this));
         require(balance > 0, "No Yoda to withdraw");
-        yodaToken.transfer(owner, balance);
+        yodaToken.transfer(contractOwner, balance);
     }
 
 }
