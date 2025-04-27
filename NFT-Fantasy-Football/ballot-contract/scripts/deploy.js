@@ -33,7 +33,7 @@ async function main() {
         yodaAddress, // YODA address
         "FantasyFootball", // NFT name
         "FFNFT", // NFT symbol
-        10 // Global mint price (Low number for testing)
+        5000 // Global mint price (2 decimal, 5000 -> 50.00 YODA)
     );
 
     await fantasyFootball.deploymentTransaction().wait();
