@@ -1,7 +1,7 @@
 // NFT will be here to mint
 const hre = require("hardhat");
 
-const LOCAL_TESTING = true; // constant should be uppercase but assigned properly
+const LOCAL_TESTING = false; // constant should be uppercase but assigned properly
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners(); // Get the deployer account
