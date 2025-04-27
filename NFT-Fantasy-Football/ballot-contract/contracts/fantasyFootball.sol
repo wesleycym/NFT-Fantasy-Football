@@ -8,6 +8,7 @@ import "base64-sol/base64.sol"; // For converting JSON metadata to base64 encode
 interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
     function balanceOf(address account) external view returns (uint256); // Returns the amount of tokens held by an address -> will be used to check contract balance
+    function transfer(address recipient, uint256 amount) external returns (bool);
 }
 
 interface IERC165 {
