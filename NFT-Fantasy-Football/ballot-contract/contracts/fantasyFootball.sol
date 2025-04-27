@@ -41,13 +41,14 @@ interface IERC721Receiver {
 
 contract FantasyFootball {
     IERC20 public yodaToken; // ERC20 contract
+    string public name; // FantasyFootball
+    string public symbol; // FFNFT
+    uint256 public mint_price; // Global mint price
 
-    string public name;
-    string public symbol;
-    uint256 public mint_price;
-    uint256 private _nextTokenId;
+    address public owner; // Mark the owner
 
-    uint256 public totalSupply;
+    uint256 private _nextTokenId; // Maybe remove?
+    uint256 public totalSupply; // Maybe remove?
 
     // Player metadata 
     struct Player {
@@ -55,7 +56,6 @@ contract FantasyFootball {
         string position;
         string team;
         uint256 fantasyPoints; 
-        uint256 mintPrice; // Price for the NFT
         bool forSale; 
         uint256 salePrice;
 
@@ -80,6 +80,8 @@ contract FantasyFootball {
         uint256 MINT_PRICE
     ) {
         yodaToken = IERC20(_yodaTokenAddress); // Accepted ERC20 contract
+
+        owner = msg.sender;
 
         // NEW IMAGES  -> 1200x1200px
         playerImageMap["Josh Allen"] = "https://white-quick-guan-314.mypinata.cloud/ipfs/bafybeid2idtzmht5newprc7wh3hi57c4fulh7lucx7epp6zprna7npcgfe/josh-allen.jpg";
@@ -127,9 +129,6 @@ contract FantasyFootball {
         string memory _position, 
         string memory _team, 
         uint256 _fantasyPoints, 
-        uint256 _mintPrice, 
-        bool _forSale, 
-        uint256 _salePrice,
         string memory _description,
         string memory _rank
         ) 
@@ -148,9 +147,8 @@ contract FantasyFootball {
             position: _position, 
             team: _team, 
             fantasyPoints: _fantasyPoints,
-            mintPrice: _mintPrice,
-            forSale: _forSale,
-            salePrice: _salePrice,
+            forSale: false,
+            salePrice: 0,
             description: _description,
             rank: _rank
         });
