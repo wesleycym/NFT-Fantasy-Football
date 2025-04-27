@@ -280,4 +280,17 @@ contract FantasyFootball {
         return interfaceId == 0x80ac58cd; // ERC-721 interface ID
     }
 
+    // Custom modifier -> Verify if the sender is the owner
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the owner");
+        _;
+    }
+
+    // Function to allow owner to withdraw YODA from the contract
+    function withdrawYoda() external onlyOwner {
+        uint256 balance = yodaToken.balanceOf(address(this));
+        require(balance > 0, "No Yoda to withdraw");
+        yodaToken.transfer(owner, balance);
+    }
+
 }
