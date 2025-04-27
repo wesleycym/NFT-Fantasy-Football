@@ -1,7 +1,7 @@
 // NFT will be here to mint
 const hre = require("hardhat");
 
-const LOCAL_TESTING = false; // constant should be uppercase but assigned properly
+const LOCAL_TESTING = false; // true for local testing | false for sepolia
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners(); // Get the deployer account
