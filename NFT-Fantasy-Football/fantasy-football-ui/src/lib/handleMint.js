@@ -5,6 +5,7 @@ import { toast } from "react-toastify"; // For alerts
 import { approveYodaSpend } from "./yoda"; // Import yoda helper
 import YODAABI from "../contracts/YODA.json"; // Import yoda contract
 
+
 export async function handleMint(player, contractAddress, setIsBuying) {
   try {
     setIsBuying(true);
@@ -64,7 +65,12 @@ export async function handleMint(player, contractAddress, setIsBuying) {
 
   } catch (err) {
     console.error("❌ Mint failed:", err);
-    toast.error("Mint failed. Please try again.");
+    toast.error("Mint failed. Please try again.", {
+      position: "top-left",
+      autoClose: 3000,
+      theme: "dark",
+      icon: "⚠️",
+    });
   } finally {
     setIsBuying(false);
   }
