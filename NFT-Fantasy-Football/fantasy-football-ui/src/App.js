@@ -6,13 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import WithdrawYodaButton from "./components/withdrawYodaButton.jsx";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
+const OWNER_ADDRESS = process.env.REACT_APP_OWNER_ADDRESS;
 
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
-
-  const OWNER_ADDRESS = "0xAF30B825C771286381e64801c20c3CAa33d7b972";
-
+  
   // Wallet connection
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
