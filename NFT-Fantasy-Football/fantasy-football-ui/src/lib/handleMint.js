@@ -17,7 +17,11 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer); //create contract
     const yoda = new ethers.Contract(process.env.REACT_APP_YODA_ADDRESS, YODA.abi, signer); // Connecet to yoda
 
-    const allowance = await yoda.allowance(await signer.getAddress(), contractAddress); // Check YODA allowance
+    const addressPromise = signer.getAddress(); // Get address -> not awaiting yet
+    const [address, allowance] = await Promise.all ([
+      addressPromise, // The awaited address
+      addressPromise.then(addr => yoda.allowance(addr, contractAddress)) // Allowance after address resolves
+    ])
 
     // Checking if allowance is already approved, 1 less step if already approved
     if (allowance < mintPrice) { // If allowance is less than mint price
