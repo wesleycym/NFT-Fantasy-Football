@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import WithdrawYodaButton from "./components/withdrawYodaButton.jsx";
 
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
+
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -98,7 +100,7 @@ function App() {
 
             {walletAddress.toLowerCase() === OWNER_ADDRESS.toLowerCase() && (
               <div className="mt-6">
-                <WithdrawYodaButton />
+                <WithdrawYodaButton contractAddress={CONTRACT_ADDRESS} walletAddress={walletAddress} ownerAddress={OWNER_ADDRESS} />
               </div>
             )}
 
@@ -106,7 +108,7 @@ function App() {
         )}
       </div>
 
-      <div className="mt-10">
+      <div className="mt-2">
         <NFTViewer walletAddress={walletAddress} isConnected={isConnected} />
       </div>
     </div>
