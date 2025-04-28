@@ -3,11 +3,7 @@ import YODA from "../contracts/YODA.json";
 
 const YODA_ADDRESS = process.env.REACT_APP_YODA_ADDRESS;
 
-export const approveYodaSpend = async (spender, amount) => {
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const signer = await provider.getSigner();
-  const yoda = new ethers.Contract(YODA_ADDRESS, YODA.abi, signer);
-
+export const approveYodaSpend = async (yoda, spender, amount) => {
   const tx = await yoda.approve(spender, amount);
   await tx.wait();
 

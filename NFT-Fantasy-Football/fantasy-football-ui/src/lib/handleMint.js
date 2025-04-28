@@ -3,7 +3,7 @@ import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import { generateRandomFantasyStats } from "./calculateStats";
 import { toast } from "react-toastify"; // For alerts
 import { approveYodaSpend } from "./yoda"; // Import yoda helper
-import YODA from "../contracts/YODA.json"; // Import yoda contract
+import YODAABI from "../contracts/YODA.json"; // Import yoda contract
 
 export async function handleMint(player, contractAddress, setIsBuying) {
   try {
@@ -15,7 +15,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     const provider = new ethers.BrowserProvider(window.ethereum); // Get provider
     const signer = await provider.getSigner(); // Get signer
     const contract = new ethers.Contract(contractAddress, FantasyFootballABI.abi, signer); //create contract
-    const yoda = new ethers.Contract(process.env.REACT_APP_YODA_ADDRESS, YODA.abi, signer); // Connecet to yoda
+    const yoda = new ethers.Contract(process.env.REACT_APP_YODA_ADDRESS, YODAABI.abi, signer); // Connecet to yoda
 
     const addressPromise = signer.getAddress(); // Get address -> not awaiting yet
     const [address, allowance] = await Promise.all ([
@@ -26,7 +26,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     // Checking if allowance is already approved, 1 less step if already approved
     if (allowance < mintPrice) { // If allowance is less than mint price
       console.log("Allowance too low, approving...");
-      await approveYodaSpend(contractAddress, mintPrice); // Approve YODA spend
+      await approveYodaSpend(yoda, contractAddress, mintPrice); // Approve YODA spend
     } else {
       console.log("Allowance already approved");
     }
@@ -43,7 +43,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
 
     // Create payload for mint
     const tx = await contract.mint(
-      await signer.getAddress(),
+      address,
       player.name,
       player.position,
       player.team,
