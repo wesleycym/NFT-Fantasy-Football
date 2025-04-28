@@ -7,6 +7,7 @@ import YODAABI from "../contracts/YODA.json"; // Import yoda contract
 
 
 export async function handleMint(player, contractAddress, setIsBuying) {
+  let mintToastId; // Set toast state
   try {
     setIsBuying(true);
 
@@ -27,7 +28,23 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     // Checking if allowance is already approved, 1 less step if already approved
     if (allowance < mintPrice) { // If allowance is less than mint price
       console.log("Allowance too low, approving...");
+
+      // Notify user
+      toast.info("🔄 Approving YODA spend...", {
+        position: "top-left",
+        autoClose: 3000,
+        theme: "dark",
+      });
+
       await approveYodaSpend(yoda, contractAddress, mintPrice); // Approve YODA spend
+
+      // Notify user up on success
+      toast.success("✅ YODA spend approved", {
+        position: "top-left",
+        autoClose: 3000,
+        theme: "dark",
+      });
+
     } else {
       console.log("Allowance already approved");
     }
@@ -41,6 +58,12 @@ export async function handleMint(player, contractAddress, setIsBuying) {
         `Rank: ${rank}`,
         `Breakdown:\\n${breakdownString}`
       ].join("\\n");
+
+    // Notify user that NFT is minting
+    mintToastId = toast.loading("⏳ Minting your NFT...", {
+      position: "top-left",
+      theme: "dark",
+    });
 
     // Create payload for mint
     const tx = await contract.mint(
@@ -56,6 +79,14 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     await tx.wait();
     console.log("✅ NFT minted successfully!");
 
+    toast.update(mintToastId, {
+      render: "🎉 NFT minted successfully!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+      theme: "dark",
+    });
+
     return{
       player,
       fantasyPoints,
@@ -64,13 +95,23 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     };
 
   } catch (err) {
-    console.error("❌ Mint failed:", err);
-    toast.error("Mint failed. Please try again.", {
-      position: "top-left",
-      autoClose: 3000,
-      theme: "dark",
-      icon: "⚠️",
-    });
+    console.error("Mint failed:", err);
+
+    if (mintToastId) {
+      toast.update(mintToastId, {
+        render: "❌ NFT mint failed. Please try again.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        theme: "dark",
+      });
+    } else {
+      toast.error("❌ Mint failed. Please try again.", {
+        position: "top-left",
+        autoClose: 3000,
+        theme: "dark",
+      });
+    }
   } finally {
     setIsBuying(false);
   }
