@@ -1,11 +1,34 @@
-import { ethers } from "ethers";
-import YODA from "../contracts/YODA.json";
-
-const YODA_ADDRESS = process.env.REACT_APP_YODA_ADDRESS;
+import { toast } from "react-toastify"; // For alerts
 
 export const approveYodaSpend = async (yoda, spender, amount) => {
-  const tx = await yoda.approve(spender, amount);
-  await tx.wait();
+  // Show toast immediately
+  const toastId = toast.loading("Approving YODA spend...", {
+    position: "top-left",
+    theme: "dark",
+  });
 
-  console.log("✅ YODA approved for spending");
+  try {
+    const tx = await yoda.approve(spender, amount);
+    await tx.wait();
+
+    console.log("YODA approved for spending");
+
+    toast.update(toastId, {
+      render: "✅ YODA spend approved!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+    });
+  } catch (error) {
+    console.error("YODA approval failed:", error);
+
+    toast.update(toastId, {
+      render: "❌ YODA approval failed",
+      type: "error",
+      isLoading: false,
+      autoClose: 3000,
+    });
+
+    throw error; // important: rethrow so handleMint can still catch it
+  }
 };
