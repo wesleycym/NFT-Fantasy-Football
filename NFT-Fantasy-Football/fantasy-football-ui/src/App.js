@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import NFTViewer from "./components/NFTViewer.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import WithdrawYodaButton from "./components/withdrawYodaButton.jsx";
 
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
@@ -94,6 +95,13 @@ function App() {
             >
               Logout
             </button>
+
+            {walletAddress.toLowerCase() === OWNER_ADDRESS.toLowerCase() && (
+              <div className="mt-6">
+                <WithdrawYodaButton />
+              </div>
+            )}
+
           </>
         )}
       </div>
