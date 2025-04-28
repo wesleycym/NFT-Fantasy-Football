@@ -28,22 +28,7 @@ export async function handleMint(player, contractAddress, setIsBuying) {
     // Checking if allowance is already approved, 1 less step if already approved
     if (allowance < mintPrice) { // If allowance is less than mint price
       console.log("Allowance too low, approving...");
-
-      // Notify user
-      toast.info("🔄 Approving YODA spend...", {
-        position: "top-left",
-        autoClose: 3000,
-        theme: "dark",
-      });
-
       await approveYodaSpend(yoda, contractAddress, mintPrice); // Approve YODA spend
-
-      // Notify user up on success
-      toast.success("✅ YODA spend approved", {
-        position: "top-left",
-        autoClose: 3000,
-        theme: "dark",
-      });
 
     } else {
       console.log("Allowance already approved");
