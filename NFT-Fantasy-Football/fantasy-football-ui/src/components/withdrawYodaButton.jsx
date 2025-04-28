@@ -1,11 +1,21 @@
 import { withdrawYoda } from "../lib/withdrawYoda";
+import { ToastContainer, toast } from "react-toastify";
+
 const WithdrawYodaButton = ({ contractAddress, walletAddress, ownerAddress }) => {
   const handleWithdraw = async () => {
     try {
       await withdrawYoda(contractAddress); // Attempt to withdraw yoda from contract
-      alert("Withdrawal successful!");
+      toast.success("YODA withdrawn to contract owner", {
+        position: "top-left",
+        autoClose: 3000,
+        theme: "dark",
+      });
     } catch (error) {
-      alert("Withdrawal failed. Check console for details.");
+      toast.error("Failed to withdraw YODA", {
+        position: "top-left",
+        autoClose: 3000,
+        theme: "dark",
+      })
     }
   };
 
