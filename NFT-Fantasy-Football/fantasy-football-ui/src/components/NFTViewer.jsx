@@ -37,7 +37,7 @@ const NFTViewer = ({ walletAddress, isConnected }) => {
             >
               <CardItem translateZ={50}>
                 <img
-                  src={`/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
+                  src={`${process.env.PUBLIC_URL}/images/${p.name.toLowerCase().replace(" ", "-")}.jpg`}
                   alt={p.name}
                   className="rounded-xl w-full h-auto"
                 />
