@@ -65,7 +65,7 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
             <>
             {/* Backdrop */}
             <motion.div
-                className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
+                className="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-md z-40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -77,7 +77,11 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ duration: 0.3 }}
+                transition={{ 
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15
+                }}
                 className="fixed top-0 right-0 h-full w-full max-w-md bg-zinc-950 text-white shadow-lg z-50 p-6 overflow-y-auto"
             >
 
