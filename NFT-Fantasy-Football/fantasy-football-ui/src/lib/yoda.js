@@ -15,6 +15,7 @@ export const approveYodaSpend = async (yoda, spender, amount) => {
       position: "top-left",
       autoClose: false,
       theme: "dark",
+      autoClose: 3000,
     });
 
     await tx.wait();
