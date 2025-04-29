@@ -29,6 +29,8 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
         setOwnedNFTs(filtered);
     };
 
+    const handleReset = () => setOwnedNFTs(rawNFTs); // Reset NFTs
+
     // Fetch owend NFTS
     const fetchNFTs = useCallback(async () => {
         if (!walletAddress) return; // No wallet connected
@@ -81,26 +83,46 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
 
                 <div className="flex items-center justify-between">
                     <h2 className="text-2xl font-bold">Your NFTs</h2>
+
                     <button
                         onClick={fetchNFTs}
                         className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
                         >
                         Refresh
                     </button>
+
+                    <button 
+                        onClick={handleReset} 
+                        className="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded"
+                        >
+                        Reset
+                    </button>
+
                     <button
                         onClick={onClose}
                         className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
                         >
                         Close
                     </button>
-            </div>
+
+                </div>
+
+                <div className="flex items-center justify-center gap-6 mt-4 py-4">
+                    <button onClick={handleSort} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">📈</button>
+                    <button onClick={() => handleFilter("Hall of Fame")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🏆</button>
+                    <button onClick={() => handleFilter("All-Pro")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">💪</button>
+                    <button onClick={() => handleFilter("Starter")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🔒</button>
+                    <button onClick={() => handleFilter("Bench")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🛠️</button>
+                    <button onClick={() => handleFilter("Practice Squad")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">📦</button>
+                    <button onClick={() => handleFilter("Draft Bust")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🧢</button>
+                </div>
 
                 <div className="grid grid-cols-1 gap-6">
-                {ownedNFTs.length === 0 ? (
-                    <p className="text-gray-400">You don't own any NFTs yet.</p>
-                ) : (
-                    ownedNFTs.map((nft, idx) => <WalletCard key={idx} nft={nft} />)
-                )}
+                    {ownedNFTs.length === 0 ? (
+                        <p className="text-gray-400">You don't own any NFTs yet.</p>
+                    ) : (
+                        ownedNFTs.map((nft, idx) => <WalletCard key={idx} nft={nft} />)
+                    )}
                 </div>
             </motion.div>
             </>
