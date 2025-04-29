@@ -9,6 +9,14 @@ export const approveYodaSpend = async (yoda, spender, amount) => {
 
   try {
     const tx = await yoda.approve(spender, amount);
+
+    // Have toast tell the user what is happening
+    toast.info("⏳ Waiting for approval to confirm...", { 
+      position: "top-left",
+      autoClose: false,
+      theme: "dark",
+    });
+
     await tx.wait();
 
     console.log("YODA approved for spending");
