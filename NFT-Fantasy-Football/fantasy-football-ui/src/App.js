@@ -83,18 +83,20 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-black to-zinc-950 text-white flex flex-col items-center justify-start py-6 font-sans">
       <ToastContainer />
       
-      <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-center drop-shadow-lg">
-        NFT Fantasy Football
-      </h1>
+      <div className="w-full px-6 flex items-center justify-center">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg">
+          NFT Fantasy Football
+        </h1>
 
-      {isConnected && (
-        <button
-          onClick={() => setWalletOpen(true)}
-          className="absolute top-8 right-6 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg text-white transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
-        >
-          My Wallet
-        </button>
-      )}
+        {isConnected && (
+          <button
+            onClick={() => setWalletOpen(true)}
+            className="absolute right-6 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg text-white transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
+          >
+            My Wallet
+          </button>
+        )}
+      </div>
 
       <div className="mt-10 flex flex-col items-center space-y-2">
         {!isConnected ? (
