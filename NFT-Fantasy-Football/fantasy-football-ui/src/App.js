@@ -4,6 +4,7 @@ import NFTViewer from "./components/NFTViewer.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import WithdrawYodaButton from "./components/withdrawYodaButton.jsx";
+import MyWallet from "./components/MyWallet.jsx";
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const OWNER_ADDRESS = process.env.REACT_APP_OWNER_ADDRESS;
@@ -11,6 +12,7 @@ const OWNER_ADDRESS = process.env.REACT_APP_OWNER_ADDRESS;
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [walletOpen, setWalletOpen] = useState(false); // Use state for wallet
   
   // Wallet connection
   const connectWallet = async () => {
@@ -69,6 +71,14 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (walletOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [walletOpen]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-black to-zinc-950 text-white flex flex-col items-center justify-start py-6 font-sans">
       <ToastContainer />
@@ -76,6 +86,15 @@ function App() {
       <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-center drop-shadow-lg">
         NFT Fantasy Football
       </h1>
+
+      {isConnected && (
+        <button
+          onClick={() => setWalletOpen(true)}
+          className="absolute top-6 right-6 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg text-white shadow-md"
+        >
+          My Wallet
+        </button>
+      )}
 
       <div className="mt-10 flex flex-col items-center space-y-2">
         {!isConnected ? (
@@ -110,6 +129,14 @@ function App() {
       <div className="mt-2">
         <NFTViewer walletAddress={walletAddress} isConnected={isConnected} />
       </div>
+
+      <MyWallet
+        isOpen={walletOpen}
+        onClose={() => setWalletOpen(false)}
+        walletAddress={walletAddress}
+        contractAddress={process.env.REACT_APP_CONTRACT_ADDRESS}
+      />
+
     </div>
   );
 }
