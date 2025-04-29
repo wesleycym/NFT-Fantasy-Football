@@ -1,6 +1,3 @@
     Bugs:
 
-        1) Fetching NFTs too fast on Mac, Windows laptop works fine.
-            - Add more delay?
-        2) When reselling, you have to go through 1 transaction to set the price, and another to list it for sale. Leads to confusion. 
-            - Make it more noticable / interactive
+        N/A
