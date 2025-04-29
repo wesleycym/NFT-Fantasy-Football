@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/NFT-Fantasy-Football/static/css/main.3763d7ef.css",
-    "main.js": "/NFT-Fantasy-Football/static/js/main.311f5952.js",
+    "main.js": "/NFT-Fantasy-Football/static/js/main.2553f72e.js",
     "static/js/453.9b22f609.chunk.js": "/NFT-Fantasy-Football/static/js/453.9b22f609.chunk.js",
     "index.html": "/NFT-Fantasy-Football/index.html",
     "main.3763d7ef.css.map": "/NFT-Fantasy-Football/static/css/main.3763d7ef.css.map",
-    "main.311f5952.js.map": "/NFT-Fantasy-Football/static/js/main.311f5952.js.map",
+    "main.2553f72e.js.map": "/NFT-Fantasy-Football/static/js/main.2553f72e.js.map",
     "453.9b22f609.chunk.js.map": "/NFT-Fantasy-Football/static/js/453.9b22f609.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3763d7ef.css",
-    "static/js/main.311f5952.js"
+    "static/js/main.2553f72e.js"
   ]
 }
