@@ -46,3 +46,5 @@ represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata.
 Average mint price ~~ 0.00279 SepoliaETH   
 
 Deploy cost ~~ .15 SepoliaETH     
+
+Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
