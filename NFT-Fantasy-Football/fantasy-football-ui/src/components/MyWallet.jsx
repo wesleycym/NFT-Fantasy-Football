@@ -12,7 +12,8 @@ function decodeBase64Unicode(str) {
   }
 
 const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
-    const [ownedNFTs, setOwnedNFTs] = useState([]);
+    const [ownedNFTs, setOwnedNFTs] = useState([]); // Save owned NFTs
+    const [rawNFTs, setRawNFTs] = useState([]); // Save unfiltered NFTs
 
     // Fetch owend NFTS
     const fetchNFTs = useCallback(async () => {
@@ -33,6 +34,7 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
         })
         );
 
+        setRawNFTs(nftData); // Save unfiltered NFTs
         // Change state of owned NFTS
         setOwnedNFTs(nftData);
     }, [walletAddress, contractAddress]);
