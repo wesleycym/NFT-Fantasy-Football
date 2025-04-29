@@ -90,7 +90,7 @@ function App() {
       {isConnected && (
         <button
           onClick={() => setWalletOpen(true)}
-          className="absolute top-6 right-6 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg text-white shadow-md"
+          className="absolute top-8 right-6 bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded-lg text-white transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
         >
           My Wallet
         </button>
