@@ -4,6 +4,9 @@ import FantasyFootballABI from "../contracts/FantasyFootball.json";
 import WalletCard from "../components/WalletCard.jsx";
 import { AnimatePresence, motion } from "framer-motion";
 
+// Helper functions for sorting
+import {extractFantasyPoints, sortByFantasyPoints, filterByRank,} from "../lib/sortNFTs";
+
 function decodeBase64Unicode(str) {
     const binary = atob(str); // Decode base64 -> binary
     const bytes = Uint8Array.from(binary, char => char.charCodeAt(0)); // Convert to bytes
@@ -14,6 +17,17 @@ function decodeBase64Unicode(str) {
 const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
     const [ownedNFTs, setOwnedNFTs] = useState([]); // Save owned NFTs
     const [rawNFTs, setRawNFTs] = useState([]); // Save unfiltered NFTs
+
+    // Sort NFTs
+    const handleSort = () => {
+        setOwnedNFTs((prev) => sortByFantasyPoints(prev));
+    };
+
+    // Filter NFTs
+    const handleFilter = (rankType) => {
+        const filtered = filterByRank(ownedNFTs, rankType);
+        setOwnedNFTs(filtered);
+    };
 
     // Fetch owend NFTS
     const fetchNFTs = useCallback(async () => {
