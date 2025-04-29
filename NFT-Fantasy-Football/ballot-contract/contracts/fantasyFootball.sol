@@ -297,4 +297,9 @@ contract FantasyFootball {
         yodaToken.transfer(contractOwner, balance);
     }
 
+    // Expose map to frontend  -> in app NFT wallet
+    function getTokenIdsByOwner(address owner) external view returns (uint256[] memory) {
+        return tokenOwnerstoIds[owner];
+    }
+
 }

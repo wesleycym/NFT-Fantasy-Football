@@ -1,15 +1,43 @@
-import { ethers } from "ethers";
-import YODA from "../contracts/YODA.json";
+import { toast } from "react-toastify"; // For alerts
 
-const YODA_ADDRESS = process.env.REACT_APP_YODA_ADDRESS;
+export const approveYodaSpend = async (yoda, spender, amount) => {
+  // Show toast immediately
+  const toastId = toast.loading("Approving YODA spend...", {
+    position: "top-left",
+    theme: "dark",
+  });
 
-export const approveYodaSpend = async (spender, amount) => {
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const signer = await provider.getSigner();
-  const yoda = new ethers.Contract(YODA_ADDRESS, YODA.abi, signer);
+  try {
+    const tx = await yoda.approve(spender, amount);
 
-  const tx = await yoda.approve(spender, amount);
-  await tx.wait();
+    // Have toast tell the user what is happening
+    toast.info("⏳ Waiting for approval to confirm...", { 
+      position: "top-left",
+      autoClose: false,
+      theme: "dark",
+      autoClose: 3000,
+    });
 
-  console.log("✅ YODA approved for spending");
+    await tx.wait();
+
+    console.log("YODA approved for spending");
+
+    toast.update(toastId, {
+      render: "✅ YODA spend approved!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+    });
+  } catch (error) {
+    console.error("YODA approval failed:", error);
+
+    toast.update(toastId, {
+      render: "❌ YODA approval failed",
+      type: "error",
+      isLoading: false,
+      autoClose: 3000,
+    });
+
+    throw error; // important: rethrow so handleMint can still catch it
+  }
 };
