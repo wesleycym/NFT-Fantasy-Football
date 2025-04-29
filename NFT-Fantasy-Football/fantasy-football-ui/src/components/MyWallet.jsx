@@ -25,7 +25,7 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
 
     // Filter NFTs
     const handleFilter = (rankType) => {
-        const filtered = filterByRank(ownedNFTs, rankType);
+        const filtered = filterByRank(rawNFTs, rankType);
         setOwnedNFTs(filtered);
     };
 
@@ -86,21 +86,21 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
 
                     <button
                         onClick={fetchNFTs}
-                        className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+                        className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
                         >
                         Refresh
                     </button>
 
                     <button 
                         onClick={handleReset} 
-                        className="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded"
+                        className="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
                         >
                         Reset
                     </button>
 
                     <button
                         onClick={onClose}
-                        className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                        className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center"
                         >
                         Close
                     </button>
@@ -108,13 +108,13 @@ const MyWallet = ({ isOpen, onClose,walletAddress, contractAddress }) => {
                 </div>
 
                 <div className="flex items-center justify-center gap-6 mt-4 py-4">
-                    <button onClick={handleSort} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">📈</button>
-                    <button onClick={() => handleFilter("Hall of Fame")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🏆</button>
-                    <button onClick={() => handleFilter("All-Pro")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">💪</button>
-                    <button onClick={() => handleFilter("Starter")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🔒</button>
-                    <button onClick={() => handleFilter("Bench")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🛠️</button>
-                    <button onClick={() => handleFilter("Practice Squad")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">📦</button>
-                    <button onClick={() => handleFilter("Draft Bust")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3">🧢</button>
+                    <button onClick={handleSort} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">📈</button>
+                    <button onClick={() => handleFilter("Hall of Fame")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">🏆</button>
+                    <button onClick={() => handleFilter("All-Pro")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">💪</button>
+                    <button onClick={() => handleFilter("Starter")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">🔒</button>
+                    <button onClick={() => handleFilter("Bench")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">🛠️</button>
+                    <button onClick={() => handleFilter("Practice Squad")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">📦</button>
+                    <button onClick={() => handleFilter("Draft Bust")} className="w-10 h-10 flex items-center justify-center shadow transition duration-200 transform hover:scale-110 hover:rotate-3 will-change-transform origin-center">🧢</button>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6">
