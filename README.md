@@ -1,5 +1,5 @@
 # 🏈 NFT Fantasy Football
-NFT Fantasy Football is an online NFT marketplace that allows users to mint a selected amount of NFL players as their own NFTs. Each minted NFT is given an accurate, calculated fantasy score based on randomly selected stats of the 2024-2025 NFL season in accordance to the player.   
+NFT Fantasy Football is an online NFT marketplace that allows users to mint a selected number of NFL players as their own NFTs. Each minted NFT is given an accurate, calculated fantasy score based on randomly selected stats of the 2024-2025 NFL season in accordance to the player.   
 
 
 
