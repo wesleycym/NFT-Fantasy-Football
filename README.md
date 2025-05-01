@@ -11,7 +11,17 @@ NFT Fantasy Football is an online NFT marketplace that allows users to mint a se
   FP < 5 - 🧢 Draft Bust
 ```
 
-[NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)   
+# Instructions   
+
+## Requirements
+[Create](https://metamask.io/) a MetaMask account.   
+[Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
+[Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
+
+### Online
+[NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
+
+### Locally 
 
 
 Average mint price ~~ 0.00279 SepoliaETH   
