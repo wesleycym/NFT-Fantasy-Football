@@ -1,7 +1,13 @@
 # 🏈 NFT Fantasy Football   
 
-NFT Fantasy Football is an online NFT marketplace that allows users to mint a selected number of NFL players as their own NFTs. Each minted NFT is given an accurate, calculated fantasy score based on randomly selected stats of the 2024-2025 NFL season in accordance to the player.   
+NFT Fantasy Football is an online NFT marketplace that allows users to mint a selected number of NFL players as their own NFTs. Each minted NFT is given an accurate, calculated fantasy score based on randomly selected stats of the 2024-2025 NFL season in accordance to the player. 
 
+On the offensive side of the ball, there are 11 categories that factor into a players score. Each category has 17 entires, all mapping to the respective score for that week.   
+> NFT Fantasy football is based off the **NFL Season** (weeks 1-18), not the **Fantasy Football Season** (weeks 1-17).   
+
+Freshly minted NFTs pull a random week, from each of the 11 categories. Leading to ~ **34 trillion unique, weekly combinations per player**.   
+
+NFT fantasy football bases its scoring off the standard PPR league. When points are calculated, each are given a corresponding rank based on the resembled performance.   
 
 >  FP >= 40 - 🏆 Hall of Fame  
 >  FP >= 30 - 💪 All-Pro  
