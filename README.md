@@ -16,6 +16,8 @@ NFT fantasy football bases its scoring off the standard PPR league. When points 
 >  FP >= 5  - 📦 Practice Squad  
 >  FP < 5 - 🧢 Draft Bust  
 
+This application uses a hybrid on-chain/off-chain architecture. All core NFT attributes (fantasy score, player info, rank) are stored on-chain, while dynamic stat generation and image hosting are handled off-chain. Thus making the smart contract cost efficient, while still maintaing the core attributes of each, uniquely minted NFT.
+
 ---
 # Instructions   
 
