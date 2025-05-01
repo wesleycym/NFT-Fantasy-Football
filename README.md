@@ -1,13 +1,14 @@
 # 🏈 NFT Fantasy Football   
 
-NFT Fantasy Football is an online NFT marketplace that allows users to mint a selected number of NFL players as their own NFTs. Each minted NFT is given an accurate, calculated fantasy score based on randomly selected stats of the 2024-2025 NFL season in accordance to the player. 
+**NFT Fantasy Football** is an online NFT marketplace that allows users to mint a selected number of NFL players as unique NFTs. Each minted NFT is assigned a calculated fantasy score based on randomly selected real stats from the 2024–2025 NFL season.
 
-On the offensive side of the ball, there are 11 categories that factor into a players score. Each category has 17 entires, all mapping to the respective score for that week.   
+On the offensive side of the ball, there are **11 categories** that factor into each player's score. Each category has **17 weekly entires**, all mapping to their respective statline for that week.   
+
 > NFT Fantasy football is based off the **NFL Season** (weeks 1-18), not the **Fantasy Football Season** (weeks 1-17).   
 
 Freshly minted NFTs pull a random week, from each of the 11 categories. Leading to ~ **34 trillion unique, weekly combinations per player**.   
 
-NFT fantasy football bases its scoring off the standard PPR league. When points are calculated, each are given a corresponding rank based on the resembled performance.   
+NFT fantasy football bases its scoring off the standard PPR format. When points are calculated, each player is given a corresponding rank based on the resembled performance.   
 
 >  FP >= 40 - 🏆 Hall of Fame  
 >  FP >= 30 - 💪 All-Pro  
@@ -16,7 +17,7 @@ NFT fantasy football bases its scoring off the standard PPR league. When points 
 >  FP >= 5  - 📦 Practice Squad  
 >  FP < 5 - 🧢 Draft Bust  
 
-This application uses a hybrid on-chain/off-chain architecture. All core NFT attributes (fantasy score, player info, rank) are stored on-chain, while dynamic stat generation and image hosting are handled off-chain. Thus making the smart contract cost efficient, while still maintaing the core attributes of each, uniquely minted NFT.
+This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadaya for every uniquely minted NFT.
 
 ---
 # Instructions   
