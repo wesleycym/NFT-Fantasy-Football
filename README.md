@@ -10,13 +10,13 @@ NFT Fantasy Football is an online NFT marketplace that allows users to mint a se
 >  FP >= 5  - 📦 Practice Squad  
 >  FP < 5 - 🧢 Draft Bust  
 
-
+---
 # Instructions   
 
 ## Requirements
 [Create](https://metamask.io/) a MetaMask account.   
-[Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
-[Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
++ [Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
++ [Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
 
 ### Online
 [NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
