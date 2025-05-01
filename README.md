@@ -18,7 +18,7 @@ NFT fantasy football bases its scoring off the standard PPR format. When points 
 >  FP < 5 - 🧢 Draft Bust  
 
 <p align="center">
-    <img src="https://i.imgur.com/WOI8S2j.gif" width="400" alt="NFT Opening Animation" />
+    <img src="https://files.catbox.moe/2o6xoo.gif" width="400" alt="NFT Opening Animation" />
 </p>
 
 This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadaya for every uniquely minted NFT.
