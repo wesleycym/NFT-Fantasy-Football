@@ -99,7 +99,9 @@ Expand the mintable roster to include more NFL players across different position
     2) Allow users to mint team specific packs.   
 - **Add past, seasonal stats**   
 Incorporate legacy players and past seasons to unlock new stat combinations and maximize fantasy score variety.     
-> e.g., Mint a “rookie HOF Josh Allen” card using his rookie stats with a legendary pull.
+> e.g.,    
+> Mint a “rookie HOF Josh Allen” card with only his rookie stats,   
+> Mint a Derrick Henry card based on his first-ever NFL start.
 
 
 ## Instructions   
