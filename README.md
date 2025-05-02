@@ -1,11 +1,11 @@
 # 🏈 NFT Fantasy Football   
 
 ## Table of Contents
-- [Abstract](##Abstract)
-- [Technology Stack](##Technology-Stack)
-- [Key Features](##Key-Features)
-- [Future Additions](##Future-Additions)
-- [Instructions](##Instructions)
+- [Abstract](#Abstract)
+- [Technology Stack](#Technology-Stack)
+- [Key Features](#Key-Features)
+- [Future Additions](#Future-Additions)
+- [Instructions](#Instructions)
 ---
 
 
