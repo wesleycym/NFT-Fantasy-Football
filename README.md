@@ -3,8 +3,8 @@
 ## Table of Contents
 
 - [Abstract](#Abstract)   
-- [Technology Stack](#Technology-Stack)   
-- [Key Features](#Key-Features)   
+- [Key Features](#Key-Features) 
+- [Technology Stack](#Technology-Stack)     
 - [Future Additions](#Future-Additions)   
 - [Instructions](#Instructions)   
 
@@ -38,6 +38,29 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 ---
 
+## Key Features
+
+- **Dynamic NFT Minting**   
+Users can mint unique NFL player NFTs based on real 2024–2025 season stats, with each NFT    assigned a randomized statline across 11 fantasy categories.   
+- **Tiered Fantasy Rankings**   
+NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of Fame, 💪 All-Pro, 🧢 Draft Bust), giving each mint a dopamine-inducing payoff.
+- **ERC-20 YODA Token Integration**   
+NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
+- **In-App NFT Wallet**   
+Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.   
+<p align="center">
+    <img src="https://files.catbox.moe/jg9ja7.gif" width="250"  />
+</p>
+
+- **Animated Pack Reveal Experience**   
+Minting triggers a 3D animated pack opening that displays your player's name, stats, and final fantasy score with flair.   
+- **Hybrid On/Off-Chain Design**   
+Core NFT data is stored on-chain; off-chain components like image hosting and stat generation keep the system lightweight and scalable.   
+- **Responsive UI with Smooth Animations**   
+Built with TailwindCSS + Framer Motion for a modern, fast, and fluid user experience across devices.
+
+---
+
 ## Technology Stack   
 
 ### Frontend
@@ -64,26 +87,7 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 - **Pinata** - Off-chain hosting for player images.   
 - **.env** - Secure storage for contract and address configs.    
 
-## Key Features
-
-- **Dynamic NFT Minting**   
-Users can mint unique NFL player NFTs based on real 2024–2025 season stats, with each NFT    assigned a randomized statline across 11 fantasy categories.   
-- **Tiered Fantasy Rankings**   
-NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of Fame, 💪 All-Pro, 🧢 Draft Bust), giving each mint a dopamine-inducing payoff.
-- **ERC-20 YODA Token Integration**   
-NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
-- **In-App NFT Wallet**   
-Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.   
-<p align="center">
-    <img src="https://files.catbox.moe/jg9ja7.gif" width="250"  />
-</p>
-
-- **Animated Pack Reveal Experience**   
-Minting triggers a 3D animated pack opening that displays your player's name, stats, and final fantasy score with flair.   
-- **Hybrid On/Off-Chain Design**   
-Core NFT data is stored on-chain; off-chain components like image hosting and stat generation keep the system lightweight and scalable.   
-- **Responsive UI with Smooth Animations**   
-Built with TailwindCSS + Framer Motion for a modern, fast, and fluid user experience across devices.
+---
 
 ## Future Additions
 
@@ -107,6 +111,7 @@ Incorporate legacy players and past seasons to unlock new stat combinations and 
     > Mint a “rookie HOF Josh Allen” card with only his rookie stats,   
     > Mint a Derrick Henry card based on his first-ever NFL start.
 
+---
 
 ## Instructions   
 
