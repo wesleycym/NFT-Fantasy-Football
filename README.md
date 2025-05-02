@@ -1,15 +1,18 @@
 # 🏈 NFT Fantasy Football   
 
 ## Table of Contents
-- [Abstract](#Abstract)
-- [Technology Stack](#Technology-Stack)
-- [Key Features](#Key-Features)
-- [Future Additions](#Future-Additions)
-- [Instructions](#Instructions)
+
+- [Abstract](#Abstract)   
+- [Technology Stack](#Technology-Stack)   
+- [Key Features](#Key-Features)   
+- [Future Additions](#Future-Additions)   
+- [Instructions](#Instructions)   
+
 ---
 
 
 ## Abstract
+
 **NFT Fantasy Football** is an online NFT marketplace that allows users to mint a selected number of NFL players as unique NFTs. Each minted NFT is assigned a calculated fantasy score based on randomly selected real stats from the 2024–2025 NFL season.
 
 On the offensive side of the ball, there are **11 categories** that factor into each player's score. Each category has **17 weekly entires**, all mapping to their respective statline for that week.   
@@ -35,14 +38,20 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 ---
 
+## Technology Stack   
 
-Average mint price ~~ 0.00279 SepoliaETH   
+### Frontend
 
-Deploy cost ~~ .15 SepoliaETH     
+- **React**   
+- **Tailwind CSS** - Modern utility-first styling.   
+- **Framer Motion**
 
-Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
+### Blockchain
 
-## Technology Stack
+### Smart Contracts
+
+### Hosting / Deployment
+
 
 ## Key Features
 
@@ -59,3 +68,11 @@ Even though the contract owner's address is public (as it must be for proper UI 
 [NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
 
 #### Locally 
+
+
+
+Average mint price ~~ 0.00279 SepoliaETH   
+
+Deploy cost ~~ .15 SepoliaETH     
+
+Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
