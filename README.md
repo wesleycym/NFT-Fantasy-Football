@@ -107,19 +107,35 @@ Incorporate legacy players and past seasons to unlock new stat combinations and 
 ## Instructions   
 
 ### Requirements
-[Create](https://metamask.io/) a MetaMask account.   
-+ [Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
-+ [Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
+
+1) [Create](https://metamask.io/) a MetaMask account.   
+
+2) Install the MetaMask browser extension: 
+    - [Chrome](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)   
+    - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)  
+
+Ensure MetaMask is set to the Sepolia testnet:   
+> MetaMask → Network Dropdown (Top Left) → Show Test Networks → Enable **Sepolia**
+
+Users will be required to have **~ [0.00279 SepoliaETH](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)** to mint an NFT. You can get free Sepolia ETH from the faucet linked above.   
+
 
 #### Online
-[NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
+[NFT Fantasy Football (GitHub Pages)](https://wesleycym.github.io/NFT-Fantasy-Football/)  
 
 #### Locally 
 
+1) **Clone the repository**   
+> git clone https://github.com/wesleycym/NFT-Fantasy-Football.git
+2) **Navigate to the frontend folder**   
+> cd NFT-Fantasy-Football/fantasy-football-ui
+3) **Install dependencies**   
+> npm install  
 
+**Note**
+```
+The **.env** in the frontend contains all public information, thus it has been made available in the repository for users to run the frontend from their desired local machine. Changing the information in this file will lead to undesired behavior of the application. 
+```
 
-Average mint price ~~ 0.00279 SepoliaETH   
-
-Deploy cost ~~ .15 SepoliaETH     
-
-Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
+5) **Start the app**    
+> npm start   
