@@ -9,7 +9,7 @@ const WalletCard = ({ nft }) => {
       })();
 
   return (
-    <CardContainer className="w-[350px] h-[400px]"> {/* Slimmer card */}
+    <CardContainer className="w-[350px] h-[400px]">
       <CardBody className="bg-zinc-900 text-white rounded-xl p-4 shadow-lg flex flex-col items-center justify-start space-y-3 w-[400px] h-[375px]">
 
         <CardItem translateZ={20}>
