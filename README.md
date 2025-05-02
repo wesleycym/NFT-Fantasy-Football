@@ -1,5 +1,15 @@
 # 🏈 NFT Fantasy Football   
 
+## Table of Contents
+- [Abstract](##Abstract)
+- [Technology Stack](##Technology-Stack)
+- [Key Features](##Key-Features)
+- [Future Additions](##Future-Additions)
+- [Instructions](##Instructions)
+---
+
+
+## Abstract
 **NFT Fantasy Football** is an online NFT marketplace that allows users to mint a selected number of NFL players as unique NFTs. Each minted NFT is assigned a calculated fantasy score based on randomly selected real stats from the 2024–2025 NFL season.
 
 On the offensive side of the ball, there are **11 categories** that factor into each player's score. Each category has **17 weekly entires**, all mapping to their respective statline for that week.   
@@ -24,17 +34,6 @@ NFT fantasy football bases its scoring off the standard PPR format. When points 
 This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadaya for every uniquely minted NFT.
 
 ---
-# Instructions   
-
-## Requirements
-[Create](https://metamask.io/) a MetaMask account.   
-+ [Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
-+ [Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
-
-### Online
-[NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
-
-### Locally 
 
 
 Average mint price ~~ 0.00279 SepoliaETH   
@@ -43,4 +42,20 @@ Deploy cost ~~ .15 SepoliaETH
 
 Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
 
-“Each NFT is uniquely generated from real NFL stat data, using 11 performance categories and 17 weeks of potential values — resulting in over 3.4 quintillion unique combinations per player.”   
+## Technology Stack
+
+## Key Features
+
+## Future Additions
+
+## Instructions   
+
+### Requirements
+[Create](https://metamask.io/) a MetaMask account.   
++ [Install](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) the MetaMask browser plugin (**Chrome**).   
++ [Install](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/) the MetaMask browser plugin (**Firefox**).   
+
+#### Online
+[NFT Fantasy Football](https://wesleycym.github.io/NFT-Fantasy-Football/)  
+
+#### Locally 
