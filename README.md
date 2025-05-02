@@ -66,9 +66,41 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 ## Key Features
 
+- **Dynamic NFT Minting**   
+Users can mint unique NFL player NFTs based on real 2024–2025 season stats, with each NFT    assigned a randomized statline across 11 fantasy categories.   
+- **Tiered Fantasy Rankings**   
+NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of Fame, 💪 All-Pro, 🧢 Draft Bust), giving each mint a dopamine-inducing payoff.
+- **ERC-20 YODA Token Integration**   
+NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
+- **In-App NFT Wallet**   
+Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.
+- **Animated Pack Reveal Experience**   
+Minting triggers a 3D animated pack opening that displays your player's name, stats, and final fantasy score with flair.   
+- **Hybrid On/Off-Chain Design**   
+Core NFT data is stored on-chain; off-chain components like image hosting and stat generation keep the system lightweight and scalable.   
+- **Responsive UI with Smooth Animations**   
+Built with TailwindCSS + Framer Motion for a modern, fast, and fluid user experience across devices.
+
 ## Future Additions
 
-- Allow users to view stat breakdown from the apps wallet.
+- **Expand Wallet Functionality**   
+Enhance the in-app wallet to show full stat breakdowns, fantasy point totals, and rankings on-click, replacing the need to rely on MetaMask’s limited NFT viewer.   
+- **Leaderboards**   
+Add a public leaderboard displaying the top-performing NFTs across all users, ranked by fantasy score or rarity tier.
+- **Update Ranks**   
+    1) Calculate ranks based on player position instead of global scores.    
+    2) Introduce special rarity tags for perfect statline pulls (e.g., a Josh Allen card with all Week 1 stats).   
+-  **NFT Trading or Marketplace**   
+Implement a marketplace where users can list, trade, or purchase NFTs.   
+- **Increase Player Pool**   
+Expand the mintable roster to include more NFL players across different positions.   
+- **Multi-NFT Pack Minting**   
+    1) Let users mint a pack of 3-5 players at once.   
+    2) Allow users to mint team specific packs.   
+- **Add past, seasonal stats**   
+Incorporate legacy players and past seasons to unlock new stat combinations and maximize fantasy score variety.     
+> e.g., Mint a “rookie HOF Josh Allen” card using his rookie stats with a legendary pull.
+
 
 ## Instructions   
 
