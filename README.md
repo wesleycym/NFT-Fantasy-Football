@@ -42,29 +42,27 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 ### Frontend
 
-- **React**   
-- **Tailwind CSS** - Modern utility-first styling.   
-- **Framer Motion** - Animations and UI transitions.    
-- **React Toastify** - Notifications, and alerts.   
-- **Aceternity** - Modern components.   
+- **React** - JavaScript library for building user interfaces.    
+- **Tailwind CSS** - Utility-first styling.   
+- **Framer Motion** - Smooth animations and transitions.     
+- **React Toastify** - Custom alerts and notifications.   
+- **Aceternity** - Modern component library.   
 
 ### Blockchain
 
-- **Ethers.js** - Blockchain interaction.   
-- **Sepolia Testnet** - Contract deployment.   
-- **Metamask** - Wallet integration.   
-- **ERC-721** - Custom NFT contract.
-- **ERC-20 (YODA)** - Custom YODA token used for minting.
+- **Ethers.js** - Ethereum JavaScript SDK for contract interaction.     
+- **Sepolia Testnet** - Ethereum test network used for deployment.     
+- **Metamask** - Wallet connection and transaction signing.    
+- **ERC-721** - Custom NFT implementation (Fantasy Player NFTs).   
+- **ERC-20 (YODA)** - In-game currency required to mint NFTs.   
 
 
 ### Smart Contracts
 
-- **Solidity** - Contract Language.   
-- **Pinata** - Off-chain image hosting.   
-- **.env** - Environment variable management.   
-
-### Hosting / Deployment
-
+- **Solidity** - Smart contract programming language
+- **Hardhat** - Smart contract development & testing framework.   
+- **Pinata** - Off-chain hosting for player images.   
+- **.env** - Secure storage for contract and address configs.    
 
 ## Key Features
 
