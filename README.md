@@ -126,15 +126,22 @@ Users will be required to have **~ [0.00279 SepoliaETH](https://cloud.google.com
 #### Locally 
 
 1) **Clone the repository**   
-```git clone https://github.com/wesleycym/NFT-Fantasy-Football.git```   
+```bash 
+git clone https://github.com/wesleycym/NFT-Fantasy-Football.git
+```   
 2) **Navigate to the frontend folder**   
-```cd NFT-Fantasy-Football/fantasy-football-ui```
+```bash
+cd NFT-Fantasy-Football/fantasy-football-ui
+```
 3) **Install dependencies**   
-```npm install```
+```bash
+npm install
+```
+4) **Start the app**    
+```bash
+npm start
+```   
 
 **Note:**
 
 >The **.env** in the frontend contains all public information, thus it has been made available in the repository for users to run the frontend from their desired local machine. Changing the information in this file will lead to undesired behavior of the application. 
-
-5) **Start the app**    
-```npm start```   
