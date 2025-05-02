@@ -73,7 +73,11 @@ NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of
 - **ERC-20 YODA Token Integration**   
 NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
 - **In-App NFT Wallet**   
-Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.
+Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.   
+<p align="center">
+    <img src="https://files.catbox.moe/jg9ja7.gif" width="250"  />
+</p>
+
 - **Animated Pack Reveal Experience**   
 Minting triggers a 3D animated pack opening that displays your player's name, stats, and final fantasy score with flair.   
 - **Hybrid On/Off-Chain Design**   
