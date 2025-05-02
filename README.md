@@ -19,7 +19,7 @@ On the offensive side of the ball, there are **11 categories** that factor into 
 
 > NFT Fantasy football is based off the **NFL Season** (weeks 1-18), not the **Fantasy Football Season** (weeks 1-17).   
 
-Freshly minted NFTs pull a random week, from each of the 11 categories. Leading to ~ **34 trillion unique, weekly combinations per player**.   
+Freshly minted NFTs pull a random week from each of the 11 categories. Leading to ~ **34 trillion unique, weekly combinations per player**.   
 
 NFT fantasy football bases its scoring off the standard PPR format. When points are calculated, each player is given a corresponding rank based on the resembled performance.   
 
@@ -34,7 +34,7 @@ NFT fantasy football bases its scoring off the standard PPR format. When points 
     <img src="https://files.catbox.moe/x56orl.gif" width="350"  />
 </p>
 
-This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadaya for every uniquely minted NFT.
+This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadata for every uniquely minted NFT.
 
 ---
 
@@ -48,8 +48,16 @@ NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of
 NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
 - **In-App NFT Wallet**   
 Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.   
+
 <p align="center">
     <img src="https://files.catbox.moe/jg9ja7.gif" width="250"  />
+</p>
+
+- **MetaMask NFT Integration**   
+All minted NFTs are fully ERC-721 compliant and display directly in MetaMask’s wallet interface, verifying ownership outside the dApp.   
+
+<p align="center">
+    <img src="https://files.catbox.moe/7o94zj.gif" width="250"  />
 </p>
 
 - **Animated Pack Reveal Experience**   
