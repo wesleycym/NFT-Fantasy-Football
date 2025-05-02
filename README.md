@@ -44,11 +44,24 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 - **React**   
 - **Tailwind CSS** - Modern utility-first styling.   
-- **Framer Motion**
+- **Framer Motion** - Animations and UI transitions.    
+- **React Toastify** - Notifications, and alerts.   
+- **Aceternity** - Modern components.   
 
 ### Blockchain
 
+- **Ethers.js** - Blockchain interaction.   
+- **Sepolia Testnet** - Contract deployment.   
+- **Metamask** - Wallet integration.   
+- **ERC-721** - Custom NFT contract.
+- **ERC-20 (YODA)** - Custom YODA token used for minting.
+
+
 ### Smart Contracts
+
+- **Solidity** - Contract Language.   
+- **Pinata** - Off-chain image hosting.   
+- **.env** - Environment variable management.   
 
 ### Hosting / Deployment
 
