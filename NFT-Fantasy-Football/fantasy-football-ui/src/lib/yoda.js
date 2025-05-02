@@ -31,6 +31,7 @@ export const approveYodaSpend = async (yoda, spender, amount) => {
   } catch (error) {
     console.error("YODA approval failed:", error);
 
+    // Send toast noti
     toast.update(toastId, {
       render: "❌ YODA approval failed",
       type: "error",
@@ -38,6 +39,6 @@ export const approveYodaSpend = async (yoda, spender, amount) => {
       autoClose: 3000,
     });
 
-    throw error; // important: rethrow so handleMint can still catch it
+    throw error; // Rethrow so handleMint can still catch it
   }
 };

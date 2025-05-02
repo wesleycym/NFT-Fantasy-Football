@@ -1,50 +1,175 @@
-# 🏈 NFT Fantasy Football
-NFT Fantasy Football is a decentralized web application that combines NFT owernship with the dynamic nature of fantasy football through the use of fantasy points. Each NFT represents a real-world player, and includes attributes such as name, team, position, and most importantly, fantasy points. Users can connect their MetaMask wallet, and purchase player NFTs using custom ERC-20 Yoda tokens.   
-___
-Upon deployment, the deployer becomes the **inital owner of all NFTs**, and has them automatically listed for sale. **Only 1 NFT is minted per NFL athlete**, ensuring uniqueness, and enforcing the structure of a fantasy football league. Once purchased at the base price, NFTs are transferred to the buyer and removed from circulation. The new owner is then given the option to list the NFT for sale again, with their own asking price.    
-___
-Fantasy point updates are reflected live on the frontend of the application. Each NFT dynamically encodes its metadata using the **tokenURI()** function. If a player's points are updated, and the NFT is resold, the new owner will see the **updated stats** reflected automatically in their wallet.   
-___
-Although players do not mint the cards themselves, purchasing an NFT with high fantasy points can capture a legacy defining game; like owning a piece of history. The on-chain **fantasyPoints field** locks in a snapshot of the players greatness.   
-___
-## Demo Checklist 
-**1) Good tile and abstract of 100 words:** ✅   
-**2) Smart contract for NFT deployed on hardhat or Sepolia:** ✅ Deployed on sepolia.   
-**3) Working front-end for the NFT for users to interact:** ✅   
-**4) Display of NFT’s price in Yodas and Transfer of Yoda for the price of an NFT:** ⚠️ Prices to display, but all NFTs are free as of testing.   
-**5) User able to mint NFT with base characteristics specified; multiple users do the same:** ⚠️ Reflected on nature of fantasy football. Availability of single player is limited, however the availability of mulitple players is abundant.   
-**6) Dynamic nature of the NFT:** ⚠️ Ensuring the integrity of fantasy football, users cannot change the values of players, the power to do so is left to the commissioner (deployer). However, I could change the logic to allow multiple NFTs of the same player to be minted, all with different fantasy point values.   
-**7) Users able to display NFT on their wallet:** ✅   
-**8) What are the offchain data for the NFT?** Where is the offchain data stored? How is it accessed? How is it
-represented on the smart contract for NFT?: ✅ NFT images are hosted on Pinata. As for data itself (name, FP, etc.), it is encoded on the fly using **tokenURI**.   
+# 🏈 NFT Fantasy Football   
 
-```solidity   
-    function tokenURI(uint256 tokenId) public view returns (string memory) {
-        require(_ownerOf[tokenId] != address(0), "Token does not exist");
+## Table of Contents
 
-        Player memory p = players[tokenId];
-        string memory image = playerImageMap[p.name];
+- [Abstract](#Abstract)   
+- [Key Features](#Key-Features) 
+- [Technology Stack](#Technology-Stack)     
+- [Future Additions](#Future-Additions)   
+- [Instructions](#Instructions)   
 
-        // JSON metadata with full details in description
-        string memory json = string(abi.encodePacked(
-            '{',
-                '"name": "', p.name, '",',
-                '"description": "', 
-                    p.position, '\\n',
-                    p.team, '\\n',
-                    Strings.toString(p.fantasyPoints), ' Fantasy Points",',
-                '"image": "', image, '"',
-            '}'
-        ));
+---
 
-        string memory encoded = Base64.encode(bytes(json));
-        return string(abi.encodePacked("data:application/json;base64,", encoded));
-    }
+
+## Abstract
+
+**NFT Fantasy Football** is an online NFT marketplace that allows users to mint a selected number of NFL players as unique NFTs. Each minted NFT is assigned a calculated fantasy score based on randomly selected real stats from the 2024–2025 NFL season.
+
+On the offensive side of the ball, there are **11 categories** that factor into each player's score. Each category has **17 weekly entires**, all mapping to their respective statline for that week.   
+
+> NFT Fantasy football is based off the **NFL Season** (weeks 1-18), not the **Fantasy Football Season** (weeks 1-17).   
+
+Freshly minted NFTs pull a random week from each of the 11 categories. Leading to ~ **34 trillion unique, weekly combinations per player**.   
+
+NFT fantasy football bases its scoring off the standard PPR format. When points are calculated, each player is given a corresponding rank based on the resembled performance.   
+
+>  FP >= 40 - 🏆 Hall of Fame  
+>  FP >= 30 - 💪 All-Pro  
+>  FP >= 15 - 🔒 Starter  
+>  FP >= 8 - 🛠️ Bench  
+>  FP >= 5  - 📦 Practice Squad  
+>  FP < 5 - 🧢 Draft Bust  
+
+<p align="center">
+    <img src="https://files.catbox.moe/x56orl.gif" width="350"  />
+</p>
+
+This application uses a **hybrid on-chain/off-chain architecture**. All core NFT attributes (fantasy score, player info, rank) are stored fully **on-chain**, while dynamic stat generation and image hosting are handled **off-chain**. This design keeps the smart contract cost-efficient while preserving essential metadata for every uniquely minted NFT.
+
+---
+
+## Key Features
+
+- **Dynamic NFT Minting**   
+Users can mint unique NFL player NFTs based on real 2024–2025 season stats, with each NFT    assigned a randomized statline across 11 fantasy categories.   
+
+- **Tiered Fantasy Rankings**   
+NFTs are ranked automatically using fantasy point thresholds (e.g., 🏆 Hall of Fame, 💪 All-Pro, 🧢 Draft Bust), giving each mint a dopamine-inducing payoff.   
+
+- **ERC-20 YODA Token Integration**   
+NFTs are minted using a custom ERC-20 token ("YODA"), enforcing spending via MetaMask with proper approval flows.   
+
+- **In-App NFT Wallet**   
+Sidebar wallet displays all NFTs owned by the user, complete with filters by rank (emoji icons) and dynamic sorting by fantasy points.   
+
+<p align="center">
+    <img src="https://files.catbox.moe/jg9ja7.gif" width="250"  />
+</p>
+
+- **MetaMask NFT Integration**   
+All minted NFTs are fully ERC-721 compliant and display directly in MetaMask’s wallet interface, verifying ownership outside the dApp.   
+
+<p align="center">
+    <img src="https://files.catbox.moe/7o94zj.gif" width="250"  />
+</p>
+
+- **Animated Pack Reveal Experience**   
+Minting triggers a 3D animated pack opening that displays your player's name, stats, and final fantasy score with flair.   
+
+- **Hybrid On/Off-Chain Design**   
+Core NFT data is stored on-chain; off-chain components like image hosting and stat generation keep the system lightweight and scalable.   
+
+- **Responsive UI with Smooth Animations**   
+Built with TailwindCSS + Framer Motion for a modern, fast, and fluid user experience across devices.
+
+---
+
+## Technology Stack   
+
+### Frontend
+
+- **React** - JavaScript library for building user interfaces.    
+- **Tailwind CSS** - Utility-first styling.   
+- **Framer Motion** - Smooth animations and transitions.     
+- **React Toastify** - Custom alerts and notifications.   
+- **Aceternity** - Modern component library.   
+
+### Blockchain
+
+- **Ethers.js** - Ethereum JavaScript SDK for contract interaction.     
+- **Sepolia Testnet** - Ethereum test network used for deployment.     
+- **Metamask** - Wallet connection and transaction signing.    
+- **ERC-721** - Custom NFT implementation (Fantasy Player NFTs).   
+- **ERC-20 (YODA)** - In-game currency required to mint NFTs.   
+
+
+### Smart Contracts
+
+- **Solidity** - Smart contract programming language
+- **Hardhat** - Smart contract development & testing framework.   
+- **Pinata** - Off-chain hosting for player images.   
+- **.env** - Secure storage for contract and address configs.    
+
+---
+
+## Future Additions
+
+- **Expand Wallet Functionality**   
+Enhance the in-app wallet to show full stat breakdowns on-click, replacing the need to rely on MetaMask’s limited NFT viewer.   
+- **Leaderboards**   
+Add a public leaderboard displaying the top-performing NFTs across all users, ranked by fantasy score or rarity tier.
+- **Update Ranks**   
+    1) Calculate ranks based on player position instead of global scores.    
+    2) Introduce special rarity tags for perfect statline pulls (e.g., a Josh Allen card with all Week 1 stats).   
+-  **NFT Trading or Marketplace**   
+Implement a marketplace where users can list, trade, or purchase NFTs.   
+- **Increase Player Pool**   
+Expand the mintable roster to include more NFL players across different positions.   
+- **Multi-NFT Pack Minting**   
+    1) Let users mint a pack of 3-5 players at once.   
+    2) Allow users to mint team specific packs.   
+- **Add past, seasonal stats**   
+Incorporate legacy players and past seasons to unlock new stat combinations and maximize fantasy score variety.     
+    > e.g.,    
+    > Mint a “rookie HOF Josh Allen” card with only his rookie stats,   
+    > Mint a Derrick Henry card based on his first-ever NFL start.
+
+---
+
+## Instructions   
+
+### Requirements
+
+1) [Create](https://metamask.io/) a MetaMask account.   
+
+2) Install the MetaMask browser extension: 
+    - [Chrome](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)   
+    - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)  
+
+3) Ensure MetaMask is set to the Sepolia testnet:   
+    > MetaMask → Network Dropdown (Top Left) → Show Test Networks → Enable **Sepolia**
+
+4) Users will be required to have ~**[0.00279 SepoliaETH](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)** to mint an NFT. You can get free Sepolia ETH from the faucet linked above.   
+
+
+#### Online
+1) **Visit the site**:  
+[NFT Fantasy Football (GitHub Pages)](https://wesleycym.github.io/NFT-Fantasy-Football/)  
+2) **Connect your Metamask wallet**:   
+Click the "**Connect Wallet**" button in the app header.   
+3) **Approve the connection prompt**:   
+MetaMask will request permission to connect your wallet to the site — approve it.   
+> Make sure you're connected to the Sepolia Test Network and have enough test ETH to cover gas fees.
+
+#### Locally 
+
+1) **Clone the repository**   
+```bash 
+git clone https://github.com/wesleycym/NFT-Fantasy-Football.git
 ```   
-**9) Compute based on NFT properties:** ❌ While it is possible to include all on the field variables to determine a players performance, there was a concern with high gas usage if implemented. Statically uploading a JSON file of all stats (passing yards, tds, etc) will turn the application into a static NFT platform, unless its manually updated. However, it is entirely possible to sort all players on the front end by points earned.   
+2) **Navigate to the frontend folder**   
+```bash
+cd NFT-Fantasy-Football/fantasy-football-ui
+```
+3) **Install dependencies**   
+```bash
+npm install
+```
+4) **Start the app**    
+```bash
+npm start
+```   
 
-Average mint price ~~ 0.00279 SepoliaETH   
+**Note:**
 
-Deploy cost ~~ .15 SepoliaETH     
-
-Even though the contract owner's address is public (as it must be for proper UI logic), all critical functions are protected on-chain with msg.sender checks. This ensures only the true owner (with the private key) can execute them, regardless of any frontend manipulation.   
+>The ```.env``` file in the frontend contains all **public-facing** information and is included in the repository. **Editing** this file is not recommended, as changes may lead to unintended behavior.

@@ -33,9 +33,20 @@ function App() {
         }
       } catch (err) {
         console.error("User rejected wallet connection:", err);
+        toast.error("User rejected wallet connection", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "dark",
+        })
       }
     } else {
-      alert("MetaMask not found. Please install it to use this app.");
+      //alert("MetaMask not found. Please install it to use this app.");
+      console.log("MetaMask not found. Please install it to use this app.");
+      toast.error("MetaMask not found. Please install it to use this app.", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+      })
     }
   };
 
