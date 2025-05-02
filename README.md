@@ -121,7 +121,13 @@ Users will be required to have **~ [0.00279 SepoliaETH](https://cloud.google.com
 
 
 #### Online
+1) **Visit the site**:  
 [NFT Fantasy Football (GitHub Pages)](https://wesleycym.github.io/NFT-Fantasy-Football/)  
+2) **Connect your Metamask wallet**:   
+Click the "**Connect Wallet**" button in the app header.   
+3) **Approve the connection prompt**:   
+MetaMask will request permission to connect your wallet to the site — approve it.   
+> Make sure you're connected to the Sepolia Test Network and have enough test ETH to cover gas fees.
 
 #### Locally 
 
@@ -144,4 +150,4 @@ npm start
 
 **Note:**
 
->The **.env** in the frontend contains all public information, thus it has been made available in the repository for users to run the frontend from their desired local machine. Changing the information in this file will lead to undesired behavior of the application. 
+>The ```.env``` file in the frontend contains all **public-facing** information and is included in the repository. **Editing** this file is not recommended, as changes may lead to unintended behavior.
