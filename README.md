@@ -99,9 +99,9 @@ Expand the mintable roster to include more NFL players across different position
     2) Allow users to mint team specific packs.   
 - **Add past, seasonal stats**   
 Incorporate legacy players and past seasons to unlock new stat combinations and maximize fantasy score variety.     
-> e.g.,    
-> Mint a “rookie HOF Josh Allen” card with only his rookie stats,   
-> Mint a Derrick Henry card based on his first-ever NFL start.
+    > e.g.,    
+    > Mint a “rookie HOF Josh Allen” card with only his rookie stats,   
+    > Mint a Derrick Henry card based on his first-ever NFL start.
 
 
 ## Instructions   
@@ -114,10 +114,10 @@ Incorporate legacy players and past seasons to unlock new stat combinations and 
     - [Chrome](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)   
     - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)  
 
-Ensure MetaMask is set to the Sepolia testnet:   
-> MetaMask → Network Dropdown (Top Left) → Show Test Networks → Enable **Sepolia**
+3) Ensure MetaMask is set to the Sepolia testnet:   
+    > MetaMask → Network Dropdown (Top Left) → Show Test Networks → Enable **Sepolia**
 
-Users will be required to have **~ [0.00279 SepoliaETH](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)** to mint an NFT. You can get free Sepolia ETH from the faucet linked above.   
+4) Users will be required to have ~**[0.00279 SepoliaETH](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)** to mint an NFT. You can get free Sepolia ETH from the faucet linked above.   
 
 
 #### Online
