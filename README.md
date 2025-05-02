@@ -68,6 +68,8 @@ This application uses a **hybrid on-chain/off-chain architecture**. All core NFT
 
 ## Future Additions
 
+- Allow users to view stat breakdown from the apps wallet.
+
 ## Instructions   
 
 ### Requirements
