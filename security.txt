@@ -1,0 +1,1 @@
+Hash the payload being sent to the contract
